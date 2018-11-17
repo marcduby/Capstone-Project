@@ -60,6 +60,31 @@ public class StockJsonParserTest extends TestCase {
         assertNotNull(stockBean.getIssueType());
     }
 
+    public void testGetYearlyDividendFromJsonString() {
+        // local variables
+        String inputJsonString = null;
+        InputStream inputStream = null;
+        Double dividend = null;
+
+        // get the test string
+        inputStream = this.getClass().getClassLoader().getResourceAsStream("dividend.json");
+        assertNotNull(inputStream);
+        inputJsonString = this.getStringFromStream(inputStream);
+        assertNotNull(inputJsonString);
+
+        // get the stock bean
+        try {
+            dividend = StockJsonParser.getYearlyDividendFromJsonString(inputJsonString);
+
+        } catch (IncomeException exception) {
+            fail("Got error: " + exception.getMessage());
+        }
+
+        // test
+        assertNotNull(dividend);
+        assertEquals(2.58, dividend);
+    }
+
     /**
      * reads the string from the stream
      *
@@ -82,7 +107,13 @@ public class StockJsonParserTest extends TestCase {
             }
 
         } catch (UnsupportedEncodingException exception) {
+            // do nothing
+
         } catch (IOException exception) {
+            // do nothing
         }
-        return out.toString();    }
+
+        // return
+        return out.toString();
+    }
 }

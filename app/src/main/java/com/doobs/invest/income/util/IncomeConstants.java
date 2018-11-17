@@ -16,5 +16,9 @@ public class IncomeConstants {
             public final static String DESCRIPTION_KEY      = "description";
             public final static String ISSUE_TYPE_KEY       = "issueType";
         }
+
+        public static class Dividend {
+            public final static String AMOUNT_KEY           = "amount";
+        }
     }
 }

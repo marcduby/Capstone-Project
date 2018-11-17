@@ -13,9 +13,9 @@ import java.util.Date;
 public class StockQuoteBean {
     // local variables
     private StockBean stockBean;
-    private float price;
+    private Double price;
     private Date date;
-    private float dividend;
+    private Double dividend;
 
     public StockBean getStockBean() {
         return stockBean;
@@ -23,14 +23,6 @@ public class StockQuoteBean {
 
     public void setStockBean(StockBean stockBean) {
         this.stockBean = stockBean;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
     }
 
     public Date getDate() {
@@ -41,11 +33,19 @@ public class StockQuoteBean {
         this.date = date;
     }
 
-    public float getDividend() {
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Double getDividend() {
         return dividend;
     }
 
-    public void setDividend(float dividend) {
+    public void setDividend(Double dividend) {
         this.dividend = dividend;
     }
 }

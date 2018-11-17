@@ -10,26 +10,10 @@ import java.util.Date;
 
 public class StockHoldingBean {
     // local variables
-    private float numberOfShares;
-    private float lastPrice;
+    private Double numberOfShares;
+    private Double lastPrice;
     private PortfolioBean portfolioBean;
     private StockBean stockBean;
-
-    public float getNumberOfShares() {
-        return numberOfShares;
-    }
-
-    public void setNumberOfShares(float numberOfShares) {
-        this.numberOfShares = numberOfShares;
-    }
-
-    public float getLastPrice() {
-        return lastPrice;
-    }
-
-    public void setLastPrice(float lastPrice) {
-        this.lastPrice = lastPrice;
-    }
 
     public PortfolioBean getPortfolioBean() {
         return portfolioBean;
@@ -45,5 +29,21 @@ public class StockHoldingBean {
 
     public void setStockBean(StockBean stockBean) {
         this.stockBean = stockBean;
+    }
+
+    public Double getNumberOfShares() {
+        return numberOfShares;
+    }
+
+    public void setNumberOfShares(Double numberOfShares) {
+        this.numberOfShares = numberOfShares;
+    }
+
+    public Double getLastPrice() {
+        return lastPrice;
+    }
+
+    public void setLastPrice(Double lastPrice) {
+        this.lastPrice = lastPrice;
     }
 }

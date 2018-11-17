@@ -15,8 +15,8 @@ public class StockBean {
     private String industry;
     private String issueType;
     private String description;
-    private float lastPrice;
-    private float lastYearlyDividend;
+    private Double lastPrice;
+    private Double lastYearlyDividend;
     private Date lastPriceDate;
 
     public String getName() {
@@ -59,27 +59,27 @@ public class StockBean {
         this.description = description;
     }
 
-    public float getLastPrice() {
-        return lastPrice;
-    }
-
-    public void setLastPrice(float lastPrice) {
-        this.lastPrice = lastPrice;
-    }
-
-    public float getLastYearlyDividend() {
-        return lastYearlyDividend;
-    }
-
-    public void setLastYearlyDividend(float lastYearlyDividend) {
-        this.lastYearlyDividend = lastYearlyDividend;
-    }
-
     public Date getLastPriceDate() {
         return lastPriceDate;
     }
 
     public void setLastPriceDate(Date lastPriceDate) {
         this.lastPriceDate = lastPriceDate;
+    }
+
+    public Double getLastPrice() {
+        return lastPrice;
+    }
+
+    public void setLastPrice(Double lastPrice) {
+        this.lastPrice = lastPrice;
+    }
+
+    public Double getLastYearlyDividend() {
+        return lastYearlyDividend;
+    }
+
+    public void setLastYearlyDividend(Double lastYearlyDividend) {
+        this.lastYearlyDividend = lastYearlyDividend;
     }
 }

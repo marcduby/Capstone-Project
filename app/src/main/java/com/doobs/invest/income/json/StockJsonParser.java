@@ -4,6 +4,7 @@ import com.doobs.invest.income.model.StockBean;
 import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeException;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -96,4 +97,58 @@ public class StockJsonParser {
         return stockBean;
     }
 
+    public static Double getYearlyDividendFromJsonString(String inputJsonString) throws IncomeException {
+        // local variables
+        Double dividend = null;
+        JSONArray jsonArray = null;
+
+        // get the json object
+        if (inputJsonString == null) {
+            throw new IncomeException("Got null input json to translate to dividend object");
+
+        } else {
+            try {
+                jsonArray = new JSONArray(inputJsonString);
+
+            } catch (JSONException exception) {
+                throw new IncomeException("Got json exception translating to dividend object: " + exception.getMessage());
+            }
+        }
+
+        // get the list
+        dividend = getDividendFromJson(jsonArray);
+
+        // return
+        return dividend;
+    }
+
+    /**
+     * returns the total dividend from the json array
+     *
+     * @param jsonArray
+     * @return
+     * @throws IncomeException
+     */
+    public static Double getDividendFromJson(JSONArray jsonArray) throws IncomeException {
+        //local variables
+        Double dividend = null;
+        Double totalDividend = 0.0;
+        JSONObject jsonObject = null;
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            jsonObject = jsonArray.optJSONObject(i);
+
+            // get the dividend amount
+            try {
+                dividend = jsonObject.getDouble(IncomeConstants.JsonKeys.Dividend.AMOUNT_KEY);
+                totalDividend = totalDividend + dividend;
+
+            } catch (JSONException exception) {
+                throw new IncomeException("Got json exception parsing the dividend: " +  exception.getMessage());
+            }
+        }
+
+        // return
+        return totalDividend;
+    }
 }
