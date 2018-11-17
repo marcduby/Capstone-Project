@@ -1,9 +1,8 @@
 package com.doobs.invest.income.com.doobs.invest.income.json;
 
-import android.util.JsonReader;
-
 import com.doobs.invest.income.json.StockJsonParser;
-import com.doobs.invest.income.model.StockBean;
+import com.doobs.invest.income.json.bean.StockInformationBean;
+import com.doobs.invest.income.json.bean.StockQuoteBean;
 import com.doobs.invest.income.util.IncomeException;
 
 import junit.framework.TestCase;
@@ -35,31 +34,35 @@ public class StockJsonParserTest extends TestCase {
         // local variables
         String inputJsonString = null;
         InputStream inputStream = null;
-        StockBean stockBean = null;
+        StockInformationBean stockInformationBean = null;
 
         // get the test string
-        inputStream = this.getClass().getClassLoader().getResourceAsStream("stock.json");
+        inputStream = this.getClass().getClassLoader().getResourceAsStream("stockInformation.json");
         assertNotNull(inputStream);
         inputJsonString = this.getStringFromStream(inputStream);
         assertNotNull(inputJsonString);
 
         // get the stock bean
         try {
-            stockBean = StockJsonParser.parseString(inputJsonString);
+            stockInformationBean = StockJsonParser.parseString(inputJsonString);
 
         } catch (IncomeException exception) {
             fail("Got error: " + exception.getMessage());
         }
 
         // test
-        assertNotNull(stockBean);
-        assertNotNull(stockBean.getSymbol());
-        assertNotNull(stockBean.getName());
-        assertNotNull(stockBean.getDescription());
-        assertNotNull(stockBean.getIndustry());
-        assertNotNull(stockBean.getIssueType());
+        assertNotNull(stockInformationBean);
+        assertNotNull(stockInformationBean.getSymbol());
+        assertNotNull(stockInformationBean.getName());
+        assertNotNull(stockInformationBean.getDescription());
+        assertNotNull(stockInformationBean.getIndustry());
+        assertNotNull(stockInformationBean.getIssueType());
     }
 
+    /**
+     * test the dividend retrieval and calculation
+     */
+    @Test
     public void testGetYearlyDividendFromJsonString() {
         // local variables
         String inputJsonString = null;
@@ -83,6 +86,40 @@ public class StockJsonParserTest extends TestCase {
         // test
         assertNotNull(dividend);
         assertEquals(2.58, dividend);
+    }
+
+    /**
+     * test the stock quote retrieval
+     *
+     */
+    @Test
+    public void testStockQuoteParsing() {
+        // local variables
+        String inputJsonString = null;
+        InputStream inputStream = null;
+        StockQuoteBean stockQuoteBean = null;
+
+        // get the test string
+        inputStream = this.getClass().getClassLoader().getResourceAsStream("quote.json");
+        assertNotNull(inputStream);
+        inputJsonString = this.getStringFromStream(inputStream);
+        assertNotNull(inputJsonString);
+
+        // get the stock bean
+        try {
+            stockQuoteBean = StockJsonParser.getStockQuoteFromJsonString(inputJsonString);
+
+        } catch (IncomeException exception) {
+            fail("Got error: " + exception.getMessage());
+        }
+
+        // test
+        assertNotNull(stockQuoteBean);
+        assertNotNull(stockQuoteBean.getSymbol());
+        assertNotNull(stockQuoteBean.getDate());
+        assertNotNull(stockQuoteBean.getPrice());
+        assertNotNull(stockQuoteBean.getPriceChange());
+        assertNotNull(stockQuoteBean.getPeRatio());
     }
 
     /**

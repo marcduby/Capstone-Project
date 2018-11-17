@@ -20,5 +20,23 @@ public class IncomeConstants {
         public static class Dividend {
             public final static String AMOUNT_KEY           = "amount";
         }
+
+        public static class Quote {
+            public final static String SYMBOL_KEY           = "symbol";
+            public final static String PRICE_KEY            = "latestPrice";
+            public final static String DATE_KEY             = "latestTime";
+            public final static String PRICE_CHANGE_KEY     = "change";
+            public final static String PE_RATIO_KEY         = "peRatio";
+        }
+
+        public static class Financials {
+            public final static String SYMBOL_KEY           = "symbol";
+            public final static String BETA_KEY             = "beta";
+            public final static String DIVIDEND_KEY         = "dividendRate";
+            public final static String YIELD_KEY            = "dividendYield";
+            public final static String PRICE_TO_SALES_KEY   = "priceToSales";
+            public final static String PRICE_TO_BOOK_KEY    = "priceToBook";
+            public final static String REVENUE_PER_HARE_KEY = "revenuePerShare";
+        }
     }
 }

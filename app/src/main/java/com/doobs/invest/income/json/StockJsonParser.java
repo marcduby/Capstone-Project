@@ -1,6 +1,7 @@
 package com.doobs.invest.income.json;
 
-import com.doobs.invest.income.model.StockBean;
+import com.doobs.invest.income.json.bean.StockInformationBean;
+import com.doobs.invest.income.json.bean.StockQuoteBean;
 import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeException;
 
@@ -9,6 +10,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -28,29 +30,29 @@ public class StockJsonParser {
      * @return
      * @throws IncomeException
      */
-    public static StockBean parseString(String inputJsonString) throws IncomeException {
+    public static StockInformationBean parseString(String inputJsonString) throws IncomeException {
         // local variables
-        StockBean stockBean = null;
+        StockInformationBean stockInformationBean = null;
         JSONObject jsonObject = null;
 
         // get the json object
         if (inputJsonString == null) {
-            throw new IncomeException("Got null input json to translate to stockBean object");
+            throw new IncomeException("Got null input json to translate to stockInformationBean object");
 
         } else {
             try {
                 jsonObject = new JSONObject(inputJsonString);
 
             } catch (JSONException exception) {
-                throw new IncomeException("Got json exception translating to stockBean object: " + exception.getMessage());
+                throw new IncomeException("Got json exception translating to stockInformationBean object: " + exception.getMessage());
             }
         }
 
         // get the list
-        stockBean = getStocktFromJson(jsonObject);
+        stockInformationBean = getStocktFromJson(jsonObject);
 
         // return
-        return stockBean;
+        return stockInformationBean;
     }
 
     /**
@@ -60,43 +62,50 @@ public class StockJsonParser {
      * @return
      * @throws IncomeException
      */
-    public static StockBean getStocktFromJson(JSONObject inputJsonObject) throws IncomeException {
+    public static StockInformationBean getStocktFromJson(JSONObject inputJsonObject) throws IncomeException {
         // local variables
-        StockBean stockBean = new StockBean();
+        StockInformationBean stockInformationBean = new StockInformationBean();
         String tempString = null;
 
         // get the symbol
         tempString = inputJsonObject.optString(IncomeConstants.JsonKeys.Stock.SYMBOL_KEY);
-        stockBean.setSymbol(tempString);
+        stockInformationBean.setSymbol(tempString);
 
         // get the name
         tempString = inputJsonObject.optString(IncomeConstants.JsonKeys.Stock.NAME_KEY);
-        stockBean.setName(tempString);
+        stockInformationBean.setName(tempString);
 
         // get the description
         tempString = inputJsonObject.optString(IncomeConstants.JsonKeys.Stock.DESCRIPTION_KEY);
-        stockBean.setDescription(tempString);
+        stockInformationBean.setDescription(tempString);
 
         // get the industry
         tempString = inputJsonObject.optString(IncomeConstants.JsonKeys.Stock.INDUSTRY_KEY);
-        stockBean.setIndustry(tempString);
+        stockInformationBean.setIndustry(tempString);
 
         // get the issue type
         tempString = inputJsonObject.optString(IncomeConstants.JsonKeys.Stock.ISSUE_TYPE_KEY);
-        stockBean.setIssueType(tempString);
+        stockInformationBean.setIssueType(tempString);
 
         // verify the data
-        if ((stockBean.getSymbol() == null) && (stockBean.getSymbol().length() > 0)) {
+        if ((stockInformationBean.getSymbol() == null) && (stockInformationBean.getSymbol().length() > 0)) {
             throw new IncomeException("A stock must have a non null symbol");
         }
-        if ((stockBean.getName() == null) && (stockBean.getName().length() > 0)) {
+        if ((stockInformationBean.getName() == null) && (stockInformationBean.getName().length() > 0)) {
             throw new IncomeException("A stock must have a non null name");
         }
 
         // return
-        return stockBean;
+        return stockInformationBean;
     }
 
+    /**
+     * returns the total yearly dividend from the json string
+     *
+     * @param inputJsonString
+     * @return
+     * @throws IncomeException
+     */
     public static Double getYearlyDividendFromJsonString(String inputJsonString) throws IncomeException {
         // local variables
         Double dividend = null;
@@ -144,11 +153,89 @@ public class StockJsonParser {
                 totalDividend = totalDividend + dividend;
 
             } catch (JSONException exception) {
-                throw new IncomeException("Got json exception parsing the dividend: " +  exception.getMessage());
+                throw new IncomeException("Got json exception parsing the dividend: " + exception.getMessage());
             }
         }
 
         // return
         return totalDividend;
+    }
+
+    /**
+     * get the stock quote from the json string
+     *
+     * @param inputJsonString
+     * @return
+     * @throws IncomeException
+     */
+    public static StockQuoteBean getStockQuoteFromJsonString(String inputJsonString) throws IncomeException {
+        // local variables
+        StockQuoteBean stockQuoteBean = null;
+        JSONObject jsonObject = null;
+
+        // get the stock quote bean
+        // get the json object
+        if (inputJsonString == null) {
+            throw new IncomeException("Got null input json to translate to stock quote object");
+
+        } else {
+            try {
+                jsonObject = new JSONObject(inputJsonString);
+
+            } catch (JSONException exception) {
+                throw new IncomeException("Got json exception translating to stock quote object: " + exception.getMessage());
+            }
+        }
+
+        // get the list
+        stockQuoteBean = getStockQuoteFromJson(jsonObject);
+
+        // return
+        return stockQuoteBean;
+    }
+
+    /**
+     * get the stock quote from the json object
+     *
+     * @param inputJsonObject
+     * @return
+     * @throws IncomeException
+     */
+    public static StockQuoteBean getStockQuoteFromJson(JSONObject inputJsonObject) throws IncomeException {
+        // local variables
+        StockQuoteBean stockQuoteBean = new StockQuoteBean();
+        String tempString = null;
+        Double tempDouble = null;
+        Date tempDate = null;
+        DateFormat formatter = new SimpleDateFormat("MMMMM dd, yyyy");
+
+        // get the symbol
+        tempString = inputJsonObject.optString(IncomeConstants.JsonKeys.Quote.SYMBOL_KEY);
+        stockQuoteBean.setSymbol(tempString);
+
+        // get the date
+        tempString = inputJsonObject.optString(IncomeConstants.JsonKeys.Quote.DATE_KEY);
+        try {
+            tempDate = formatter.parse(tempString);
+
+        } catch (ParseException exception) {
+            throw new IncomeException("Got stock quote error parsing the date: " + exception.getMessage());
+        }
+        stockQuoteBean.setDate(tempDate);
+
+        // get the price
+        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Quote.PRICE_KEY);
+        stockQuoteBean.setPrice(tempDouble);
+
+        // get the price change
+        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Quote.PRICE_CHANGE_KEY);
+        stockQuoteBean.setPriceChange(tempDouble);
+
+        // get the PE ratio
+        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Quote.PE_RATIO_KEY);
+        stockQuoteBean.setPeRatio(tempDouble);
+
+        // return
+        return stockQuoteBean;
     }
 }

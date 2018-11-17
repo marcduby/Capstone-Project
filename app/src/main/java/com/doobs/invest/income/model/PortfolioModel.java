@@ -9,12 +9,12 @@ import java.util.List;
  * Created by mduby on 11/16/18.
  */
 
-public class PortfolioBean {
+public class PortfolioModel {
     // local variables
     private String name;
     private String descriprion;
     private String goal;
-    private List<StockBean> stockBeanList = new ArrayList<StockBean>();
+    private List<StockHoldingModel> stockHoldingList = new ArrayList<StockHoldingModel>();
 
     public String getName() {
         return name;
@@ -40,11 +40,11 @@ public class PortfolioBean {
         this.goal = goal;
     }
 
-    public List<StockBean> getStockBeanList() {
-        return stockBeanList;
+    public List<StockHoldingModel> getStockHoldingList() {
+        return stockHoldingList;
     }
 
-    public void setStockBeanList(List<StockBean> stockBeanList) {
-        this.stockBeanList = stockBeanList;
+    public void setStockHoldingList(List<StockHoldingModel> stockHoldingList) {
+        this.stockHoldingList = stockHoldingList;
     }
 }

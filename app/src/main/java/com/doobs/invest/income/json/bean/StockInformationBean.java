@@ -1,4 +1,4 @@
-package com.doobs.invest.income.model;
+package com.doobs.invest.income.json.bean;
 
 import java.util.Date;
 
@@ -8,16 +8,13 @@ import java.util.Date;
  * Created by mduby on 11/15/18.
  */
 
-public class StockBean {
+public class StockInformationBean {
     // instance variables
-    private String name;
     private String symbol;
+    private String name;
     private String industry;
     private String issueType;
     private String description;
-    private Double lastPrice;
-    private Double lastYearlyDividend;
-    private Date lastPriceDate;
 
     public String getName() {
         return name;
@@ -59,27 +56,4 @@ public class StockBean {
         this.description = description;
     }
 
-    public Date getLastPriceDate() {
-        return lastPriceDate;
-    }
-
-    public void setLastPriceDate(Date lastPriceDate) {
-        this.lastPriceDate = lastPriceDate;
-    }
-
-    public Double getLastPrice() {
-        return lastPrice;
-    }
-
-    public void setLastPrice(Double lastPrice) {
-        this.lastPrice = lastPrice;
-    }
-
-    public Double getLastYearlyDividend() {
-        return lastYearlyDividend;
-    }
-
-    public void setLastYearlyDividend(Double lastYearlyDividend) {
-        this.lastYearlyDividend = lastYearlyDividend;
-    }
 }
