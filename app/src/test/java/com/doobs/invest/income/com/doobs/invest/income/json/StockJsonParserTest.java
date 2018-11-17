@@ -3,6 +3,7 @@ package com.doobs.invest.income.com.doobs.invest.income.json;
 import com.doobs.invest.income.json.StockJsonParser;
 import com.doobs.invest.income.json.bean.StockInformationBean;
 import com.doobs.invest.income.json.bean.StockQuoteBean;
+import com.doobs.invest.income.json.bean.StockStatsBean;
 import com.doobs.invest.income.util.IncomeException;
 
 import junit.framework.TestCase;
@@ -120,6 +121,38 @@ public class StockJsonParserTest extends TestCase {
         assertNotNull(stockQuoteBean.getPrice());
         assertNotNull(stockQuoteBean.getPriceChange());
         assertNotNull(stockQuoteBean.getPeRatio());
+    }
+
+    @Test
+    public void testStockStatsParsing() {
+        // local variables
+        String inputJsonString = null;
+        InputStream inputStream = null;
+        StockStatsBean stockStatsBean = null;
+
+        // get the test string
+        inputStream = this.getClass().getClassLoader().getResourceAsStream("stockStats.json");
+        assertNotNull(inputStream);
+        inputJsonString = this.getStringFromStream(inputStream);
+        assertNotNull(inputJsonString);
+
+        // get the stock bean
+        try {
+            stockStatsBean = StockJsonParser.getStockStatsFromJsonString(inputJsonString);
+
+        } catch (IncomeException exception) {
+            fail("Got error: " + exception.getMessage());
+        }
+
+        // test
+        assertNotNull(stockStatsBean);
+        assertNotNull(stockStatsBean.getSymbol());
+        assertNotNull(stockStatsBean.getBeta());
+        assertNotNull(stockStatsBean.getDividend());
+        assertNotNull(stockStatsBean.getYield());
+        assertNotNull(stockStatsBean.getPriceToBook());
+        assertNotNull(stockStatsBean.getPriceToSales());
+        assertNotNull(stockStatsBean.getRevenuePerShare());
     }
 
     /**

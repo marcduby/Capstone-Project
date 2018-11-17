@@ -2,6 +2,7 @@ package com.doobs.invest.income.json;
 
 import com.doobs.invest.income.json.bean.StockInformationBean;
 import com.doobs.invest.income.json.bean.StockQuoteBean;
+import com.doobs.invest.income.json.bean.StockStatsBean;
 import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeException;
 
@@ -237,5 +238,83 @@ public class StockJsonParser {
 
         // return
         return stockQuoteBean;
+    }
+
+    /**
+     * get the stock financial statistics fromt he json string
+     *
+     * @param inputJsonString
+     * @return
+     * @throws IncomeException
+     */
+    public static StockStatsBean getStockStatsFromJsonString(String inputJsonString) throws IncomeException {
+        // local variables
+        StockStatsBean stockStatsBean = null;
+        JSONObject jsonObject = null;
+
+        // get the stock quote bean
+        // get the json object
+        if (inputJsonString == null) {
+            throw new IncomeException("Got null input json to translate to stock stats object");
+
+        } else {
+            try {
+                jsonObject = new JSONObject(inputJsonString);
+
+            } catch (JSONException exception) {
+                throw new IncomeException("Got json exception translating to stock stats object: " + exception.getMessage());
+            }
+        }
+
+        // get the list
+        stockStatsBean = getStockStatsFromJson(jsonObject);
+
+        // return
+        return stockStatsBean;
+    }
+
+    /**
+     * get the stock financial information from the json object
+     *
+     * @param inputJsonObject
+     * @return
+     * @throws IncomeException
+     */
+    public static StockStatsBean getStockStatsFromJson(JSONObject inputJsonObject) throws IncomeException {
+        // local variables
+        StockStatsBean stockStatsBean = new StockStatsBean();
+        String tempString = null;
+        Double tempDouble = null;
+
+        // get the symbol
+        tempString = inputJsonObject.optString(IncomeConstants.JsonKeys.Financials.SYMBOL_KEY);
+        stockStatsBean.setSymbol(tempString);
+
+        // get the beta
+        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.BETA_KEY);
+        stockStatsBean.setBeta(tempDouble);
+
+        // get the dividend
+        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.DIVIDEND_KEY);
+        stockStatsBean.setDividend(tempDouble);
+
+        // get the yield
+        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.YIELD_KEY);
+        stockStatsBean.setYield(tempDouble);
+
+        // get the price to book
+        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.PRICE_TO_BOOK_KEY);
+        stockStatsBean.setPriceToBook(tempDouble);
+
+        // get the price to sales
+        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.PRICE_TO_SALES_KEY);
+        stockStatsBean.setPriceToSales(tempDouble);
+
+        // get the revenue per share
+        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.REVENUE_PER_HARE_KEY);
+        stockStatsBean.setRevenuePerShare(tempDouble);
+
+        // return
+        return stockStatsBean;
     }
 }
