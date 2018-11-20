@@ -158,6 +158,8 @@ public class StockJsonParserTest extends TestCase {
     /**
      * reads the string from the stream
      *
+     * Note: code from https://stackoverflow.com/questions/309424/how-to-read-convert-an-inputstream-into-a-string-in-java
+     *
      * @param inputStream
      * @return
      */
@@ -166,14 +168,14 @@ public class StockJsonParserTest extends TestCase {
         String result = null;
         final int bufferSize = 1024;
         final char[] buffer = new char[bufferSize];
-        final StringBuilder out = new StringBuilder();
+        final StringBuilder stringBuilder = new StringBuilder();
         try {
             Reader in = new InputStreamReader(inputStream, "UTF-8");
             for (; ; ) {
                 int rsz = in.read(buffer, 0, buffer.length);
                 if (rsz < 0)
                     break;
-                out.append(buffer, 0, rsz);
+                stringBuilder.append(buffer, 0, rsz);
             }
 
         } catch (UnsupportedEncodingException exception) {
@@ -184,6 +186,6 @@ public class StockJsonParserTest extends TestCase {
         }
 
         // return
-        return out.toString();
+        return stringBuilder.toString();
     }
 }
