@@ -25,6 +25,14 @@ public class StockHoldingModel {
     @ColumnInfo(name = "number_shares")
     private Double numberOfShares;
 
+    @NonNull
+    @ColumnInfo(name = "stock_id")
+    private Integer stockId;
+
+    @NonNull
+    @ColumnInfo(name = "portfolio_id")
+    private Integer portfolioId;
+
     private StockModel stockModel;
 
     public Double getNumberOfShares() {
@@ -46,5 +54,23 @@ public class StockHoldingModel {
     @NonNull
     public Integer getId() {
         return id;
+    }
+
+    @NonNull
+    public Integer getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(@NonNull Integer stockId) {
+        this.stockId = stockId;
+    }
+
+    @NonNull
+    public Integer getPortfolioId() {
+        return portfolioId;
+    }
+
+    public void setPortfolioId(@NonNull Integer portfolioId) {
+        this.portfolioId = portfolioId;
     }
 }
