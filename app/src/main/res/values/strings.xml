@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">IncomeTrackerAndroid</string>
+
+    <string name="portfolio_header">Portfolios</string>
 </resources>

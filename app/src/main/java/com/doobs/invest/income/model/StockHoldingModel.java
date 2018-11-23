@@ -2,6 +2,7 @@ package com.doobs.invest.income.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
@@ -18,7 +19,7 @@ public class StockHoldingModel {
     // local variables
     @NonNull
     @ColumnInfo(name = "id")
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private Integer id;
 
     @NonNull
@@ -33,6 +34,7 @@ public class StockHoldingModel {
     @ColumnInfo(name = "portfolio_id")
     private Integer portfolioId;
 
+    @Ignore
     private StockModel stockModel;
 
     public Double getNumberOfShares() {
@@ -72,5 +74,9 @@ public class StockHoldingModel {
 
     public void setPortfolioId(@NonNull Integer portfolioId) {
         this.portfolioId = portfolioId;
+    }
+
+    public void setId(@NonNull Integer id) {
+        this.id = id;
     }
 }

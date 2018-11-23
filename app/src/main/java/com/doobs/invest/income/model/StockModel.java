@@ -14,12 +14,12 @@ import java.util.Date;
  *
  * Created by mduby on 11/17/18.
  */
-@Entity(tableName = IncomeConstants.Database.TABLE_NAME_HOLDING)
+@Entity(tableName = IncomeConstants.Database.TABLE_NAME_STOCK_INFORMATION)
 public class StockModel {
     // local variables
     @NonNull
     @ColumnInfo(name = "id")
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private Integer id;
 
     // daily price information
@@ -35,8 +35,8 @@ public class StockModel {
     @ColumnInfo(name = "pe_ratio")
     private Double peRatio;
 
-    @ColumnInfo(name = "date")
-    private Date date;
+    @ColumnInfo(name = "date_millis")
+    private Long dateMilliseconds;
 
     // company information
     @ColumnInfo(name = "name")
@@ -100,14 +100,6 @@ public class StockModel {
 
     public void setPeRatio(Double peRatio) {
         this.peRatio = peRatio;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getName() {
@@ -188,6 +180,18 @@ public class StockModel {
 
     public void setPriceToBook(Double priceToBook) {
         this.priceToBook = priceToBook;
+    }
+
+    public void setId(@NonNull Integer id) {
+        this.id = id;
+    }
+
+    public Long getDateMilliseconds() {
+        return dateMilliseconds;
+    }
+
+    public void setDateMilliseconds(Long dateMilliseconds) {
+        this.dateMilliseconds = dateMilliseconds;
     }
 
     @NonNull
