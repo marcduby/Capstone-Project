@@ -2,6 +2,7 @@ package com.doobs.invest.income;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -98,11 +99,15 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
         Toast.makeText(this, "adding portfolio", Toast.LENGTH_LONG).show();
 
         // call the view model
-        PortfolioModel portfolioModel = new PortfolioModel();
-        portfolioModel.setName("portfolio: " + new Date().getTime());
-        portfolioModel.setGoal("goal test");
-        portfolioModel.setDescriprion("test decsrition");
-        this.incomeViewModel.insertPortfolio(portfolioModel);
+//        PortfolioModel portfolioModel = new PortfolioModel();
+//        portfolioModel.setName("portfolio: " + new Date().getTime());
+//        portfolioModel.setGoal("goal test");
+//        portfolioModel.setDescriprion("test decsrition");
+//        this.incomeViewModel.insertPortfolio(portfolioModel);
+
+        // create intent and send to new activity
+        Intent intent = new Intent(this, PortfolioSavingActivity.class);
+        this.startActivity(intent);
     }
 
 }
