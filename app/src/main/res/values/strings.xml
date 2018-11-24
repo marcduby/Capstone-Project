@@ -3,6 +3,15 @@
 
     <string name="portfolio_header">Portfolios</string>
 
+    <!-- portfolio saving -->
+    <string name="portfolio_name">Name</string>
+    <string name="portfolio_goal">Goal</string>
+    <string name="portfolio_description">Description</string>
+    <string name="portfolio_name_hint">The name that will display in the list</string>
+    <string name="portfolio_goal_hint">What the goal is (aggressive, moderate, etc)</string>
+    <string name="portfolio_description_hint">Brief description</string>
+
     <string name="title_activity_portfolio_saving">Update Portfolio</string>
+    <string name="title_activity_portfolio_new">New Portfolio</string>
     <string name="title_activity_main">Portfolios</string>
 </resources>

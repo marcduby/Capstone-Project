@@ -17,4 +17,22 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="textView" parent="AppTheme">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="labelViewNoMargin" parent="textView">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="editViewNoMargin" parent="textView">
+        <item name="android:paddingLeft">2dp</item>
+    </style>
+
+    <style name="labelView" parent="labelViewNoMargin">
+        <item name="android:layout_marginTop">20sp</item>
+    </style>
+
+
+
 </resources>
