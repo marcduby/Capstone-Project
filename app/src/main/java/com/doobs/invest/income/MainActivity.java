@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
         // set the adapter on the recycler view
         this.portfolioRecyclerView.setAdapter(this.portfolioRecyclerAdapter);
 
-        // get the movie view model
+        // get the income view model
         this.incomeViewModel = ViewModelProviders.of(this).get(IncomeViewModel.class);
 
         // if there is state saved, reset it

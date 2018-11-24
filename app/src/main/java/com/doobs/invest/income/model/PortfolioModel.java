@@ -6,7 +6,9 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import com.doobs.invest.income.repository.IncomeViewModel;
 import com.doobs.invest.income.util.IncomeConstants;
+import com.doobs.invest.income.util.IncomeException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,5 +80,27 @@ public class PortfolioModel {
 
     public void setId(@NonNull Integer id) {
         this.id = id;
+    }
+
+    /**
+     * checks the validity of the portfolio object
+     *
+     * @throws IncomeException
+     */
+    public void validityCheck() throws IncomeException {
+        // make sure name not null and not empty
+        if ((this.name == null) || (this.name.trim().length() < 1)) {
+            throw new IncomeException("The portfolio name cannot be empty");
+        }
+
+        // make sure descriprion not null and not empty
+        if ((this.descriprion == null) || (this.descriprion.trim().length() < 1)) {
+            throw new IncomeException("The portfolio descriprion cannot be empty");
+        }
+
+        // make sure goal not null and not empty
+        if ((this.goal == null) || (this.goal.trim().length() < 1)) {
+            throw new IncomeException("The portfolio goal cannot be empty");
+        }
     }
 }

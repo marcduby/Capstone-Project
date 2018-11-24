@@ -52,7 +52,7 @@ public class PortfolioViewHolder extends RecyclerView.ViewHolder  implements Vie
         Log.i(TAG_NAME, "Inflating view for portfolio: " + name);
 
         // set the name text
-        this.portfolioNameTextView.setText(name);
+        this.portfolioNameTextView.setText(name + ": " + portfolioModel.getId());
     }
 
     @Override
