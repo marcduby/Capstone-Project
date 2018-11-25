@@ -27,6 +27,10 @@ public class StockHoldingModel {
     private Double numberOfShares;
 
     @NonNull
+    @ColumnInfo(name = "price_paid")
+    private Double pricePaid;
+
+    @NonNull
     @ColumnInfo(name = "stock_id")
     private Integer stockId;
 
@@ -79,4 +83,41 @@ public class StockHoldingModel {
     public void setId(@NonNull Integer id) {
         this.id = id;
     }
+
+    @NonNull
+    public Double getPricePaid() {
+        return pricePaid;
+    }
+
+    public void setPricePaid(@NonNull Double pricePaid) {
+        this.pricePaid = pricePaid;
+    }
+
+    /**
+     * get the cost basis of the stock holding
+     *
+     * @return
+     */
+    public Double getCostBasis() {
+        return this.numberOfShares * this.pricePaid;
+    }
+
+    /**
+     * get the current value basis of the stock holding
+     *
+     * @return
+     */
+    public Double getValueBasis() {
+        return this.numberOfShares * this.stockModel.getPrice();
+    }
+
+    /**
+     * get the total dividedn expected from the stock holding
+     *
+     * @return
+     */
+    public Double getYearlyDivided() {
+        return this.numberOfShares * this.stockModel.getDidvidend();
+    }
+
 }

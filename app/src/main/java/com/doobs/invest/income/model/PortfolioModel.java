@@ -103,4 +103,58 @@ public class PortfolioModel {
             throw new IncomeException("The portfolio goal cannot be empty");
         }
     }
+
+    /**
+     * get the portfolio's total cost basis
+     *
+     * @return
+     */
+    public Double getTotalCostBasis() {
+        // local variables
+        Double amount = 0.0;
+
+        // calculate
+        for (StockHoldingModel stockHoldingModel : this.getStockHoldingList()) {
+            amount = amount + stockHoldingModel.getCostBasis();
+        }
+
+        // return
+        return amount;
+    }
+
+    /**
+     * get the portfolio's total value basis
+     *
+     * @return
+     */
+    public Double getTotalValueBasis() {
+        // local variables
+        Double amount = 0.0;
+
+        // calculate
+        for (StockHoldingModel stockHoldingModel : this.getStockHoldingList()) {
+            amount = amount + stockHoldingModel.getValueBasis();
+        }
+
+        // return
+        return amount;
+    }
+
+    /**
+     * returns the portfolio's expected yearly dividend amount
+     *
+     * @return
+     */
+    public Double getTotalDividendCashFlow() {
+        // local variables
+        Double amount = 0.0;
+
+        // calculate
+        for (StockHoldingModel stockHoldingModel : this.getStockHoldingList()) {
+            amount = amount + stockHoldingModel.getYearlyDivided();
+        }
+
+        // return
+        return amount;
+    }
 }
