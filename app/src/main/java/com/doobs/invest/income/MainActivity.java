@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.doobs.invest.income.adapter.PortfolioRecyclerAdapter;
 import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.repository.IncomeViewModel;
+import com.doobs.invest.income.util.IncomeConstants;
 
 import java.util.Date;
 import java.util.List;
@@ -92,7 +93,13 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
      */
     @Override
     public void onListItemClick(PortfolioModel portfolioModel) {
+        // toast
         Toast.makeText(this, "clicked on item: " + portfolioModel.getName(), Toast.LENGTH_LONG).show();
+
+        // open the stock holding list
+        Intent intent = new Intent(this, StockHoldingListActivity.class);
+        intent.putExtra(IncomeConstants.ExtraKeys.PORTFOLIO_ID, portfolioModel.getId());
+        this.startActivity(intent);
     }
 
     /**

@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.doobs.invest.income.dao.PortfolioDao;
+import com.doobs.invest.income.dao.StockHoldingDao;
 import com.doobs.invest.income.database.IncomeDatabase;
 import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.model.StockHoldingModel;
@@ -21,10 +22,10 @@ import java.util.Map;
  *
  * Created by mduby on 11/22/18.
  */
-
 public class IncomeRepository {
     // instance variables
     private PortfolioDao portfolioDao;
+    private StockHoldingDao stockHoldingDao;
     private LiveData<List<PortfolioModel>> portfolioList;
     private Map<Integer, LiveData<List<StockHoldingModel>>> stockHoldingMapByPortfolioId;
     private Map<Integer, LiveData<StockModel>> stockMapByStockId;
@@ -47,6 +48,16 @@ public class IncomeRepository {
      */
     public LiveData<List<PortfolioModel>> getPortfolioList() {
         return portfolioList;
+    }
+
+    /**
+     * returns the stock holdings for a portfolio
+     *
+     * @param portfooioId
+     * @return
+     */
+    public LiveData<List<StockHoldingModel>> getStockHoldingsForPortfolioId(Integer portfooioId) {
+        return this.stockHoldingDao.getAllStocks(portfooioId);
     }
 
     /**

@@ -23,6 +23,7 @@ public class StockModel {
     private Integer id;
 
     // daily price information
+    @NonNull
     @ColumnInfo(name = "symbol")
     private String symbol;
 
@@ -39,12 +40,15 @@ public class StockModel {
     private Long dateMilliseconds;
 
     // company information
+    @NonNull
     @ColumnInfo(name = "name")
     private String name;
 
+    @NonNull
     @ColumnInfo(name = "industry")
     private String industry;
 
+    @NonNull
     @ColumnInfo(name = "issue_type")
     private String issueType;
 

@@ -6,6 +6,7 @@ import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.doobs.invest.income.model.PortfolioModel;
+import com.doobs.invest.income.model.StockHoldingModel;
 
 import java.util.List;
 
@@ -80,4 +81,5 @@ public class IncomeViewModel extends AndroidViewModel {
     public LiveData<List<PortfolioModel>> getPortfolioList() {
         return portfolioList;
     }
+
 }

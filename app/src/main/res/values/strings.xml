@@ -3,6 +3,12 @@
 
     <string name="portfolio_header">Portfolios</string>
 
+    <!-- portfolio list -->
+    <string name="portfolio_add">Add Portfolio</string>
+
+    <!-- stock holding list -->
+    <string name="stock_holding_add">Add Position</string>
+
     <!-- portfolio saving -->
     <string name="portfolio_name">Name</string>
     <string name="portfolio_goal">Goal</string>
@@ -11,7 +17,13 @@
     <string name="portfolio_goal_hint">What the goal is (aggressive, moderate, etc)</string>
     <string name="portfolio_description_hint">Brief description</string>
 
+    <!-- activity titles -->
     <string name="title_activity_portfolio_saving">Update Portfolio</string>
     <string name="title_activity_portfolio_new">New Portfolio</string>
     <string name="title_activity_main">Portfolios</string>
+    <string name="title_activity_stock_holdings">Portfolio Holdings</string>
+
+    <!-- snippets -->
+    <string name="portfolio_snippet"> Portfolio</string>
+
 </resources>

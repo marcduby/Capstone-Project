@@ -120,4 +120,12 @@ public class StockHoldingModel {
         return this.numberOfShares * this.stockModel.getDidvidend();
     }
 
+    /**
+     * return a description of the stock holding
+     *
+     * @return
+     */
+    public String getDescription() {
+        return this.numberOfShares + " shares of " + this.stockModel.getSymbol();
+    }
 }

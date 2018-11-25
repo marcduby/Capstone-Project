@@ -16,6 +16,10 @@ public class IncomeConstants {
         public static final String DATABASE_NAME                    = "income_database";
     }
 
+    public class ExtraKeys {
+        public static final String PORTFOLIO_ID                     = "portfolioId";
+    }
+
     public static class JsonKeys {
         public static class Stock {
             public final static String SYMBOL_KEY           = "symbol";
