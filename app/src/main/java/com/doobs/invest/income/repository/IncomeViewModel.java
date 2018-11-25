@@ -62,6 +62,21 @@ public class IncomeViewModel extends AndroidViewModel {
         this.incomeRepository.delete(portfolioModel);
     }
 
+    /**
+     * count the portfolios with the given name
+     *
+     * @param name
+     * @return
+     */
+    public Integer getCountPortfoliosByNamwe(String name) {
+        return this.incomeRepository.getCountPortfoliosByName(name);
+    }
+
+    /**
+     * get the portfoio list
+     *
+     * @return
+     */
     public LiveData<List<PortfolioModel>> getPortfolioList() {
         return portfolioList;
     }

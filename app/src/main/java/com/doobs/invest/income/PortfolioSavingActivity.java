@@ -1,6 +1,7 @@
 package com.doobs.invest.income;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -73,6 +74,9 @@ public class PortfolioSavingActivity extends AppCompatActivity {
                     // snack bar
                     Snackbar.make(view, "Portfolio " + portfolioModel.getName() + " saved", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+
+                    // go back
+                    finish();
                 }
             }
         });

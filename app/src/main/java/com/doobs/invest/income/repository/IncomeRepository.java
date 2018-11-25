@@ -2,6 +2,7 @@ package com.doobs.invest.income.repository;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -10,6 +11,7 @@ import com.doobs.invest.income.database.IncomeDatabase;
 import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.model.StockHoldingModel;
 import com.doobs.invest.income.model.StockModel;
+import com.doobs.invest.income.util.IncomeException;
 
 import java.util.List;
 import java.util.Map;
@@ -75,6 +77,16 @@ public class IncomeRepository {
     }
 
     /**
+     * get the number of portfolios with the name given
+     *
+     * @param name
+     * @return
+     */
+    public Integer getCountPortfoliosByName(String name) {
+        return this.portfolioDao.getCountPortfoliosByName(name);
+    }
+
+    /**
      * async class to insert movie data
      *
      */
@@ -96,8 +108,7 @@ public class IncomeRepository {
             // get the portfolio to insert
             PortfolioModel portfolioModel = portfolioModels[0];
 
-            // TODO - maybe add a check that it is not in the list yet?
-            // insert the movie
+            // insert the portfolio
             this.portfolioDao.insert(portfolioModel);
 
             // log
@@ -130,8 +141,7 @@ public class IncomeRepository {
             // get the portfolio to insert
             PortfolioModel portfolioModel = portfolioModels[0];
 
-            // TODO - maybe add a check that it is not in the list yet?
-            // insert the movie
+            // delete the portfolio
             this.portfolioDao.delete(portfolioModel);
 
             // log
@@ -164,8 +174,7 @@ public class IncomeRepository {
             // get the portfolio to insert
             PortfolioModel portfolioModel = portfolioModels[0];
 
-            // TODO - maybe add a check that it is not in the list yet?
-            // insert the movie
+            // update the portfolio
             this.portfolioDao.update(portfolioModel);
 
             // log
