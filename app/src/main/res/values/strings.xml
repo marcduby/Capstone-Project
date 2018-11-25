@@ -17,11 +17,24 @@
     <string name="portfolio_goal_hint">What the goal is (aggressive, moderate, etc)</string>
     <string name="portfolio_description_hint">Brief description</string>
 
+    <!-- stock holding saving -->
+    <string name="stock_holding_symbol_label">Symbol</string>
+    <string name="stock_holding_symbol_hint">The symbol of the stock to search for</string>
+    <string name="stock_holding_name_label">Description</string>
+    <string name="stock_holding_number_of_shares_label">Number of Shares</string>
+    <string name="stock_holding_price_bought_label">Cost</string>
+    <string name="stock_holding_price_bought_hint">The cost basis of the stock</string>
+    <string name="stock_holding_current_price_label">Current Price</string>
+    <string name="stock_holding_dividend_label">Dividend</string>
+    <string name="stock_holding_gain_label">Gain/Loss</string>
+    <string name="stock_holding_yield_label">Yield</string>
+
     <!-- activity titles -->
     <string name="title_activity_portfolio_saving">Update Portfolio</string>
     <string name="title_activity_portfolio_new">New Portfolio</string>
     <string name="title_activity_main">Portfolios</string>
     <string name="title_activity_stock_holdings">Portfolio Holdings</string>
+    <string name="title_activity_stock_holdings_new">Update Stock Holding</string>
 
     <!-- snippets -->
     <string name="portfolio_snippet"> Portfolio</string>

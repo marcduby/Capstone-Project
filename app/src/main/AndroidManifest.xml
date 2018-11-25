@@ -36,6 +36,14 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
+
+        <activity
+            android:name=".StockHoldingSavingActivity"
+            android:parentActivityName=".StockHoldingListActivity"
+            android:label="@string/title_activity_stock_holdings_new"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>
