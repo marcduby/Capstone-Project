@@ -42,11 +42,14 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
     private RecyclerView stockHoldingRecyclerView;
     private StockHoldingViewModel stockHoldingViewModel;
     private LinearLayoutManager stockHoldingListLayoutManager;
-    private Button addStockHoldingButton;
+    private PortfolioModel portfolioModel;
 
     // widgets
     @BindView(R.id.portfolio_name_textview)
     protected TextView portfolioNameTextView;
+
+    @BindView(R.id.stock_holding_add_button)
+    protected Button addStockHoldingButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +94,13 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
 
         // load the portfolio from the intent
         Integer portfolioId = this.getIntent().getIntExtra(IncomeConstants.ExtraKeys.PORTFOLIO_ID, 0);
-        LiveData<PortfolioModel> portfolioModelLiveData = this.stockHoldingViewModel.getPortfolioModelLiveData(portfolioId);
+        this.stockHoldingViewModel.getPortfolioModelLiveData(portfolioId).observe(this, new Observer<PortfolioModel>() {
+            @Override
+            public void onChanged(@Nullable PortfolioModel portfolioModelReturn) {
+                portfolioModel = portfolioModelReturn;
+            }
+        });
+//        this.portfolioModel = this.stockHoldingViewModel.loadPortfolio(portfolioId);
 
         // if there is state saved, reset it
         if (savedInstanceState != null) {
@@ -131,7 +140,8 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
 //        this.incomeViewModel.insertPortfolio(portfolioModel);
 
         // create intent and send to new activity
-        Intent intent = new Intent(this, PortfolioSavingActivity.class);
+        Intent intent = new Intent(this, StockHoldingSavingActivity.class);
+        intent.putExtra(IncomeConstants.ExtraKeys.PORTFOLIO_ID, this.portfolioModel.getId());
         this.startActivity(intent);
     }
 

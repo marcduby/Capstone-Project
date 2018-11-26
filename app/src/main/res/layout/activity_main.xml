@@ -24,7 +24,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/portfolio_add"
+            android:text="@string/portfolio_add_button"
             android:id="@+id/portfolio_add_button"
             android:background="@color/doobsAccent"/>
 

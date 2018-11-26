@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 
 import com.doobs.invest.income.json.bean.StockInformationBean;
 import com.doobs.invest.income.util.IncomeConstants;
+import com.doobs.invest.income.util.IncomeException;
 
 /**
  * Entity class to hold the stock position information
@@ -128,4 +129,32 @@ public class StockHoldingModel {
     public String getDescription() {
         return this.numberOfShares + " shares of " + this.stockModel.getSymbol();
     }
+
+    /**
+     * verify the stock holding data validity
+     *
+     * @throws IncomeException
+     */
+    public void validityCheck() throws IncomeException {
+        // make sure stock id not null and not empty
+        if (this.stockId == null) {
+            throw new IncomeException("The stock holding stock cannot be empty");
+        }
+
+        // make sure portfolio id not null and not empty
+        if (this.portfolioId == null) {
+            throw new IncomeException("The stock holding portfolio cannot be empty");
+        }
+
+        // make sure number of shares not null and not empty
+        if ((this.numberOfShares == null) || (this.numberOfShares >= 0)) {
+            throw new IncomeException("The portfolio number of shares cannot be empty or less than 0");
+        }
+
+        // make sure price bought not null and not empty
+        if ((this.pricePaid == null) || (this.pricePaid >= 0)) {
+            throw new IncomeException("The portfolio price bought cannot be empty or less than 0");
+        }
+    }
+
 }

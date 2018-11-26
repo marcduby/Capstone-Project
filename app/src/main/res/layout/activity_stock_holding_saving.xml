@@ -39,35 +39,69 @@
                 android:id="@+id/stock_holding_symbol_editview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/portfolio_name_hint"
+                android:hint="@string/stock_holding_symbol_hint"
                 style="@style/editViewNoMargin"/>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/symbol_search_button"
+                android:background="@color/colorAccent"
+                android:text="@string/stock_search_button"/>
+
+            <!-- start - display of search stock results -->
             <TextView
-                android:id="@+id/portfolio_description_label_textview"
+                android:id="@+id/stock_informtion_label_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/portfolio_description"
+                android:text="@string/stock_information_label"
+                style="@style/labelView" />
+
+            <TextView
+                android:id="@+id/stock_symbol_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/editViewNoMargin" />
+
+            <TextView
+                android:id="@+id/stock_name_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/editViewNoMargin" />
+
+            <TextView
+                android:id="@+id/stock_description_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/editViewNoMargin" />
+            <!-- end - display of search stock results -->
+
+            <TextView
+                android:id="@+id/stock_holding_number_shares_label_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stock_holding_number_of_shares_label"
                 style="@style/labelView" />
 
             <EditText
-                android:id="@+id/portfolio_descriprion_editview"
+                android:id="@+id/stock_holding_number_shares_editview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/portfolio_description_hint"
+                android:hint="@string/stock_holding_number_of_shares_hint"
                 style="@style/editViewNoMargin"/>
 
             <TextView
-                android:id="@+id/portfolio_goal_label_textview"
+                android:id="@+id/stock_holding_price_label_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/portfolio_goal"
+                android:text="@string/stock_holding_price_bought_label"
                 style="@style/labelView" />
 
             <EditText
-                android:id="@+id/portfolio_goal_editview"
+                android:id="@+id/stock_holding_price_editview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/portfolio_goal_hint"
+                android:hint="@string/stock_holding_price_bought_hint"
                 style="@style/editViewNoMargin"/>
 
 

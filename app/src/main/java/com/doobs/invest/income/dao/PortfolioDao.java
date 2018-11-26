@@ -35,6 +35,9 @@ public interface PortfolioDao {
     @Query("select * from " + IncomeConstants.Database.TABLE_NAME_PORTFOLIO + " where id = :id")
     public LiveData<PortfolioModel> loadById(Integer id);
 
+    @Query("select * from " + IncomeConstants.Database.TABLE_NAME_PORTFOLIO + " where id = :id")
+    public PortfolioModel loadObjectById(Integer id);
+
     @Query("select * from " + IncomeConstants.Database.TABLE_NAME_PORTFOLIO + " order by name")
     public LiveData<List<PortfolioModel>> getAllPortfolios();
 

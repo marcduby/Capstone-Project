@@ -2,6 +2,7 @@ package com.doobs.invest.income.repository;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -26,7 +27,7 @@ public class StockHoldingRepository {
     private StockHoldingDao stockHoldingDao;
     private PortfolioDao portfolioDao;
     private StockDao stockDao;
-    private LiveData<StockModel> stockModelLiveData;
+    private MutableLiveData<StockModel> stockModelLiveData = new MutableLiveData<StockModel>();
 
     public StockHoldingRepository(Application application) {
         // create the database
@@ -50,19 +51,53 @@ public class StockHoldingRepository {
     }
 
     /**
+     * load the portfolio object withput live data
+     *
+     * @param portfolioId
+     * @return
+     */
+    public PortfolioModel getPortfolioObjectById(Integer portfolioId) {
+        // load the portfolio
+        return this.portfolioDao.loadObjectById(portfolioId);
+    }
+
+    /**
      * get the stock model for the given symbol
      *
      * @param symbol
      * @return
      */
     public LiveData<StockModel> findOrCreateStockBySymbol(String symbol) {
-        // get the stock from the async task
+        // only load if not already loaded
+        if (this.stockModelLiveData == null ||
+                this.stockModelLiveData.getValue() == null ||
+                !this.stockModelLiveData.getValue().getSymbol().equals(symbol)) {
+
+            // get the stock from the async task
+            new FindOrCreateStockAsyncTask(this.stockDao).execute(symbol);
+
+        } else {
+            Log.i(TAG_NAME, "Stock already loaded with symbol: " + symbol);
+        }
 
         // return
         return this.stockModelLiveData;
     }
 
-    public class FindOrCreateStockAsyncTask extends AsyncTask<String, Void, Void> {
+    /**
+     * updates the stock model live data
+     *
+     * @param stockModel
+     */
+    public void updateStockModelLiveData(StockModel stockModel) {
+        this.stockModelLiveData.postValue(stockModel);
+    }
+
+    /**
+     * asyc task class to find the stock for a given symbol
+     *
+     */
+    public class FindOrCreateStockAsyncTask extends AsyncTask<String, Void, StockModel> {
         // instance variables
         private StockDao stockDao;
 
@@ -76,19 +111,19 @@ public class StockHoldingRepository {
         }
 
         @Override
-        protected Void doInBackground(String... symbols) {
-            // get the symbole to search with
+        protected StockModel doInBackground(String... symbols) {
+            // get the symbol to search with
             String symbol = symbols[0];
-            LiveData<StockModel> stockModelData;
+//            LiveData<StockModel> stockModelData;
             StockModel stockModel;
 
             // look for the stock in the database
-            stockModelData = this.stockDao.getStockBySymbol(symbol);
+            stockModel = this.stockDao.getStockBySymbol(symbol);
 
             // if null, find with REST call
-            if (stockModelData == null || stockModelData.getValue() == null) {
+            if (stockModel == null) {
                 // log not found
-                Log.i(this.getClass().getName(), "Did not find stcok in DB with symbol: " + symbol);
+                Log.i(this.getClass().getName(), "Did not find stock in DB with symbol: " + symbol);
 
                 // find with REST
                 stockModel = this.findStockFromRestCall(symbol);
@@ -98,18 +133,20 @@ public class StockHoldingRepository {
                     this.stockDao.insert(stockModel);
 
                     // no do call again
-                    stockModelData = this.stockDao.getStockBySymbol(symbol);
+                    stockModel = this.stockDao.getStockBySymbol(symbol);
                 }
             }
 
             // log
-            Log.i(this.getClass().getName(), "Updated movie with id: " + portfolioModel.getId() + " and name: " + portfolioModel.getName());
-
-            // set the stock
-            stockModelLiveData = stockModelData;
+            Log.i(this.getClass().getName(), "Found stock id: " + stockModel.getId() + " and name: " + stockModel.getName() + " for symbol: " + symbol);
 
             // return
-            return null;
+            return stockModel;
+        }
+
+        @Override
+        protected void onPostExecute(StockModel stockModel) {
+            updateStockModelLiveData(stockModel);
         }
 
         /**
@@ -134,4 +171,7 @@ public class StockHoldingRepository {
         }
     }
 
+    public MutableLiveData<StockModel> getStockModelLiveData() {
+        return stockModelLiveData;
+    }
 }

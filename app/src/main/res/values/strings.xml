@@ -3,8 +3,9 @@
 
     <string name="portfolio_header">Portfolios</string>
 
-    <!-- portfolio list -->
-    <string name="portfolio_add">Add Portfolio</string>
+    <!-- buttons -->
+    <string name="portfolio_add_button">Add Portfolio</string>
+    <string name="stock_search_button">Search Stock</string>
 
     <!-- stock holding list -->
     <string name="stock_holding_add">Add Position</string>
@@ -19,9 +20,11 @@
 
     <!-- stock holding saving -->
     <string name="stock_holding_symbol_label">Symbol</string>
+    <string name="stock_information_label">Stock Information</string>
     <string name="stock_holding_symbol_hint">The symbol of the stock to search for</string>
     <string name="stock_holding_name_label">Description</string>
     <string name="stock_holding_number_of_shares_label">Number of Shares</string>
+    <string name="stock_holding_number_of_shares_hint">The number of shares of stock bought</string>
     <string name="stock_holding_price_bought_label">Cost</string>
     <string name="stock_holding_price_bought_hint">The cost basis of the stock</string>
     <string name="stock_holding_current_price_label">Current Price</string>

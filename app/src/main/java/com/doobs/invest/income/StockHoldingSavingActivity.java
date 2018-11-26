@@ -1,19 +1,29 @@
 package com.doobs.invest.income;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.doobs.invest.income.model.PortfolioModel;
+import com.doobs.invest.income.model.StockHoldingModel;
+import com.doobs.invest.income.model.StockModel;
 import com.doobs.invest.income.repository.IncomeViewModel;
+import com.doobs.invest.income.repository.StockHoldingViewModel;
 import com.doobs.invest.income.util.IncomeException;
+
+import java.text.ParseException;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,18 +33,39 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
     private final String TAG_NAME = this.getClass().getName();
 
     // instance variables
-    PortfolioModel portfolioModel;
-    private IncomeViewModel incomeViewModel;
+    private StockHoldingModel stockHoldingModel;
+    private StockHoldingViewModel stockHoldingViewModel;
+    private StockModel stockModel;
+    private PortfolioModel portfolioModel;
 
     // widgets
-    @BindView(R.id.portfolio_name_editview)
-    protected EditText portfolioNameEditText;
+    // stock name text view
+    @BindView(R.id.stock_name_textview)
+    protected TextView stockNameTextView;
 
-    @BindView(R.id.portfolio_descriprion_editview)
-    protected EditText portfolioDescriptionEditText;
+    // stock description
+    @BindView(R.id.stock_description_textview)
+    protected TextView stockDescriptionTextView;
 
-    @BindView(R.id.portfolio_goal_editview)
-    protected EditText portfolioGoalEditText;
+    // stock symbol
+    @BindView(R.id.stock_symbol_textview)
+    protected TextView stockSymbolTextView;
+
+    // symbol search button
+    @BindView(R.id.symbol_search_button)
+    protected Button symbolSearchButton;
+
+    // stock symbol search view
+    @BindView(R.id.stock_holding_symbol_editview)
+    protected EditText stockHoldingSymbolEditView;
+
+    // stock number shares search view
+    @BindView(R.id.stock_holding_number_shares_editview)
+    protected EditText stockHoldingNumberSharestEditView;
+
+    // stock price bought search view
+    @BindView(R.id.stock_holding_price_editview)
+    protected EditText stockHoldingPriceBoughtEditView;
 
     /**
      * onCreate method
@@ -54,56 +85,110 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // get the income view model
-        this.incomeViewModel = ViewModelProviders.of(this).get(IncomeViewModel.class);
+        this.stockHoldingViewModel = ViewModelProviders.of(this).get(StockHoldingViewModel.class);
 
-        // create the portfolio model
-        this.portfolioModel = new PortfolioModel();
-
-        // get the FAB
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        // add a listener to the button
+        this.symbolSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (savePortfolio(portfolioModel)) {
-                    // log
-                    Log.i(TAG_NAME, "Saved portfolio with id: " + portfolioModel.getId() + " and name: " + portfolioModel.getName());
+                searchSymbol();
+            }
 
-                    // snack bar
-                    Snackbar.make(view, "Portfolio " + portfolioModel.getName() + " saved", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+        });
 
-                    // go back
-                    finish();
-                }
+        // observe the stock live data
+        this.stockHoldingViewModel.getStockModelLiveData().observe(this, new Observer<StockModel>() {
+            @Override
+            public void onChanged(@Nullable StockModel stockModel) {
+                // call the view update method
+                updateStockInformation(stockModel);
             }
         });
+
+
+//        // create the portfolio model
+//        this.portfolioModel = new PortfolioModel();
+
+        // get the FAB
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (savePortfolio(portfolioModel)) {
+//                    // log
+//                    Log.i(TAG_NAME, "Saved portfolio with id: " + portfolioModel.getId() + " and name: " + portfolioModel.getName());
+//
+//                    // snack bar
+//                    Snackbar.make(view, "Portfolio " + portfolioModel.getName() + " saved", Snackbar.LENGTH_LONG)
+//                            .setAction("Action", null).show();
+//
+//                    // go back
+//                    finish();
+//                }
+//            }
+//        });
+    }
+
+    protected void searchSymbol() {
+        // get the symbol from the input
+        String symbol = this.stockHoldingSymbolEditView.getText().toString();
+
+        // check
+        if (symbol == null || symbol.trim().length() < 0) {
+            Toast.makeText(this, "The symbol needs to be not empty", Toast.LENGTH_LONG);
+
+        } else {
+            this.stockHoldingViewModel.loadStockHolding(symbol);
+        }
     }
 
     /**
-     * save the portfolio information
+     * sets the stock information in the UI
      *
-     * @param portfolioModel
+     * @param model
+     */
+    protected void updateStockInformation(StockModel model) {
+        // set the instance
+        this.stockModel = model;
+
+        // set the name
+        this.stockNameTextView.setText(this.stockModel.getName());
+
+        // set the symbol
+        this.stockSymbolTextView.setText(this.stockModel.getSymbol());
+
+        // set the description
+        this.stockDescriptionTextView.setText(this.stockModel.getDescription());
+    }
+
+    /**
+     * save the stock holding information
+     *
      * @return
      */
-    private boolean savePortfolio(PortfolioModel portfolioModel) {
+    private boolean saveStockHolding() {
         // local variables
         boolean saveSuccess = false;
+        StockHoldingModel stockHoldingModel = new StockHoldingModel();
 
-        // get the name
-        portfolioModel.setName(this.portfolioNameEditText.getText().toString());
-
-        // get the description
-        portfolioModel.setDescriprion(this.portfolioDescriptionEditText.getText().toString());
-
-        // get the goal
-        portfolioModel.setGoal(this.portfolioGoalEditText.getText().toString());
-
-        // make sure all the fields are filled
         try {
-            portfolioModel.validityCheck();
+            // get the stock id
+            stockHoldingModel.setPortfolioId(this.portfolioModel.getId());
+
+            // set the portfolio id
+            stockHoldingModel.setStockId(this.stockModel.getId());
+
+            // set the number of shares
+            stockHoldingModel.setNumberOfShares(this.getDoubleFromTextView(this.stockHoldingSymbolEditView, "number of shares"));
+
+            // set the price bought
+            stockHoldingModel.setPricePaid(this.getDoubleFromTextView(this.stockHoldingPriceBoughtEditView, "price bought"));
+
+            // make sure all the fields are filled
+            stockHoldingModel.validityCheck();
 
             // save the portfolio
-            this.incomeViewModel.insertPortfolio(portfolioModel);
+//            this.stockHoldingViewModel.(portfolioModel);
             saveSuccess = true;
 
         } catch (IncomeException exception) {
@@ -112,5 +197,33 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
 
         // return
         return saveSuccess;
+    }
+
+    /**
+     * get the double number from the text field
+     *
+     * @param textView
+     * @param type
+     * @return
+     * @throws IncomeException
+     */
+    protected Double getDoubleFromTextView(EditText textView, String type) throws IncomeException {
+        // local variables
+        String inputString = null;
+        Double value = null;
+
+        // get the string from the text view
+        inputString = textView.getText().toString();
+
+        // convert to a double
+        try {
+            value = Double.valueOf(inputString);
+
+        } catch (NumberFormatException exception) {
+            throw new IncomeException("Got incorrect number " + inputString + " for " + type + " field");
+        }
+
+        // return
+        return value;
     }
 }

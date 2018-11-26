@@ -8,10 +8,13 @@ import android.util.Log;
 
 import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.model.StockHoldingModel;
+import com.doobs.invest.income.model.StockModel;
 
 import java.util.List;
 
 /**
+ * View model class to add a stock holding to a portfolio
+ *
  * Created by mduby on 11/25/18.
  */
 
@@ -59,7 +62,30 @@ public class StockHoldingViewModel extends AndroidViewModel {
         return portfolioModelLiveData;
     }
 
+    /**
+     * get the stock portfolio object by id
+     *
+     * @param portfolioId
+     * @return
+     */
+    public PortfolioModel loadPortfolio(Integer portfolioId) {
+        return this.stockHoldingRepository.getPortfolioObjectById(portfolioId);
+    }
+
+    public void loadStockHolding(String symbol) {
+        this.stockHoldingRepository.findOrCreateStockBySymbol(symbol);
+    }
+
     public LiveData<List<StockHoldingModel>> getStockHoldingList() {
         return stockHoldingList;
+    }
+
+    /**
+     * return the stock model
+     *
+     * @return
+     */
+    public LiveData<StockModel> getStockModelLiveData() {
+        return this.stockHoldingRepository.getStockModelLiveData();
     }
 }
