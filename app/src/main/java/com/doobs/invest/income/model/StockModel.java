@@ -39,6 +39,9 @@ public class StockModel {
     @ColumnInfo(name = "date_millis")
     private Long dateMilliseconds;
 
+    @ColumnInfo(name = "date_string")
+    private String dateString;
+
     // company information
     @NonNull
     @ColumnInfo(name = "name")
@@ -124,6 +127,14 @@ public class StockModel {
 
     public String getIssueType() {
         return issueType;
+    }
+
+    public String getDateString() {
+        return dateString;
+    }
+
+    public void setDateString(String dateString) {
+        this.dateString = dateString;
     }
 
     public String getIssueTypeDescription() {

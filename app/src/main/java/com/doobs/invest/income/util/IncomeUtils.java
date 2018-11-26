@@ -1,6 +1,9 @@
 package com.doobs.invest.income.util;
 
+import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Utility class to provide various shared utility methods
@@ -56,5 +59,23 @@ public class IncomeUtils {
 
         // return
         return formattedDouble;
+    }
+
+    /**
+     * return the current date as a string
+     *
+     * @return
+     */
+    public static String getCurrentDateString() {
+        // local variables
+        Date date = new Date();
+        DateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+        String dateString = null;
+
+        // format the data
+        dateString = formatter.format(date);
+
+        // return
+        return dateString;
     }
 }
