@@ -303,16 +303,16 @@ public class StockJsonParser {
         stockStatsBean.setYield(tempDouble);
 
         // get the price to book
-        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.PRICE_TO_BOOK_KEY);
-        stockStatsBean.setPriceToBook(tempDouble);
-
-        // get the price to sales
-        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.PRICE_TO_SALES_KEY);
-        stockStatsBean.setPriceToSales(tempDouble);
-
-        // get the revenue per share
-        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.REVENUE_PER_HARE_KEY);
-        stockStatsBean.setRevenuePerShare(tempDouble);
+//        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.PRICE_TO_BOOK_KEY);
+//        stockStatsBean.setPriceToBook(tempDouble);
+//
+//        // get the price to sales
+//        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.PRICE_TO_SALES_KEY);
+//        stockStatsBean.setPriceToSales(tempDouble);
+//
+//        // get the revenue per share
+//        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.REVENUE_PER_HARE_KEY);
+//        stockStatsBean.setRevenuePerShare(tempDouble);
 
         // return
         return stockStatsBean;

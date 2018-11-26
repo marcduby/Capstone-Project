@@ -13,6 +13,7 @@ import com.doobs.invest.income.database.IncomeDatabase;
 import com.doobs.invest.income.json.StockJsonParser;
 import com.doobs.invest.income.json.bean.StockInformationBean;
 import com.doobs.invest.income.json.bean.StockQuoteBean;
+import com.doobs.invest.income.json.bean.StockStatsBean;
 import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.model.StockModel;
 import com.doobs.invest.income.util.IncomeConstants;
@@ -172,6 +173,7 @@ public class StockHoldingRepository {
             String restCallString = null;
             StockInformationBean stockInformationBean = null;
             StockQuoteBean stockQuoteBean = null;
+            StockStatsBean stockStatsBean = null;
 
             // log
             Log.i(this.getClass().getName(), "Calling REST service for symbol: " + symbol);
@@ -208,6 +210,21 @@ public class StockHoldingRepository {
                 stockModel.setPeRatio(stockQuoteBean.getPeRatio());
                 stockModel.setPriceChange(stockQuoteBean.getPriceChange());
                 stockModel.setDateString(IncomeUtils.getCurrentDateString());
+
+                // get the stock stats
+                // build the URL
+                stockQueryUrl = NetworkUtils.getRestServiceUrl(symbol, IncomeConstants.RestServer.DATA_STATS);
+
+                // call the REST service
+                restCallString = NetworkUtils.getResponseFromHttpUrl(stockQueryUrl);
+
+                // parse the string to json
+                stockStatsBean = StockJsonParser.getStockStatsFromJsonString(restCallString);
+
+                // get the data for the stock model
+                stockModel.setDividend(stockStatsBean.getDividend());
+                stockModel.setYield(stockStatsBean.getYield());
+                stockModel.setBeta(stockStatsBean.getBeta());
 
             } catch (IncomeException exception) {
                 // log

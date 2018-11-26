@@ -1,6 +1,7 @@
 package com.doobs.invest.income.util;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,7 +48,7 @@ public class IncomeUtils {
     public static String getPercentString(Double value) throws IncomeException {
         // local variables
         String formattedDouble = null;
-        NumberFormat formatter = NumberFormat.getPercentInstance();
+        DecimalFormat formatter = new DecimalFormat("#.##");
 
         // if null, set as 0
         if (value == null) {
@@ -55,7 +56,7 @@ public class IncomeUtils {
         }
 
         // format the double
-        formattedDouble = formatter.format(value);
+        formattedDouble = formatter.format(value) + " %";
 
         // return
         return formattedDouble;
