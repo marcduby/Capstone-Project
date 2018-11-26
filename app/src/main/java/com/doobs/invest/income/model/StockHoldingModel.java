@@ -147,13 +147,13 @@ public class StockHoldingModel {
         }
 
         // make sure number of shares not null and not empty
-        if ((this.numberOfShares == null) || (this.numberOfShares >= 0)) {
-            throw new IncomeException("The portfolio number of shares cannot be empty or less than 0");
+        if ((this.numberOfShares == null) || (this.numberOfShares <= 0)) {
+            throw new IncomeException("The number of shares cannot be empty or less than or equal to 0");
         }
 
         // make sure price bought not null and not empty
-        if ((this.pricePaid == null) || (this.pricePaid >= 0)) {
-            throw new IncomeException("The portfolio price bought cannot be empty or less than 0");
+        if ((this.pricePaid == null) || (this.pricePaid < 0)) {
+            throw new IncomeException("The price bought cannot be empty or less than 0");
         }
     }
 

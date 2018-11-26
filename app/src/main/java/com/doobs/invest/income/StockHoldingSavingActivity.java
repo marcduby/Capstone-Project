@@ -20,6 +20,7 @@ import com.doobs.invest.income.model.StockHoldingModel;
 import com.doobs.invest.income.model.StockModel;
 import com.doobs.invest.income.repository.IncomeViewModel;
 import com.doobs.invest.income.repository.StockHoldingViewModel;
+import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeException;
 import com.doobs.invest.income.util.IncomeUtils;
 
@@ -84,6 +85,10 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
     @BindView(R.id.stock_holding_price_editview)
     protected EditText stockHoldingPriceBoughtEditView;
 
+    // FAB
+    @BindView(R.id.stock_holding_saving_fab)
+    protected FloatingActionButton stockHoldingSavingFab;
+
     /**
      * onCreate method
      *
@@ -123,27 +128,32 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
         });
 
 
-//        // create the portfolio model
-//        this.portfolioModel = new PortfolioModel();
+//        // load the portfolio model
+        final Integer portfolioId = getIntent().getIntExtra(IncomeConstants.ExtraKeys.PORTFOLIO_ID, 0);
+        this.stockHoldingViewModel.getPortfolioModelLiveData(portfolioId).observe(this, new Observer<PortfolioModel>() {
+            @Override
+            public void onChanged(@Nullable PortfolioModel model) {
+                portfolioModel = model;
+            }
+        });
 
         // get the FAB
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (savePortfolio(portfolioModel)) {
-//                    // log
-//                    Log.i(TAG_NAME, "Saved portfolio with id: " + portfolioModel.getId() + " and name: " + portfolioModel.getName());
-//
-//                    // snack bar
-//                    Snackbar.make(view, "Portfolio " + portfolioModel.getName() + " saved", Snackbar.LENGTH_LONG)
-//                            .setAction("Action", null).show();
-//
-//                    // go back
-//                    finish();
-//                }
-//            }
-//        });
+        stockHoldingSavingFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (saveStockHolding()) {
+                    // log
+                    Log.i(TAG_NAME, "Saved stock holding for portfolio with id: " + portfolioModel.getId() + " and stock: " + stockModel.getName());
+
+                    // snack bar
+                    Snackbar.make(view, "Stock holding " + stockHoldingModel.getId() + " saved", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+                    // go back
+                    finish();
+                }
+            }
+        });
     }
 
     protected void searchSymbol() {
@@ -203,32 +213,34 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
     private boolean saveStockHolding() {
         // local variables
         boolean saveSuccess = false;
-        StockHoldingModel stockHoldingModel = new StockHoldingModel();
+        StockHoldingModel newStockHoldingModel = new StockHoldingModel();
 
         try {
             // get the stock id
-            stockHoldingModel.setPortfolioId(this.portfolioModel.getId());
+            newStockHoldingModel.setPortfolioId(this.portfolioModel.getId());
 
             // set the portfolio id
-            stockHoldingModel.setStockId(this.stockModel.getId());
+            newStockHoldingModel.setStockId(this.stockModel.getId());
 
             // set the number of shares
-            stockHoldingModel.setNumberOfShares(this.getDoubleFromTextView(this.stockHoldingSymbolEditView, "number of shares"));
+            newStockHoldingModel.setNumberOfShares(this.getDoubleFromTextView(this.stockHoldingNumberSharestEditView, "number of shares"));
 
             // set the price bought
-            stockHoldingModel.setPricePaid(this.getDoubleFromTextView(this.stockHoldingPriceBoughtEditView, "price bought"));
+            newStockHoldingModel.setPricePaid(this.getDoubleFromTextView(this.stockHoldingPriceBoughtEditView, "price bought"));
 
             // make sure all the fields are filled
-            stockHoldingModel.validityCheck();
+            newStockHoldingModel.validityCheck();
 
             // save the portfolio
-//            this.stockHoldingViewModel.(portfolioModel);
+            this.stockHoldingViewModel.insertOrUpdateStockHolding(newStockHoldingModel);
             saveSuccess = true;
 
         } catch (IncomeException exception) {
             Toast.makeText(this, exception.getMessage(), Toast.LENGTH_LONG).show();
         }
 
+        // assign the stock holding model
+        this.stockHoldingModel = newStockHoldingModel;
         // return
         return saveSuccess;
     }
@@ -254,6 +266,7 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
             value = Double.valueOf(inputString);
 
         } catch (NumberFormatException exception) {
+            Log.i(TAG_NAME, "Got number format exception: " + exception.getMessage());
             throw new IncomeException("Got incorrect number " + inputString + " for " + type + " field");
         }
 

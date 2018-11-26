@@ -15,6 +15,7 @@ import com.doobs.invest.income.json.bean.StockInformationBean;
 import com.doobs.invest.income.json.bean.StockQuoteBean;
 import com.doobs.invest.income.json.bean.StockStatsBean;
 import com.doobs.invest.income.model.PortfolioModel;
+import com.doobs.invest.income.model.StockHoldingModel;
 import com.doobs.invest.income.model.StockModel;
 import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeException;
@@ -48,6 +49,15 @@ public class StockHoldingRepository {
         this.stockHoldingDao = incomeDatabase.getStockHoldingDao();
         this.portfolioDao = incomeDatabase.getPortfolioDao();
         this.stockDao = incomeDatabase.getStockDao();
+    }
+
+    /**
+     * insert a stock holding in the DB
+     *
+     * @param stockHoldingModel
+     */
+    public void insertOrUpdateStockHolding(StockHoldingModel stockHoldingModel) {
+        new InsertOrUpdateStockHoldingAsyncTask(this.stockHoldingDao).execute(stockHoldingModel);
     }
 
     /**
@@ -268,4 +278,43 @@ public class StockHoldingRepository {
     public MutableLiveData<StockModel> getStockModelLiveData() {
         return stockModelLiveData;
     }
+
+    /**
+     * async task class to insert or update a stock holding
+     *
+     */
+    public static class InsertOrUpdateStockHoldingAsyncTask extends AsyncTask<StockHoldingModel, Void, Void> {
+        // instance variables
+        private StockHoldingDao stockHoldingDao;
+
+        /**
+         * default constructor
+         *
+         * @param dao
+         */
+        public InsertOrUpdateStockHoldingAsyncTask(StockHoldingDao dao) {
+            this.stockHoldingDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(StockHoldingModel... stockHoldingModels) {
+            // get the stock holding to insert
+            StockHoldingModel stockHoldingModel = stockHoldingModels[0];
+
+            // insert the stock holding
+            if (stockHoldingModel.getId() == null) {
+                this.stockHoldingDao.insert(stockHoldingModel);
+
+            } else {
+                this.stockHoldingDao.update(stockHoldingModel);
+            }
+
+            // log
+            Log.i(this.getClass().getName(), "Inserted movie with id: " + stockHoldingModel.getId() + " and stock id: " + stockHoldingModel.getStockId());
+
+            // return
+            return null;
+        }
+    }
+
 }

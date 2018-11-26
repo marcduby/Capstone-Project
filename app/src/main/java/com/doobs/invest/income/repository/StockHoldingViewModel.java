@@ -88,4 +88,15 @@ public class StockHoldingViewModel extends AndroidViewModel {
     public LiveData<StockModel> getStockModelLiveData() {
         return this.stockHoldingRepository.getStockModelLiveData();
     }
+
+    /**
+     * insert or update a stock holding in the persistence layer
+     *
+     * @param stockHoldingModel
+     */
+    public void insertOrUpdateStockHolding(StockHoldingModel stockHoldingModel) {
+        this.stockHoldingRepository.insertOrUpdateStockHolding(stockHoldingModel);
+    }
+
+
 }
