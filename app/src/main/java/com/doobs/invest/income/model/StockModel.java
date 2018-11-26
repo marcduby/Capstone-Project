@@ -126,6 +126,18 @@ public class StockModel {
         return issueType;
     }
 
+    public String getIssueTypeDescription() {
+        if (IncomeConstants.RestCodes.IssueType.COMMON_STOCK.equalsIgnoreCase(this.issueType)) {
+            return IncomeConstants.RestCodes.IssueTypeDescription.COMMON_STOCK;
+
+        } else if (IncomeConstants.RestCodes.IssueType.ETF.equalsIgnoreCase(this.issueType)) {
+            return IncomeConstants.RestCodes.IssueTypeDescription.ETF;
+
+        } else {
+            return IncomeConstants.RestCodes.IssueTypeDescription.NOT_AVAILABLE;
+        }
+    }
+
     public void setIssueType(String issueType) {
         this.issueType = issueType;
     }

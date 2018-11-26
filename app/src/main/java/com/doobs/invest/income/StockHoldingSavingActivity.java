@@ -43,13 +43,17 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
     @BindView(R.id.stock_name_textview)
     protected TextView stockNameTextView;
 
-    // stock description
-    @BindView(R.id.stock_description_textview)
-    protected TextView stockDescriptionTextView;
+    // stock industry
+    @BindView(R.id.stock_industry_textview)
+    protected TextView stockIndustryTextView;
 
     // stock symbol
     @BindView(R.id.stock_symbol_textview)
     protected TextView stockSymbolTextView;
+
+    // stock issue type
+    @BindView(R.id.stock_issue_type_textview)
+    protected TextView stockIssueTypeTextView;
 
     // symbol search button
     @BindView(R.id.symbol_search_button)
@@ -131,11 +135,11 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
 
     protected void searchSymbol() {
         // get the symbol from the input
-        String symbol = this.stockHoldingSymbolEditView.getText().toString();
+        String symbol = this.stockHoldingSymbolEditView.getText().toString().toUpperCase();
 
         // check
-        if (symbol == null || symbol.trim().length() < 0) {
-            Toast.makeText(this, "The symbol needs to be not empty", Toast.LENGTH_LONG);
+        if (symbol == null || symbol.trim().length() < 1) {
+            Toast.makeText(this, "The symbol to search cannot be empty", Toast.LENGTH_LONG).show();
 
         } else {
             this.stockHoldingViewModel.loadStockHolding(symbol);
@@ -157,8 +161,11 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
         // set the symbol
         this.stockSymbolTextView.setText(this.stockModel.getSymbol());
 
-        // set the description
-        this.stockDescriptionTextView.setText(this.stockModel.getDescription());
+        // set the industry
+        this.stockIndustryTextView.setText(this.stockModel.getIndustry());
+
+        // set the issue type
+        this.stockIssueTypeTextView.setText(this.stockModel.getIssueTypeDescription());
     }
 
     /**
