@@ -32,6 +32,12 @@
     <string name="stock_holding_gain_label">Gain/Loss</string>
     <string name="stock_holding_yield_label">Yield</string>
 
+    <!-- stock description table -->
+    <string name="stock_symbol_label">Symbol</string>
+    <string name="stock_name_label">Name</string>
+    <string name="stock_industry_label">Industry</string>
+    <string name="stock_issue_type_label">Issue Type</string>
+
     <!-- activity titles -->
     <string name="title_activity_portfolio_saving">Update Portfolio</string>
     <string name="title_activity_portfolio_new">New Portfolio</string>

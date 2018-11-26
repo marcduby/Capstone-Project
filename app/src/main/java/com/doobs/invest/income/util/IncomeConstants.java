@@ -8,6 +8,19 @@ package com.doobs.invest.income.util;
 
 public class IncomeConstants {
 
+    public class RestCodes {
+        public class IssueType {
+            public static final String COMMON_STOCK                 = "cs";
+            public static final String ETF                          = "et";
+        }
+
+        public class IssueTypeDescription {
+            public static final String COMMON_STOCK                 = "common stock";
+            public static final String ETF                          = "exchange traded fund";
+            public static final String NOT_AVAILABLE                = "N/A";
+        }
+    }
+
     public class Database {
         public static final String TABLE_NAME_PORTFOLIO             = "inc_portfolio";
         public static final String TABLE_NAME_HOLDING               = "inc_holding";

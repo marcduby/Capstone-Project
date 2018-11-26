@@ -46,34 +46,107 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/symbol_search_button"
-                android:background="@color/colorAccent"
+                android:background="@color/doobsAccent"
                 android:text="@string/stock_search_button"/>
 
             <!-- start - display of search stock results -->
             <TextView
-                android:id="@+id/stock_informtion_label_textview"
-                android:layout_width="wrap_content"
+                android:id="@+id/stock_informtaion_label_textview"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/stock_information_label"
                 style="@style/labelView" />
 
-            <TextView
-                android:id="@+id/stock_symbol_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/editViewNoMargin" />
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
 
-            <TextView
-                android:id="@+id/stock_name_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/editViewNoMargin" />
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
 
-            <TextView
-                android:id="@+id/stock_description_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/editViewNoMargin" />
+                    <TextView
+                        android:id="@+id/stock_symbol_label_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:width="@dimen/table_layout_stock_label_width"
+                        android:text="@string/stock_symbol_label"
+                        style="@style/labelViewNoMargin"
+                        android:layout_column="1" />
+
+                    <TextView
+                        android:id="@+id/stock_symbol_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/editViewNoMargin"
+                        android:layout_column="2" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:id="@+id/stock_name_label_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:width="@dimen/table_layout_stock_label_width"
+                        android:text="@string/stock_name_label"
+                        style="@style/labelViewNoMargin"
+                        android:layout_column="1" />
+
+                    <TextView
+                        android:id="@+id/stock_name_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/editViewNoMargin"
+                        android:layout_column="2" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:id="@+id/stock_industry_label_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:width="@dimen/table_layout_stock_label_width"
+                        android:text="@string/stock_industry_label"
+                        style="@style/labelViewNoMargin"
+                        android:layout_column="1" />
+
+                    <TextView
+                        android:id="@+id/stock_industry_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/editViewNoMargin"
+                        android:layout_column="2" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:id="@+id/stock_issue_type_label_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:width="@dimen/table_layout_stock_label_width"
+                        android:text="@string/stock_issue_type_label"
+                        style="@style/labelViewNoMargin"
+                        android:layout_column="1" />
+
+                    <TextView
+                        android:id="@+id/stock_issue_type_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/editViewNoMargin"
+                        android:layout_column="2" />
+                </TableRow>
+
+            </TableLayout>
             <!-- end - display of search stock results -->
 
             <TextView
