@@ -72,14 +72,14 @@
                         android:layout_height="wrap_content"
                         android:width="@dimen/table_layout_stock_label_width"
                         android:text="@string/stock_symbol_label"
-                        style="@style/labelViewNoMargin"
+                        style="@style/labelViewSmall"
                         android:layout_column="1" />
 
                     <TextView
                         android:id="@+id/stock_symbol_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/editViewNoMargin"
+                        style="@style/textViewSmall"
                         android:layout_column="2" />
                 </TableRow>
 
@@ -93,14 +93,14 @@
                         android:layout_height="wrap_content"
                         android:width="@dimen/table_layout_stock_label_width"
                         android:text="@string/stock_name_label"
-                        style="@style/labelViewNoMargin"
+                        style="@style/labelViewSmall"
                         android:layout_column="1" />
 
                     <TextView
                         android:id="@+id/stock_name_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/editViewNoMargin"
+                        style="@style/textViewSmall"
                         android:layout_column="2" />
                 </TableRow>
 
@@ -114,14 +114,14 @@
                         android:layout_height="wrap_content"
                         android:width="@dimen/table_layout_stock_label_width"
                         android:text="@string/stock_industry_label"
-                        style="@style/labelViewNoMargin"
+                        style="@style/labelViewSmall"
                         android:layout_column="1" />
 
                     <TextView
                         android:id="@+id/stock_industry_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/editViewNoMargin"
+                        style="@style/textViewSmall"
                         android:layout_column="2" />
                 </TableRow>
 
@@ -135,17 +135,79 @@
                         android:layout_height="wrap_content"
                         android:width="@dimen/table_layout_stock_label_width"
                         android:text="@string/stock_issue_type_label"
-                        style="@style/labelViewNoMargin"
+                        style="@style/labelViewSmall"
                         android:layout_column="1" />
 
                     <TextView
                         android:id="@+id/stock_issue_type_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        style="@style/editViewNoMargin"
+                        style="@style/textViewSmall"
                         android:layout_column="2" />
                 </TableRow>
 
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:id="@+id/stock_price_label_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:width="@dimen/table_layout_stock_label_width"
+                        android:text="@string/stock_price_label"
+                        style="@style/labelViewSmall"
+                        android:layout_column="1" />
+
+                    <TextView
+                        android:id="@+id/stock_price_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/textViewSmall"
+                        android:layout_column="2" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:id="@+id/stock_yield_label_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:width="@dimen/table_layout_stock_label_width"
+                        android:text="@string/stock_yield_label"
+                        style="@style/labelViewSmall"
+                        android:layout_column="1" />
+
+                    <TextView
+                        android:id="@+id/stock_yield_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/textViewSmall"
+                        android:layout_column="2" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:id="@+id/stock_dividend_label_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:width="@dimen/table_layout_stock_label_width"
+                        android:text="@string/stock_dividend_label"
+                        style="@style/labelViewSmall"
+                        android:layout_column="1" />
+
+                    <TextView
+                        android:id="@+id/stock_dividend_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/textViewSmall"
+                        android:layout_column="2" />
+                </TableRow>
             </TableLayout>
             <!-- end - display of search stock results -->
 

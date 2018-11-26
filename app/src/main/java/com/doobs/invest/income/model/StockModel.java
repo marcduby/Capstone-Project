@@ -60,7 +60,7 @@ public class StockModel {
     private Double beta;
 
     @ColumnInfo(name = "dividend")
-    private Double didvidend;
+    private Double dividend;
 
     @ColumnInfo(name = "yield")
     private Double yield;
@@ -158,12 +158,12 @@ public class StockModel {
         this.beta = beta;
     }
 
-    public Double getDidvidend() {
-        return didvidend;
+    public Double getDividend() {
+        return dividend;
     }
 
-    public void setDidvidend(Double didvidend) {
-        this.didvidend = didvidend;
+    public void setDividend(Double dividend) {
+        this.dividend = dividend;
     }
 
     public Double getYield() {

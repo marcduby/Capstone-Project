@@ -29,8 +29,8 @@ public class IncomeConstants {
         }
 
         public class IssueTypeDescription {
-            public static final String COMMON_STOCK                 = "common stock";
-            public static final String ETF                          = "exchange traded fund";
+            public static final String COMMON_STOCK                 = "Common stock";
+            public static final String ETF                          = "Exchange traded fund";
             public static final String NOT_AVAILABLE                = "N/A";
         }
     }

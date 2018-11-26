@@ -55,6 +55,9 @@ public class NetworkUtils {
         HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
         String responseString = null;
 
+        // log
+        Log.i(TAG_NAME, "Making REST call to: " + url.toString());
+
         // open the stream
         try {
             InputStream inputStream = httpURLConnection.getInputStream();

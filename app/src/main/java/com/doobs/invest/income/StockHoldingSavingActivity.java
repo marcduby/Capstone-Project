@@ -21,6 +21,7 @@ import com.doobs.invest.income.model.StockModel;
 import com.doobs.invest.income.repository.IncomeViewModel;
 import com.doobs.invest.income.repository.StockHoldingViewModel;
 import com.doobs.invest.income.util.IncomeException;
+import com.doobs.invest.income.util.IncomeUtils;
 
 import java.text.ParseException;
 import java.util.List;
@@ -54,6 +55,18 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
     // stock issue type
     @BindView(R.id.stock_issue_type_textview)
     protected TextView stockIssueTypeTextView;
+
+    // stock price
+    @BindView(R.id.stock_price_textview)
+    protected TextView stockPriceTextView;
+
+    // stock dividend
+    @BindView(R.id.stock_dividend_textview)
+    protected TextView stockDividendTextView;
+
+    // stock yield
+    @BindView(R.id.stock_yield_textview)
+    protected TextView stockYieldTextView;
 
     // symbol search button
     @BindView(R.id.symbol_search_button)
@@ -166,6 +179,20 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
 
         // set the issue type
         this.stockIssueTypeTextView.setText(this.stockModel.getIssueTypeDescription());
+
+        try {
+            // set the price
+            this.stockPriceTextView.setText(IncomeUtils.getCurrencyString(this.stockModel.getPrice()));
+
+            // set the yield
+            this.stockYieldTextView.setText(IncomeUtils.getPercentString(this.stockModel.getYield()));
+
+            // set the dividend
+            this.stockDividendTextView.setText(IncomeUtils.getCurrencyString(this.stockModel.getDividend()));
+
+        } catch (IncomeException exception) {
+            Log.e(TAG_NAME, "Got exception displaying the double values");
+        }
     }
 
     /**

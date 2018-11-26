@@ -5,4 +5,19 @@
 
 - short term enhancements
   - store the div/bought/value bvalues in all DB objects
+  - add edits to
+    - stock holding
+    - portfolio
 
+
+
+- work
+  - 20181126 - utesday
+    - finish REST call integration (all 3 for data)
+    - save position
+    - add financial data to all 3 models
+    - test no network
+    - add symbol eror checking
+    
+    
+    

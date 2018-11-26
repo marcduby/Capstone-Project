@@ -118,7 +118,7 @@ public class StockHoldingModel {
      * @return
      */
     public Double getYearlyDivided() {
-        return this.numberOfShares * this.stockModel.getDidvidend();
+        return this.numberOfShares * this.stockModel.getDividend();
     }
 
     /**

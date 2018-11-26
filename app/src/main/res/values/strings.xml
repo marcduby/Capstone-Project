@@ -37,6 +37,9 @@
     <string name="stock_name_label">Name</string>
     <string name="stock_industry_label">Industry</string>
     <string name="stock_issue_type_label">Issue Type</string>
+    <string name="stock_price_label">Price</string>
+    <string name="stock_dividend_label">Dividend</string>
+    <string name="stock_yield_label">Yield</string>
 
     <!-- activity titles -->
     <string name="title_activity_portfolio_saving">Update Portfolio</string>

@@ -4,5 +4,5 @@
     <dimen name="toolbar_height">56dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
 
-    <dimen name="table_layout_stock_label_width">130dp</dimen>
+    <dimen name="table_layout_stock_label_width">90dp</dimen>
 </resources>

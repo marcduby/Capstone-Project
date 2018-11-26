@@ -21,6 +21,16 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <!-- small text for stock list -->
+    <style name="textViewSmall" parent="AppTheme">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="labelViewSmall" parent="textViewSmall">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <!-- small text for stock list -->
+
     <style name="labelViewNoMargin" parent="textView">
         <item name="android:textStyle">bold</item>
     </style>
