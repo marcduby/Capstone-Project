@@ -3,7 +3,7 @@ package com.doobs.invest.income.util;
 import java.text.NumberFormat;
 
 /**
- * Utility class to provide various shared utitlity methods
+ * Utility class to provide various shared utility methods
  *
  * Created by mduby on 11/26/18.
  */
