@@ -10,8 +10,16 @@ import com.doobs.invest.income.dao.PortfolioDao;
 import com.doobs.invest.income.dao.StockDao;
 import com.doobs.invest.income.dao.StockHoldingDao;
 import com.doobs.invest.income.database.IncomeDatabase;
+import com.doobs.invest.income.json.StockJsonParser;
+import com.doobs.invest.income.json.bean.StockInformationBean;
 import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.model.StockModel;
+import com.doobs.invest.income.util.IncomeConstants;
+import com.doobs.invest.income.util.IncomeException;
+import com.doobs.invest.income.util.NetworkUtils;
+
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * Repository class to manage the stock holding objects
@@ -156,6 +164,49 @@ public class StockHoldingRepository {
          * @return
          */
         protected StockModel findStockFromRestCall(String symbol) {
+            // TODO - implement
+            StockModel stockModel = new StockModel();
+            URL stockQueryUrl = null;
+            String restCallString = null;
+            StockInformationBean stockInformationBean = null;
+
+            // log
+            Log.i(this.getClass().getName(), "Calling REST service for symbol: " + symbol);
+
+            try {
+                // build the URL
+                stockQueryUrl = NetworkUtils.getRestServiceUrl(symbol, IncomeConstants.RestServer.DATA_COMPANY);
+
+                // call the REST service
+                restCallString = NetworkUtils.getResponseFromHttpUrl(stockQueryUrl);
+
+                // parse the string to json
+                stockInformationBean = StockJsonParser.parseString(restCallString);
+
+                // get the data for the stock model
+                stockModel.setSymbol(stockInformationBean.getSymbol());
+                stockModel.setName(stockInformationBean.getName());
+                stockModel.setIndustry(stockInformationBean.getIndustry());
+                stockModel.setIssueType(stockInformationBean.getIssueType());
+
+            } catch (IncomeException exception) {
+                // TODO - set live data string error
+
+            } catch (IOException exception) {
+                // TODO - set live data string error
+            }
+
+            // return
+            return stockModel;
+        }
+
+        /**
+         * find a stock through the REST service
+         *
+         * @param symbol
+         * @return
+         */
+        protected StockModel findStockFromRestCallTest(String symbol) {
             // TODO - implement
             StockModel stockModel = new StockModel();
             stockModel.setSymbol(symbol);

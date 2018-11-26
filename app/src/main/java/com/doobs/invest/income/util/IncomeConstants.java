@@ -8,6 +8,20 @@ package com.doobs.invest.income.util;
 
 public class IncomeConstants {
 
+    public class RestServer {
+        // server information
+        public static final String SERVER_NAME                      = "https://api.iextrading.com";
+        public static final String ROOT_CONTEXT                     = "1.0";
+
+        // methods
+        public static final String METHOD_STOCK                     = "stock";
+
+        // data
+        public static final String DATA_STATS                       = "stats";
+        public static final String DATA_QUOTE                       = "quote";
+        public static final String DATA_COMPANY                     = "company";
+    }
+
     public class RestCodes {
         public class IssueType {
             public static final String COMMON_STOCK                 = "cs";
