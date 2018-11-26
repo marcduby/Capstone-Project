@@ -1,0 +1,8 @@
+
+- long term enhacements
+
+
+
+- short term enhancements
+  - store the div/bought/value bvalues in all DB objects
+

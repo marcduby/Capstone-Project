@@ -8,6 +8,18 @@ package com.doobs.invest.income.util;
 
 public class IncomeConstants {
 
+    public class Database {
+        public static final String TABLE_NAME_PORTFOLIO             = "inc_portfolio";
+        public static final String TABLE_NAME_HOLDING               = "inc_holding";
+        public static final String TABLE_NAME_STOCK_INFORMATION     = "inc_stock_information";
+
+        public static final String DATABASE_NAME                    = "income_database";
+    }
+
+    public class ExtraKeys {
+        public static final String PORTFOLIO_ID                     = "portfolioId";
+    }
+
     public static class JsonKeys {
         public static class Stock {
             public final static String SYMBOL_KEY           = "symbol";

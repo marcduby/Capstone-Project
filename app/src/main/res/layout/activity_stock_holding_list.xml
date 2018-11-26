@@ -24,14 +24,19 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/portfolio_add_button"
-            android:id="@+id/portfolio_add_button"
+            android:text="@string/stock_holding_add"
+            android:id="@+id/stock_holding_add_button"
             android:background="@color/doobsAccent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/portfolio_name_textview"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/portfolio_recyclerview">
+            android:id="@+id/stock_holding_recyclerview">
 
         </android.support.v7.widget.RecyclerView>
 
