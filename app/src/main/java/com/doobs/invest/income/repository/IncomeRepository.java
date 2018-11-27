@@ -51,16 +51,6 @@ public class IncomeRepository {
     }
 
     /**
-     * returns the stock holdings for a portfolio
-     *
-     * @param portfooioId
-     * @return
-     */
-    public LiveData<List<StockHoldingModel>> getStockHoldingsForPortfolioId(Integer portfooioId) {
-        return this.stockHoldingDao.getAllStocks(portfooioId);
-    }
-
-    /**
      * inserts a new portfolio object
      *
      * @param portfolioModel

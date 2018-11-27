@@ -24,6 +24,7 @@ import com.doobs.invest.income.util.NetworkUtils;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 /**
  * Repository class to manage the stock holding objects
@@ -69,6 +70,28 @@ public class StockHoldingRepository {
     public LiveData<PortfolioModel> getPortfolioById(Integer portfolioId) {
         // load the portfolio
         return this.portfolioDao.loadById(portfolioId);
+    }
+
+    /**
+     * returns the stock holdings for a portfolio
+     *
+     * @param portfolioId
+     * @return
+     */
+    public LiveData<List<StockHoldingModel>> getStockHoldingsForPortfolioId(Integer portfolioId) {
+        // get the list of stock holdings
+        LiveData<List<StockHoldingModel>> listLiveData = this.stockHoldingDao.getAllStocks(portfolioId);
+
+        // for each holding, load the stock
+//        if (listLiveData != null && listLiveData.getValue() != null) {
+//            for (StockHoldingModel stockHoldingModel : listLiveData.getValue()) {
+//                StockModel stockModel = this.stockDao.getStockById(stockHoldingModel.getId());
+//                stockHoldingModel.setStockModel(stockModel);
+//            }
+//        }
+
+        // return
+        return listLiveData;
     }
 
     /**

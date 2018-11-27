@@ -25,7 +25,6 @@ public class StockHoldingViewModel extends AndroidViewModel {
     // instamnce variables
     private StockHoldingRepository stockHoldingRepository;
     private LiveData<PortfolioModel> portfolioModelLiveData;
-    private LiveData<List<StockHoldingModel>> stockHoldingList;
 
     /**
      * default constructor
@@ -76,10 +75,6 @@ public class StockHoldingViewModel extends AndroidViewModel {
         this.stockHoldingRepository.findOrCreateStockBySymbol(symbol);
     }
 
-    public LiveData<List<StockHoldingModel>> getStockHoldingList() {
-        return stockHoldingList;
-    }
-
     /**
      * return the stock model
      *
@@ -88,6 +83,7 @@ public class StockHoldingViewModel extends AndroidViewModel {
     public LiveData<StockModel> getStockModelLiveData() {
         return this.stockHoldingRepository.getStockModelLiveData();
     }
+
 
     /**
      * insert or update a stock holding in the persistence layer
@@ -98,5 +94,13 @@ public class StockHoldingViewModel extends AndroidViewModel {
         this.stockHoldingRepository.insertOrUpdateStockHolding(stockHoldingModel);
     }
 
-
+    /**
+     * returns the stock portfolio holdings
+     *
+     * @param portfolioId
+     * @return
+     */
+    public LiveData<List<StockHoldingModel>> getStockHoldingsForPortfolioId(Integer portfolioId) {
+        return this.stockHoldingRepository.getStockHoldingsForPortfolioId(portfolioId);
+    }
 }

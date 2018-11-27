@@ -98,6 +98,7 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
             @Override
             public void onChanged(@Nullable PortfolioModel portfolioModelReturn) {
                 portfolioModel = portfolioModelReturn;
+                portfolioNameTextView.setText(portfolioModel.getName() + getString(R.string.portfolio_snippet));
             }
         });
 //        this.portfolioModel = this.stockHoldingViewModel.loadPortfolio(portfolioId);
@@ -107,10 +108,10 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
         }
 
         // set the observer on the database live data portfolio list used for display
-        this.stockHoldingViewModel.getPortfolioModelLiveData(1).observe(this, new Observer<PortfolioModel>() {
+        this.stockHoldingViewModel.getStockHoldingsForPortfolioId(portfolioId).observe(this, new Observer<List<StockHoldingModel>>() {
             @Override
-            public void onChanged(@Nullable PortfolioModel portfolioModel) {
-                    portfolioNameTextView.setText(portfolioModel.getName() + getString(R.string.portfolio_snippet));
+            public void onChanged(@Nullable List<StockHoldingModel> stockHoldingModelList) {
+                stockHoldingRecyclerAdapter.setStockHoldingModelList(stockHoldingModelList);
             }
         });
     }

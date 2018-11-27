@@ -127,7 +127,7 @@ public class StockHoldingModel {
      * @return
      */
     public String getDescription() {
-        return this.numberOfShares + " shares of " + this.stockModel.getSymbol();
+        return this.numberOfShares.toString();// + " shares of " + this.stockModel.getSymbol();
     }
 
     /**
