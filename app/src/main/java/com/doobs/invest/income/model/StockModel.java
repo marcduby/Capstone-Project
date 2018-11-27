@@ -39,6 +39,9 @@ public class StockModel {
     @ColumnInfo(name = "date_millis")
     private Long dateMilliseconds;
 
+    @ColumnInfo(name = "date_string")
+    private String dateString;
+
     // company information
     @NonNull
     @ColumnInfo(name = "name")
@@ -60,7 +63,7 @@ public class StockModel {
     private Double beta;
 
     @ColumnInfo(name = "dividend")
-    private Double didvidend;
+    private Double dividend;
 
     @ColumnInfo(name = "yield")
     private Double yield;
@@ -126,6 +129,14 @@ public class StockModel {
         return issueType;
     }
 
+    public String getDateString() {
+        return dateString;
+    }
+
+    public void setDateString(String dateString) {
+        this.dateString = dateString;
+    }
+
     public String getIssueTypeDescription() {
         if (IncomeConstants.RestCodes.IssueType.COMMON_STOCK.equalsIgnoreCase(this.issueType)) {
             return IncomeConstants.RestCodes.IssueTypeDescription.COMMON_STOCK;
@@ -158,12 +169,12 @@ public class StockModel {
         this.beta = beta;
     }
 
-    public Double getDidvidend() {
-        return didvidend;
+    public Double getDividend() {
+        return dividend;
     }
 
-    public void setDidvidend(Double didvidend) {
-        this.didvidend = didvidend;
+    public void setDividend(Double dividend) {
+        this.dividend = dividend;
     }
 
     public Double getYield() {

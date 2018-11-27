@@ -31,7 +31,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/portfolio_name_textview"/>
+            android:id="@+id/portfolio_name_textview"
+            style="@style/labelView"
+            android:gravity="center"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"

@@ -31,7 +31,7 @@ public class StockJsonParser {
      * @return
      * @throws IncomeException
      */
-    public static StockInformationBean parseString(String inputJsonString) throws IncomeException {
+    public static StockInformationBean getStockInformationFromJsonString(String inputJsonString) throws IncomeException {
         // local variables
         StockInformationBean stockInformationBean = null;
         JSONObject jsonObject = null;
@@ -50,7 +50,7 @@ public class StockJsonParser {
         }
 
         // get the list
-        stockInformationBean = getStocktFromJson(jsonObject);
+        stockInformationBean = getStockInformationFromJson(jsonObject);
 
         // return
         return stockInformationBean;
@@ -63,7 +63,7 @@ public class StockJsonParser {
      * @return
      * @throws IncomeException
      */
-    public static StockInformationBean getStocktFromJson(JSONObject inputJsonObject) throws IncomeException {
+    public static StockInformationBean getStockInformationFromJson(JSONObject inputJsonObject) throws IncomeException {
         // local variables
         StockInformationBean stockInformationBean = new StockInformationBean();
         String tempString = null;
@@ -215,14 +215,14 @@ public class StockJsonParser {
         stockQuoteBean.setSymbol(tempString);
 
         // get the date
-        tempString = inputJsonObject.optString(IncomeConstants.JsonKeys.Quote.DATE_KEY);
-        try {
-            tempDate = formatter.parse(tempString);
-
-        } catch (ParseException exception) {
-            throw new IncomeException("Got stock quote error parsing the date: " + exception.getMessage());
-        }
-        stockQuoteBean.setDate(tempDate);
+//        tempString = inputJsonObject.optString(IncomeConstants.JsonKeys.Quote.DATE_KEY);
+//        try {
+//            tempDate = formatter.parse(tempString);
+//
+//        } catch (ParseException exception) {
+//            throw new IncomeException("Got stock quote error parsing the date: " + exception.getMessage());
+//        }
+//        stockQuoteBean.setDate(tempDate);
 
         // get the price
         tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Quote.PRICE_KEY);
@@ -303,16 +303,16 @@ public class StockJsonParser {
         stockStatsBean.setYield(tempDouble);
 
         // get the price to book
-        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.PRICE_TO_BOOK_KEY);
-        stockStatsBean.setPriceToBook(tempDouble);
-
-        // get the price to sales
-        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.PRICE_TO_SALES_KEY);
-        stockStatsBean.setPriceToSales(tempDouble);
-
-        // get the revenue per share
-        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.REVENUE_PER_HARE_KEY);
-        stockStatsBean.setRevenuePerShare(tempDouble);
+//        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.PRICE_TO_BOOK_KEY);
+//        stockStatsBean.setPriceToBook(tempDouble);
+//
+//        // get the price to sales
+//        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.PRICE_TO_SALES_KEY);
+//        stockStatsBean.setPriceToSales(tempDouble);
+//
+//        // get the revenue per share
+//        tempDouble = inputJsonObject.optDouble(IncomeConstants.JsonKeys.Financials.REVENUE_PER_HARE_KEY);
+//        stockStatsBean.setRevenuePerShare(tempDouble);
 
         // return
         return stockStatsBean;
