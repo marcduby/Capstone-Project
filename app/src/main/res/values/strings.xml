@@ -48,6 +48,13 @@
     <string name="title_activity_stock_holdings">Portfolio Holdings</string>
     <string name="title_activity_stock_holdings_new">Update Stock Holding</string>
 
+    <!-- stock holding list table -->
+    <string name="stock_holding_list_shares_label"># Shares</string>
+    <string name="stock_holding_list_symbol_label">Symbol</string>
+    <string name="stock_holding_list_cost_basis_label">Cost Basis</string>
+    <string name="stock_holding_list_dividend_label">Dividend</string>
+
+
     <!-- snippets -->
     <string name="portfolio_snippet"> Portfolio</string>
 

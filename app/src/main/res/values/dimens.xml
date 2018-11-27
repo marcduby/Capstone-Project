@@ -1,8 +1,16 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="medium_margin">16dp</dimen>
 
     <dimen name="toolbar_height">56dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
 
     <dimen name="table_layout_stock_label_width">90dp</dimen>
+
+    <!-- stock holding list -->
+    <dimen name="table_layout_stock_holding_list_shares_width">90dp</dimen>
+    <dimen name="table_layout_stock_holding_list_symbol_width">90dp</dimen>
+    <dimen name="table_layout_stock_holding_list_cost_basis_width">90dp</dimen>
+    <dimen name="table_layout_stock_holding_list_dividend_width">90dp</dimen>
+
 </resources>

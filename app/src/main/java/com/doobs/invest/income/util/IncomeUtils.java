@@ -21,7 +21,7 @@ public class IncomeUtils {
      * @return
      * @throws IncomeException
      */
-    public static String getCurrencyString(Double value) throws IncomeException {
+    public static String getCurrencyString(Double value) {
         // local variables
         String formattedDouble = null;
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
@@ -45,7 +45,7 @@ public class IncomeUtils {
      * @return
      * @throws IncomeException
      */
-    public static String getPercentString(Double value) throws IncomeException {
+    public static String getPercentString(Double value) {
         // local variables
         String formattedDouble = null;
         DecimalFormat formatter = new DecimalFormat("#.##");

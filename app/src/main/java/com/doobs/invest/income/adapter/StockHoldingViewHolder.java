@@ -8,6 +8,10 @@ import android.widget.TextView;
 import com.doobs.invest.income.R;
 import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.model.StockHoldingModel;
+import com.doobs.invest.income.util.IncomeUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * View holder class to display the portfolio recycler view rows
@@ -21,7 +25,23 @@ public class StockHoldingViewHolder extends RecyclerView.ViewHolder  implements 
 
     // instance variables
     private StockHoldingRecyclerAdapter parent;
+
+    // widgets
+    // number of shares
+    @BindView(R.id.stock_list_shares_textview)
     TextView stockHoldingNameTextView;
+
+    // stock symbol
+    @BindView(R.id.stock_list_symbol_textview)
+    TextView stockHoldingSymbolTextView;
+
+    // cost basis
+    @BindView(R.id.stock_list_cost_textview)
+    TextView stockHoldingCostBasisTextView;
+
+    // dividend
+    @BindView(R.id.stock_list_dividend_textview)
+    TextView stockHoldingDividendTextView;
 
     /**
      * default constructor
@@ -31,9 +51,12 @@ public class StockHoldingViewHolder extends RecyclerView.ViewHolder  implements 
     public StockHoldingViewHolder(View itemView, StockHoldingRecyclerAdapter stockHoldingRecyclerAdapter) {
         super(itemView);
 
+        // bind with butterknife
+        ButterKnife.bind(this, itemView);
+
         // get the text view
         this.parent = stockHoldingRecyclerAdapter;
-        this.stockHoldingNameTextView = (TextView) itemView.findViewById(R.id.portfolio_name_textview);
+//        this.stockHoldingNameTextView = (TextView) itemView.findViewById(R.id.portfolio_name_textview);
 
         // set the listener
         itemView.setOnClickListener(this);
@@ -46,13 +69,22 @@ public class StockHoldingViewHolder extends RecyclerView.ViewHolder  implements 
      */
     protected void bind(StockHoldingModel stockHoldingModel) {
         // get the name
-        String name = stockHoldingModel.getDescription();
+        String name = stockHoldingModel.getNumberOfShares().toString();
 
         // log
         Log.i(TAG_NAME, "Inflating view for stock holding: " + name);
 
         // set the name text
         this.stockHoldingNameTextView.setText(name + ": " + stockHoldingModel.getId());
+
+        // set the symbol
+        this.stockHoldingSymbolTextView.setText(stockHoldingModel.getStockSymbol());
+
+        // set the cost
+        this.stockHoldingCostBasisTextView.setText(IncomeUtils.getCurrencyString(stockHoldingModel.getCostBasis()));
+
+        // set the dividend
+        this.stockHoldingDividendTextView.setText(IncomeUtils.getCurrencyString(stockHoldingModel.getTotalDividend()));
     }
 
     @Override

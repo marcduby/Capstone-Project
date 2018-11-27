@@ -190,19 +190,15 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
         // set the issue type
         this.stockIssueTypeTextView.setText(this.stockModel.getIssueTypeDescription());
 
-        try {
-            // set the price
-            this.stockPriceTextView.setText(IncomeUtils.getCurrencyString(this.stockModel.getPrice()));
+        // set the price
+        this.stockPriceTextView.setText(IncomeUtils.getCurrencyString(this.stockModel.getPrice()));
 
-            // set the yield
-            this.stockYieldTextView.setText(IncomeUtils.getPercentString(this.stockModel.getYield()));
+        // set the yield
+        this.stockYieldTextView.setText(IncomeUtils.getPercentString(this.stockModel.getYield()));
 
-            // set the dividend
-            this.stockDividendTextView.setText(IncomeUtils.getCurrencyString(this.stockModel.getDividend()));
+        // set the dividend
+        this.stockDividendTextView.setText(IncomeUtils.getCurrencyString(this.stockModel.getDividend()));
 
-        } catch (IncomeException exception) {
-            Log.e(TAG_NAME, "Got exception displaying the double values");
-        }
     }
 
     /**
