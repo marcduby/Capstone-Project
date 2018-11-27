@@ -52,7 +52,7 @@
     <string name="stock_holding_list_shares_label"># Shares</string>
     <string name="stock_holding_list_symbol_label">Symbol</string>
     <string name="stock_holding_list_cost_basis_label">Cost Basis</string>
-    <string name="stock_holding_list_current_value_label">Value</string>
+    <string name="stock_holding_list_current_value_label">Sum Value</string>
     <string name="stock_holding_list_dividend_label">Dividend</string>
     <string name="stock_holding_list_total_label">Totals</string>
 
