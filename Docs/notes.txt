@@ -16,10 +16,18 @@
     - portfolio list gui
     - capstone proposal
     - test no network
-    - add symbol eror checking
+    - add symbol error checking
     - edit portfolio/stock holding
     - widget
     - verify accessibility
+    - portfolio diversification chart
+    - google services
+      - admob
+      - analytics
+    - RTL cheeck
+    - accessibility check
+    - all strings check
+    
     
   - 20181126 - monday
     * finish REST call integration (all 3 for data)
