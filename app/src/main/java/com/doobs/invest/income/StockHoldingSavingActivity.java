@@ -228,6 +228,15 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
             // set the price bought
             newStockHoldingModel.setPricePaid(this.getDoubleFromTextView(this.stockHoldingPriceBoughtEditView, "price bought"));
 
+            // set the stock sybol
+            newStockHoldingModel.setStockSymbol(this.stockModel.getSymbol());
+
+            // set the current value
+            newStockHoldingModel.setCurrentValue(newStockHoldingModel.getNumberOfShares() * this.stockModel.getPrice());
+
+            // set the total dividend
+            newStockHoldingModel.setTotalDividend(newStockHoldingModel.getNumberOfShares() * this.stockModel.getDividend());
+
             // make sure all the fields are filled
             newStockHoldingModel.validityCheck();
 

@@ -38,8 +38,17 @@ public class PortfolioModel {
     @ColumnInfo(name = "goal")
     private String goal;
 
-    @Ignore
-    private List<StockHoldingModel> stockHoldingList = new ArrayList<StockHoldingModel>();
+    @ColumnInfo(name = "cost_basis")
+    private Double costBasis;
+
+    @ColumnInfo(name = "current_value")
+    private Double currentValue;
+
+    @ColumnInfo(name = "total_dividend")
+    private Double totalDividend;
+
+//    @Ignore
+//    private List<StockHoldingModel> stockHoldingList = new ArrayList<StockHoldingModel>();
 
     public String getName() {
         return name;
@@ -65,13 +74,13 @@ public class PortfolioModel {
         this.goal = goal;
     }
 
-    public List<StockHoldingModel> getStockHoldingList() {
-        return stockHoldingList;
-    }
-
-    public void setStockHoldingList(List<StockHoldingModel> stockHoldingList) {
-        this.stockHoldingList = stockHoldingList;
-    }
+//    public List<StockHoldingModel> getStockHoldingList() {
+//        return stockHoldingList;
+//    }
+//
+//    public void setStockHoldingList(List<StockHoldingModel> stockHoldingList) {
+//        this.stockHoldingList = stockHoldingList;
+//    }
 
     @NonNull
     public Integer getId() {
@@ -104,57 +113,82 @@ public class PortfolioModel {
         }
     }
 
-    /**
-     * get the portfolio's total cost basis
-     *
-     * @return
-     */
-    public Double getTotalCostBasis() {
-        // local variables
-        Double amount = 0.0;
+//    /**
+//     * get the portfolio's total cost basis
+//     *
+//     * @return
+//     */
+//    public Double getTotalCostBasis() {
+//        // local variables
+//        Double amount = 0.0;
+//
+//        // calculate
+//        for (StockHoldingModel stockHoldingModel : this.getStockHoldingList()) {
+//            amount = amount + stockHoldingModel.getCostBasis();
+//        }
+//
+//        // return
+//        return amount;
+//    }
+//
+//    /**
+//     * get the portfolio's total value basis
+//     *
+//     * @return
+//     */
+//    public Double getTotalValueBasis() {
+//        // local variables
+//        Double amount = 0.0;
+//
+//        // calculate
+//        for (StockHoldingModel stockHoldingModel : this.getStockHoldingList()) {
+//            amount = amount + stockHoldingModel.getValueBasis();
+//        }
+//
+//        // return
+//        return amount;
+//    }
+//
+//    /**
+//     * returns the portfolio's expected yearly dividend amount
+//     *
+//     * @return
+//     */
+//    public Double getTotalDividendCashFlow() {
+//        // local variables
+//        Double amount = 0.0;
+//
+//        // calculate
+//        for (StockHoldingModel stockHoldingModel : this.getStockHoldingList()) {
+//            amount = amount + stockHoldingModel.getYearlyDivided();
+//        }
+//
+//        // return
+//        return amount;
+//    }
 
-        // calculate
-        for (StockHoldingModel stockHoldingModel : this.getStockHoldingList()) {
-            amount = amount + stockHoldingModel.getCostBasis();
-        }
 
-        // return
-        return amount;
+    public Double getCostBasis() {
+        return costBasis;
     }
 
-    /**
-     * get the portfolio's total value basis
-     *
-     * @return
-     */
-    public Double getTotalValueBasis() {
-        // local variables
-        Double amount = 0.0;
-
-        // calculate
-        for (StockHoldingModel stockHoldingModel : this.getStockHoldingList()) {
-            amount = amount + stockHoldingModel.getValueBasis();
-        }
-
-        // return
-        return amount;
+    public void setCostBasis(Double costBasis) {
+        this.costBasis = costBasis;
     }
 
-    /**
-     * returns the portfolio's expected yearly dividend amount
-     *
-     * @return
-     */
-    public Double getTotalDividendCashFlow() {
-        // local variables
-        Double amount = 0.0;
+    public Double getCurrentValue() {
+        return currentValue;
+    }
 
-        // calculate
-        for (StockHoldingModel stockHoldingModel : this.getStockHoldingList()) {
-            amount = amount + stockHoldingModel.getYearlyDivided();
-        }
+    public void setCurrentValue(Double currentValue) {
+        this.currentValue = currentValue;
+    }
 
-        // return
-        return amount;
+    public Double getTotalDividend() {
+        return totalDividend;
+    }
+
+    public void setTotalDividend(Double totalDividend) {
+        this.totalDividend = totalDividend;
     }
 }

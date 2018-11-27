@@ -39,8 +39,18 @@ public class StockHoldingModel {
     @ColumnInfo(name = "portfolio_id")
     private Integer portfolioId;
 
-    @Ignore
-    private StockModel stockModel;
+    @NonNull
+    @ColumnInfo(name = "symbol")
+    private String stockSymbol;
+
+    @ColumnInfo(name = "current_value")
+    private Double currentValue;
+
+    @ColumnInfo(name = "total_dividend")
+    private Double totalDividend;
+
+//    @Ignore
+//    private StockModel stockModel;
 
     public Double getNumberOfShares() {
         return numberOfShares;
@@ -50,13 +60,13 @@ public class StockHoldingModel {
         this.numberOfShares = numberOfShares;
     }
 
-    public StockModel getStockModel() {
-        return stockModel;
-    }
-
-    public void setStockModel(StockModel stockModel) {
-        this.stockModel = stockModel;
-    }
+//    public StockModel getStockModel() {
+//        return stockModel;
+//    }
+//
+//    public void setStockModel(StockModel stockModel) {
+//        this.stockModel = stockModel;
+//    }
 
     @NonNull
     public Integer getId() {
@@ -103,23 +113,23 @@ public class StockHoldingModel {
         return this.numberOfShares * this.pricePaid;
     }
 
-    /**
-     * get the current value basis of the stock holding
-     *
-     * @return
-     */
-    public Double getValueBasis() {
-        return this.numberOfShares * this.stockModel.getPrice();
-    }
-
-    /**
-     * get the total dividedn expected from the stock holding
-     *
-     * @return
-     */
-    public Double getYearlyDivided() {
-        return this.numberOfShares * this.stockModel.getDividend();
-    }
+//    /**
+//     * get the current value basis of the stock holding
+//     *
+//     * @return
+//     */
+//    public Double getValueBasis() {
+//        return this.numberOfShares * this.stockModel.getPrice();
+//    }
+//
+//    /**
+//     * get the total dividedn expected from the stock holding
+//     *
+//     * @return
+//     */
+//    public Double getYearlyDivided() {
+//        return this.numberOfShares * this.stockModel.getDividend();
+//    }
 
     /**
      * return a description of the stock holding
@@ -127,7 +137,32 @@ public class StockHoldingModel {
      * @return
      */
     public String getDescription() {
-        return this.numberOfShares.toString();// + " shares of " + this.stockModel.getSymbol();
+        return this.numberOfShares.toString() + " shares of " + this.stockSymbol;
+    }
+
+    @NonNull
+    public String getStockSymbol() {
+        return stockSymbol;
+    }
+
+    public void setStockSymbol(@NonNull String stockSymbol) {
+        this.stockSymbol = stockSymbol;
+    }
+
+    public Double getCurrentValue() {
+        return currentValue;
+    }
+
+    public void setCurrentValue(Double currentValue) {
+        this.currentValue = currentValue;
+    }
+
+    public Double getTotalDividend() {
+        return totalDividend;
+    }
+
+    public void setTotalDividend(Double totalDividend) {
+        this.totalDividend = totalDividend;
     }
 
     /**
