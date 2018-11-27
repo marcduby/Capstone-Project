@@ -190,19 +190,15 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
         // set the issue type
         this.stockIssueTypeTextView.setText(this.stockModel.getIssueTypeDescription());
 
-        try {
-            // set the price
-            this.stockPriceTextView.setText(IncomeUtils.getCurrencyString(this.stockModel.getPrice()));
+        // set the price
+        this.stockPriceTextView.setText(IncomeUtils.getCurrencyString(this.stockModel.getPrice()));
 
-            // set the yield
-            this.stockYieldTextView.setText(IncomeUtils.getPercentString(this.stockModel.getYield()));
+        // set the yield
+        this.stockYieldTextView.setText(IncomeUtils.getPercentString(this.stockModel.getYield()));
 
-            // set the dividend
-            this.stockDividendTextView.setText(IncomeUtils.getCurrencyString(this.stockModel.getDividend()));
+        // set the dividend
+        this.stockDividendTextView.setText(IncomeUtils.getCurrencyString(this.stockModel.getDividend()));
 
-        } catch (IncomeException exception) {
-            Log.e(TAG_NAME, "Got exception displaying the double values");
-        }
     }
 
     /**
@@ -227,6 +223,15 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
 
             // set the price bought
             newStockHoldingModel.setPricePaid(this.getDoubleFromTextView(this.stockHoldingPriceBoughtEditView, "price bought"));
+
+            // set the stock sybol
+            newStockHoldingModel.setStockSymbol(this.stockModel.getSymbol());
+
+            // set the current value
+            newStockHoldingModel.setCurrentValue(newStockHoldingModel.getNumberOfShares() * this.stockModel.getPrice());
+
+            // set the total dividend
+            newStockHoldingModel.setTotalDividend(newStockHoldingModel.getNumberOfShares() * this.stockModel.getDividend());
 
             // make sure all the fields are filled
             newStockHoldingModel.validityCheck();

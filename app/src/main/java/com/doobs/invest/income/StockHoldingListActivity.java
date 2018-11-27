@@ -23,6 +23,7 @@ import com.doobs.invest.income.model.StockHoldingModel;
 import com.doobs.invest.income.repository.IncomeViewModel;
 import com.doobs.invest.income.repository.StockHoldingViewModel;
 import com.doobs.invest.income.util.IncomeConstants;
+import com.doobs.invest.income.util.IncomeUtils;
 
 import java.util.List;
 
@@ -50,6 +51,12 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
 
     @BindView(R.id.stock_holding_add_button)
     protected Button addStockHoldingButton;
+
+    @BindView(R.id.stock_holding_list_total_cost)
+    protected TextView portfolioTotalCostTextView;
+
+    @BindView(R.id.stock_holding_list_total_dividend)
+    protected TextView portfolioTotalDividendTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +106,9 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
             public void onChanged(@Nullable PortfolioModel portfolioModelReturn) {
                 portfolioModel = portfolioModelReturn;
                 portfolioNameTextView.setText(portfolioModel.getName() + getString(R.string.portfolio_snippet));
+
+                portfolioTotalCostTextView.setText(IncomeUtils.getCurrencyString(portfolioModel.getCostBasis()));
+                portfolioTotalDividendTextView.setText(IncomeUtils.getCurrencyString(portfolioModel.getTotalDividend()));
             }
         });
 //        this.portfolioModel = this.stockHoldingViewModel.loadPortfolio(portfolioId);
