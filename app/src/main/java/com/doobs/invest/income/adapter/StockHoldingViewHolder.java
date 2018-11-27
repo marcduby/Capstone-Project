@@ -81,7 +81,7 @@ public class StockHoldingViewHolder extends RecyclerView.ViewHolder  implements 
         this.stockHoldingSymbolTextView.setText(stockHoldingModel.getStockSymbol());
 
         // set the cost
-        this.stockHoldingCostBasisTextView.setText(IncomeUtils.getCurrencyString(stockHoldingModel.getCostBasis()));
+        this.stockHoldingCostBasisTextView.setText(IncomeUtils.getCurrencyString(stockHoldingModel.getCurrentValue()));
 
         // set the dividend
         this.stockHoldingDividendTextView.setText(IncomeUtils.getCurrencyString(stockHoldingModel.getTotalDividend()));

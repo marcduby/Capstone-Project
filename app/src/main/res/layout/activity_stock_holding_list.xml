@@ -45,7 +45,6 @@
                 android:layout_height="fill_parent">
 
                 <TextView
-                    android:id="@+id/stock_list_shares_textview"
                     android:text="@string/stock_holding_list_shares_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -54,7 +53,6 @@
                     android:layout_column="1" />
 
                 <TextView
-                    android:id="@+id/stock_list_symbol_textview"
                     android:text="@string/stock_holding_list_symbol_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -63,8 +61,7 @@
                     android:layout_column="2" />
 
                 <TextView
-                    android:id="@+id/stock_list_cost_textview"
-                    android:text="@string/stock_holding_list_cost_basis_label"
+                    android:text="@string/stock_holding_list_current_value_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -73,7 +70,6 @@
                     android:layout_column="3" />
 
                 <TextView
-                    android:id="@+id/stock_list_dividend_textview"
                     android:text="@string/stock_holding_list_dividend_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -88,11 +84,56 @@
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
             android:id="@+id/stock_holding_recyclerview">
 
         </android.support.v7.widget.RecyclerView>
 
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin">
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:text="@string/stock_holding_list_total_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="@dimen/table_layout_stock_holding_list_shares_width"
+                    style="@style/labelViewSmall"
+                    android:layout_column="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:width="@dimen/table_layout_stock_holding_list_symbol_width"
+                    style="@style/labelViewSmall"
+                    android:layout_column="2" />
+
+                <TextView
+                    android:id="@+id/stock_holding_list_total_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:width="@dimen/table_layout_stock_holding_list_cost_basis_width"
+                    style="@style/labelViewSmall"
+                    android:layout_column="3" />
+
+                <TextView
+                    android:id="@+id/stock_holding_list_total_dividend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:width="@dimen/table_layout_stock_holding_list_dividend_width"
+                    style="@style/labelViewSmall"
+                    android:layout_column="4" />
+
+            </TableRow>
+
+        </TableLayout>
     </LinearLayout>
 
 
