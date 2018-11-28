@@ -22,6 +22,11 @@ public class IncomeConstants {
         public static final String DATA_COMPANY                     = "company";
     }
 
+    public class ErrorCodes {
+        public static final String NO_NETWORK                       = "Network unavailable, please check reception";
+        public static final String INCORRECT_STOCK_SYMBOL           = "The stock symbol is not valid; please check the symbol";
+    }
+
     public class RestCodes {
         public class IssueType {
             public static final String COMMON_STOCK                 = "cs";

@@ -70,6 +70,12 @@
     <string name="portfolio_snippet">Portfolio:\u0020</string>
 
     <!-- constants for display of industry -->
-    <string name="diversification_chart_label">Diversificatino by Value</string>
+    <string name="diversification_chart_label">Diversification by Value</string>
+
+    <!-- messages and values -->
+    <string name="multiple_industry_value">Multiple</string>
+    <string name="no_network_error">Network unavailable, please check reception</string>
+    <string name="not_found_stock_symbol_error">The stock symbol is not valid; please check the symbol</string>
+    <string name="empty_stock_symbol_error">The symbol to search cannot be empty</string>
 
 </resources>

@@ -125,7 +125,9 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable StockModel stockModel) {
                 // call the view update method
-                updateStockInformation(stockModel);
+                if (stockModel != null) {
+                    updateStockInformation(stockModel);
+                }
             }
         });
 
@@ -156,6 +158,25 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // add listener to the error message
+        this.stockHoldingViewModel.getErrorStringMutableLiveData().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String errorMessageString) {
+                if (errorMessageString != null && errorMessageString.trim().length() > 0) {
+                    showErrorString(errorMessageString);
+                }
+            }
+        });
+    }
+
+    /**
+     * show the error string
+     *
+     * @param errorString
+     */
+    protected void showErrorString(String errorString) {
+        Toast.makeText(this, errorString, Toast.LENGTH_LONG).show();
     }
 
     protected void searchSymbol() {
@@ -164,7 +185,7 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
 
         // check
         if (symbol == null || symbol.trim().length() < 1) {
-            Toast.makeText(this, "The symbol to search cannot be empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, this.getString(R.string.empty_stock_symbol_error), Toast.LENGTH_LONG).show();
 
         } else {
             this.stockHoldingViewModel.loadStockHolding(symbol);
@@ -213,45 +234,52 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
         boolean saveSuccess = false;
         StockHoldingModel newStockHoldingModel = new StockHoldingModel();
 
-        try {
-            // get the stock id
-            newStockHoldingModel.setPortfolioId(this.portfolioModel.getId());
+        if (this.stockModel == null) {
+            this.showErrorString(this.getString(R.string.not_found_stock_symbol_error));
 
-            // set the portfolio id
-            newStockHoldingModel.setStockId(this.stockModel.getId());
+        } else {
+            // create the stock holding
+            try {
+                // get the stock id
+                newStockHoldingModel.setPortfolioId(this.portfolioModel.getId());
 
-            // set the number of shares
-            newStockHoldingModel.setNumberOfShares(this.getDoubleFromTextView(this.stockHoldingNumberSharestEditView, "number of shares"));
+                // set the portfolio id
+                newStockHoldingModel.setStockId(this.stockModel.getId());
 
-            // set the price bought
-            newStockHoldingModel.setPricePaid(this.getDoubleFromTextView(this.stockHoldingPriceBoughtEditView, "price bought"));
+                // set the number of shares
+                newStockHoldingModel.setNumberOfShares(this.getDoubleFromTextView(this.stockHoldingNumberSharestEditView, "number of shares"));
 
-            // set the stock sybol
-            newStockHoldingModel.setStockSymbol(this.stockModel.getSymbol());
+                // set the price bought
+                newStockHoldingModel.setPricePaid(this.getDoubleFromTextView(this.stockHoldingPriceBoughtEditView, "price bought"));
 
-            // set the industry of the holding
-            String industry = this.stockModel.getIndustry();
-            newStockHoldingModel.setIndustry(industry);
+                // set the stock sybol
+                newStockHoldingModel.setStockSymbol(this.stockModel.getSymbol());
 
-            // set the current value
-            newStockHoldingModel.setCurrentValue(newStockHoldingModel.getNumberOfShares() * this.stockModel.getPrice());
+                // set the industry of the holding
+                String industry = this.stockModel.getIndustry();
+                newStockHoldingModel.setIndustry(industry);
 
-            // set the total dividend
-            newStockHoldingModel.setTotalDividend(newStockHoldingModel.getNumberOfShares() * this.stockModel.getDividend());
+                // set the current value
+                newStockHoldingModel.setCurrentValue(newStockHoldingModel.getNumberOfShares() * this.stockModel.getPrice());
 
-            // make sure all the fields are filled
-            newStockHoldingModel.validityCheck();
+                // set the total dividend
+                newStockHoldingModel.setTotalDividend(newStockHoldingModel.getNumberOfShares() * this.stockModel.getDividend());
 
-            // save the portfolio
-            this.stockHoldingViewModel.insertOrUpdateStockHolding(newStockHoldingModel);
-            saveSuccess = true;
+                // make sure all the fields are filled
+                newStockHoldingModel.validityCheck();
 
-        } catch (IncomeException exception) {
-            Toast.makeText(this, exception.getMessage(), Toast.LENGTH_LONG).show();
+                // save the portfolio
+                this.stockHoldingViewModel.insertOrUpdateStockHolding(newStockHoldingModel);
+                saveSuccess = true;
+
+            } catch (IncomeException exception) {
+                Toast.makeText(this, exception.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+            // assign the stock holding model
+            this.stockHoldingModel = newStockHoldingModel;
         }
 
-        // assign the stock holding model
-        this.stockHoldingModel = newStockHoldingModel;
         // return
         return saveSuccess;
     }

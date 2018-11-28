@@ -12,20 +12,45 @@
 
 
 - work
-  - 20181127 - tuesday
-    * portfolio list gui
-    * portfolio diversification chart
-    * capstone proposal
-    - test no network
-    - add symbol error checking
-    - back buttons
+  - 20181128 - wednesday
+    - error and snack bar
+      - test no network
+      - add symbol error checking
+    - scrollviews
     - edit
       - portfolio
       - stock holding
     - delete
       - stock holding
       - portfolio
+   ============= AM ==================   
+      
+    - stock, stock holding, portfolio refresh
+    - widget
+    - verify accessibility
+    - google services
+      - admob
+      - analytics
+    - RTL check
+    - accessibility check
+    - all strings check
+    - gradle install task
+  
+  - 20181127 - tuesday
+    * portfolio list gui
+    * portfolio diversification chart
+    * capstone proposal
+    - error and snack bar
+      - test no network
+      - add symbol error checking
+    * back buttons (verify conistency)
     - scrollviews
+    - edit
+      - portfolio
+      - stock holding
+    - delete
+      - stock holding
+      - portfolio
     - widget
     - verify accessibility
     - google services

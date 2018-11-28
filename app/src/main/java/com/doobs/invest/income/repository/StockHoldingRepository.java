@@ -3,9 +3,11 @@ package com.doobs.invest.income.repository;
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.doobs.invest.income.R;
 import com.doobs.invest.income.dao.PortfolioDao;
 import com.doobs.invest.income.dao.StockDao;
 import com.doobs.invest.income.dao.StockHoldingDao;
@@ -41,6 +43,7 @@ public class StockHoldingRepository {
     private PortfolioDao portfolioDao;
     private StockDao stockDao;
     private MutableLiveData<StockModel> stockModelLiveData = new MutableLiveData<StockModel>();
+    private MutableLiveData<String> errorStringMutableLiveData = new MutableLiveData<String>();
 
     public StockHoldingRepository(Application application) {
         // create the database
@@ -121,6 +124,15 @@ public class StockHoldingRepository {
     }
 
     /**
+     * returns the error string live data object
+     *
+     * @return
+     */
+    public MutableLiveData<String> getErrorStringMutableLiveData() {
+        return errorStringMutableLiveData;
+    }
+
+    /**
      * updates the stock model live data
      *
      * @param stockModel
@@ -150,7 +162,6 @@ public class StockHoldingRepository {
         protected StockModel doInBackground(String... symbols) {
             // get the symbol to search with
             String symbol = symbols[0];
-//            LiveData<StockModel> stockModelData;
             StockModel stockModel;
 
             // look for the stock in the database
@@ -161,11 +172,36 @@ public class StockHoldingRepository {
                 // log not found
                 Log.i(this.getClass().getName(), "Did not find stock in DB with symbol: " + symbol);
 
+                // test network
+                try {
+                    NetworkUtils.testNetwork();
+
+                } catch (IncomeException exception) {
+                    // log error, set error string and return null
+                    Log.e(TAG_NAME, "Got network error:  " + exception.getMessage());
+//                    errorStringMutableLiveData.postValue(Resources.getSystem().getString(R.string.no_network_error));
+                    errorStringMutableLiveData.postValue(IncomeConstants.ErrorCodes.NO_NETWORK);
+                    return null;
+                }
+
                 // find with REST
                 stockModel = this.findStockFromRestCall(symbol);
 
+                // if null symbol, error
+                if (stockModel == null) {
+                    // log error, set error string and return null
+                    Log.e(TAG_NAME, "Got incorrect stock symbol search for symbol:  " + symbol);
+//                    errorStringMutableLiveData.postValue(Resources.getSystem().getString(R.string.no_stock_symbol_error));
+                    errorStringMutableLiveData.postValue(IncomeConstants.ErrorCodes.INCORRECT_STOCK_SYMBOL);
+                    return null;
+                }
+
+                // clear out the error string
+                errorStringMutableLiveData.postValue(null);
+
                 // set industry as default if none
                 if (stockModel.getIndustry() == null || stockModel.getIndustry().trim().length() < 1) {
+//                    stockModel.setIndustry(Resources.getSystem().getString(R.string.multiple_industry_value));
                     stockModel.setIndustry(IncomeConstants.RestCodes.Industry.DEFAULT);
                 }
 
@@ -261,12 +297,14 @@ public class StockHoldingRepository {
                 Log.e(TAG_NAME, "Got error parsing the REST call: " + exception.getMessage());
 
                 // TODO - set live data string error
+                stockModel = null;
 
             } catch (IOException exception) {
                 // log
                 Log.e(TAG_NAME, "Got IO error parsing the REST call: " + exception.getMessage());
 
                 // TODO - set live data string error
+                stockModel = null;
             }
 
             // return

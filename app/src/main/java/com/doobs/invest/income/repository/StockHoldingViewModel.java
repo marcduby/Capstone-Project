@@ -3,6 +3,7 @@ package com.doobs.invest.income.repository;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -25,6 +26,7 @@ public class StockHoldingViewModel extends AndroidViewModel {
     // instamnce variables
     private StockHoldingRepository stockHoldingRepository;
     private LiveData<PortfolioModel> portfolioModelLiveData;
+    private MutableLiveData<String> errorStringMutableLiveData;
 
     /**
      * default constructor
@@ -36,6 +38,9 @@ public class StockHoldingViewModel extends AndroidViewModel {
 
         // get the repository
         this.stockHoldingRepository = new StockHoldingRepository(application);
+
+        // get the error string live data object
+        this.errorStringMutableLiveData = this.stockHoldingRepository.getErrorStringMutableLiveData();
     }
 
     /**
@@ -84,6 +89,14 @@ public class StockHoldingViewModel extends AndroidViewModel {
         return this.stockHoldingRepository.getStockModelLiveData();
     }
 
+    /**
+     * returns the error string live data model
+     *
+     * @return
+     */
+    public MutableLiveData<String> getErrorStringMutableLiveData() {
+        return errorStringMutableLiveData;
+    }
 
     /**
      * insert or update a stock holding in the persistence layer
