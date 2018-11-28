@@ -132,6 +132,9 @@ public class IncomeUtils {
                 Color.rgb(0, 255, 0),        // green
                 Color.rgb(255, 153, 51),       // orange
                 Color.rgb(255, 0, 255),       // purple
+                Color.rgb(153, 102, 51),       // brown
+                Color.rgb(128, 128, 128),       // grey
+                Color.rgb(102, 153, 153),       // teal
                 Color.rgb(204, 204, 0)     // yellow
         };
 

@@ -33,6 +33,8 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -137,12 +139,20 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
         // set the observer on the database live data portfolio list used for display
         this.stockHoldingViewModel.getStockHoldingsForPortfolioId(portfolioId).observe(this, new Observer<List<StockHoldingModel>>() {
             @Override
-            public void onChanged(@Nullable List<StockHoldingModel> moddelList) {
+            public void onChanged(@Nullable List<StockHoldingModel> modelList) {
+                // sort the list
+                Collections.sort(modelList, new Comparator<StockHoldingModel>() {
+                    @Override
+                    public int compare(StockHoldingModel aModel, StockHoldingModel bModel) {
+                        return aModel.getStockSymbol().compareTo(bModel.getStockSymbol());
+                    }
+                });
+
                 // update the display
-                stockHoldingRecyclerAdapter.setStockHoldingModelList(moddelList);
+                stockHoldingRecyclerAdapter.setStockHoldingModelList(modelList);
 
                 // update the instance variable
-                stockHoldingModelList = moddelList;
+                stockHoldingModelList = modelList;
 
                 // refresh the pie chart
                 refreshPieChart();

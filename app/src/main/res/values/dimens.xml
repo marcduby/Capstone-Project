@@ -19,4 +19,7 @@
     <dimen name="table_layout_stock_holding_list_cost_basis_width">90dp</dimen>
     <dimen name="table_layout_stock_holding_list_dividend_width">90dp</dimen>
 
+    <!-- charts -->
+    <dimen name="stock_holding_pie_chart_width">280dp</dimen>
+
 </resources>
