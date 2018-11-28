@@ -7,73 +7,77 @@
     android:layout_height="match_parent"
     tools:context="com.doobs.invest.income.PortfolioSavingActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/toolbar_height"
-            android:elevation="@dimen/toolbar_elevation"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginTop="20dp">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/portfolio_name_label_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/portfolio_name"
-                style="@style/labelView" />
-
-            <EditText
-                android:id="@+id/portfolio_name_editview"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/portfolio_name_hint"
-                style="@style/editViewNoMargin"/>
+                android:layout_height="@dimen/toolbar_height"
+                android:elevation="@dimen/toolbar_elevation"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-            <TextView
-                android:id="@+id/portfolio_description_label_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/portfolio_description"
-                style="@style/labelView" />
-
-            <EditText
-                android:id="@+id/portfolio_descriprion_editview"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/portfolio_description_hint"
-                style="@style/editViewNoMargin"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="20dp">
 
-            <TextView
-                android:id="@+id/portfolio_goal_label_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/portfolio_goal"
-                style="@style/labelView" />
+                <TextView
+                    android:id="@+id/portfolio_name_label_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/portfolio_name"
+                    style="@style/labelView" />
 
-            <EditText
-                android:id="@+id/portfolio_goal_editview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/portfolio_goal_hint"
-                style="@style/editViewNoMargin"/>
+                <EditText
+                    android:id="@+id/portfolio_name_editview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/portfolio_name_hint"
+                    style="@style/editViewNoMargin"/>
+
+                <TextView
+                    android:id="@+id/portfolio_description_label_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/portfolio_description"
+                    style="@style/labelView" />
+
+                <EditText
+                    android:id="@+id/portfolio_descriprion_editview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/portfolio_description_hint"
+                    style="@style/editViewNoMargin"/>
+
+                <TextView
+                    android:id="@+id/portfolio_goal_label_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/portfolio_goal"
+                    style="@style/labelView" />
+
+                <EditText
+                    android:id="@+id/portfolio_goal_editview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/portfolio_goal_hint"
+                    style="@style/editViewNoMargin"/>
 
 
+            </LinearLayout>
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

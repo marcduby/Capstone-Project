@@ -219,7 +219,7 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
         // set legend display
         this.industryPieChart.getLegend().setWordWrapEnabled(true);
         this.industryPieChart.getLegend().setEnabled(true);
-        this.industryPieChart.getLegend().setTextSize(10);
+        this.industryPieChart.getLegend().setTextSize(15);
         this.industryPieChart.getDescription().setEnabled(false);
 //        this.industryPieChart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_LEFT);
 

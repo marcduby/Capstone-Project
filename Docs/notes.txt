@@ -13,9 +13,9 @@
 
 - work
   - 20181128 - wednesday
-    - error and snack bar
-      - test no network
-      - add symbol error checking
+    * error and snack bar
+      * test no network
+      * add symbol error checking
     - scrollviews
     - edit
       - portfolio
@@ -23,6 +23,7 @@
     - delete
       - stock holding
       - portfolio
+    - sort lists
    ============= AM ==================   
       
     - stock, stock holding, portfolio refresh

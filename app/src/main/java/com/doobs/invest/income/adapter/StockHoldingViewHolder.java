@@ -74,7 +74,7 @@ public class StockHoldingViewHolder extends RecyclerView.ViewHolder  implements 
         Log.i(TAG_NAME, "Inflating view for stock holding: " + name);
 
         // set the name text
-        this.stockHoldingNameTextView.setText(name + ": " + stockHoldingModel.getId());
+        this.stockHoldingNameTextView.setText(name);
 
         // set the symbol
         this.stockHoldingSymbolTextView.setText(stockHoldingModel.getStockSymbol());
