@@ -36,6 +36,7 @@
     - accessibility check
     * all strings check
     - gradle install task
+    - add espresso test
   
   - 20181127 - tuesday
     * portfolio list gui

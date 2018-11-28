@@ -27,6 +27,25 @@
     * https://developer.android.com/guide/topics/ui/floating-action-button
   * How to close child activities after an action
     * https://stackoverflow.com/questions/15393899/how-to-close-activity-and-go-back-to-previous-activity-in-android
+  * Using Butterknife in ViewHolder
+    * https://teamtreehouse.com/community/binding-widgets-in-viewholder-with-butterknife
+  * Setting a RecyclerView max height
+    * https://stackoverflow.com/questions/42694355/how-to-set-recyclerview-max-height
+  * Using the MPAndroidChart library
+    * https://github.com/PhilJay/MPAndroidChart/wiki/Getting-Started
+    * https://stackoverflow.com/questions/27566916/how-to-remove-description-from-chart-in-mpandroidchart
+    * https://github.com/PhilJay/MPAndroidChart/wiki/Legend
+  * For accessibility help
+    * https://developer.android.com/guide/topics/ui/accessibility/apps
+  * For using the toolbar back button
+    * https://stackoverflow.com/questions/12276027/how-can-i-return-to-a-parent-activity-correctly
+    * https://stackoverflow.com/questions/26651602/display-back-arrow-on-toolbar
+  * For accessing strings.xml in the application
+    * https://stackoverflow.com/questions/4253328/getstring-outside-of-a-context-or-activity
+  * RTL support
+    * https://android.jlelse.eu/rtl-support-on-android-here-is-all-you-need-know-e13f2df512e2
+    
+    
     
     
     
