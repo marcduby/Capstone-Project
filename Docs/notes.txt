@@ -28,12 +28,11 @@
       
     - stock, stock holding, portfolio refresh
     - widget
-    - verify accessibility
     - google services
       - admob
       - analytics
     - RTL check
-    - accessibility check
+    * accessibility check
     * all strings check
     - gradle install task
     - add espresso test

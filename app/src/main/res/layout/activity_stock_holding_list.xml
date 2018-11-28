@@ -25,13 +25,6 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
             <!--app:contentInsetStart="120dp"-->
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/stock_holding_add"
-                android:id="@+id/stock_holding_add_button"
-                android:background="@color/doobsAccent"/>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -158,6 +151,43 @@
                 android:layout_height="@dimen/stock_holding_pie_chart_width" />
 
         </LinearLayout>
+
+
     </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_stock_holding_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:background="@color/doobsAccent"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin_large"
+        android:contentDescription="@string/accessibility_add_stock_holding_button_label"
+        android:src="@drawable/ic_add_black_24dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_invisible"
+        android:layout_width="@dimen/fab_margin"
+        android:layout_height="@dimen/fab_margin"
+        android:layout_gravity="top|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:visibility="invisible"
+        app:layout_anchor="@id/add_stock_holding_fab"
+        app:layout_anchorGravity="top" />
+
+    <!-- top FAB -->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/edit_portfolio_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_create_black_24dp"
+        android:background="@color/doobsAccent"
+        app:layout_anchor="@id/fab_invisible"
+        android:contentDescription="@string/accessibility_edit_portfolio_button_label"
+        app:layout_anchorGravity="top" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -16,7 +16,7 @@
     <string name="portfolio_description">Description</string>
     <string name="portfolio_name_hint">The name that will display in the list</string>
     <string name="portfolio_goal_hint">What the goal is (aggressive, moderate, etc)</string>
-    <string name="portfolio_description_hint">Brief description</string>
+    <string name="portfolio_description_hint">Brief description (limit 25 chars)</string>
 
     <!-- stock holding saving -->
     <string name="stock_holding_symbol_label">Symbol</string>
@@ -83,6 +83,7 @@
     <string name="adding_stock_holding_toast">Adding stock holding of\u0020</string>
 
     <!-- accessibility labels -->
+    <string name="accessibility_edit_portfolio_button_label">Edit portfolio</string>
     <string name="accessibility_add_portfolio_button_label">Add portfolio</string>
     <string name="accessibility_add_stock_holding_button_label">Add stock holding</string>
     <string name="accessibility_save_portfolio_button_label">Save portfolio</string>

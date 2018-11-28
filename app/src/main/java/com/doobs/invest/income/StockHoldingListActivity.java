@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -61,20 +62,25 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
     @BindView(R.id.portfolio_name_textview)
     protected TextView portfolioNameTextView;
 
-    @BindView(R.id.stock_holding_add_button)
-    protected Button addStockHoldingButton;
-
+    // total value
     @BindView(R.id.stock_holding_list_total_value)
     protected TextView portfolioTotalValueTextView;
 
+    // total dividend
     @BindView(R.id.stock_holding_list_total_dividend)
     protected TextView portfolioTotalDividendTextView;
 
+    // stock holding list recycler view
     @BindView(R.id.stock_holding_recyclerview)
     protected RecyclerView stockHoldingRecyclerView;
 
+    // diversification pie chart
     @BindView(R.id.industry_pie_chart)
     protected PieChart industryPieChart;
+
+    // add stock holding FAB
+    @BindView(R.id.add_stock_holding_fab)
+    protected FloatingActionButton portfolioAddFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +100,7 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
 
         // get the views
 //        this.addStockHoldingButton = this.findViewById(R.id.stock_holding_add_button);
-        this.addStockHoldingButton.setOnClickListener(new View.OnClickListener() {
+        this.portfolioAddFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addStockHolding();
@@ -224,7 +230,7 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
         this.industryPieChart.getLegend().setEnabled(true);
         this.industryPieChart.getLegend().setTextSize(15);
         this.industryPieChart.getDescription().setEnabled(false);
-//        this.industryPieChart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_LEFT);
+        this.industryPieChart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_CENTER);
 
 
         // set the data

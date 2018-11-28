@@ -102,6 +102,11 @@ public class PortfolioModel {
             throw new IncomeException("The portfolio name cannot be empty");
         }
 
+        // limit name to 25 characters
+        if (this.name.length() > 25) {
+            throw new IncomeException("The portfolio name should be 25 characters or less");
+        }
+
         // make sure descriprion not null and not empty
         if ((this.descriprion == null) || (this.descriprion.trim().length() < 1)) {
             throw new IncomeException("The portfolio descriprion cannot be empty");
