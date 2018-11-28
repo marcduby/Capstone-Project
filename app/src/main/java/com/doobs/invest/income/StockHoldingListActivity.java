@@ -27,6 +27,7 @@ import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeUtils;
 import com.doobs.invest.income.util.NetworkUtils;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -120,7 +121,7 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
             @Override
             public void onChanged(@Nullable PortfolioModel portfolioModelReturn) {
                 portfolioModel = portfolioModelReturn;
-                portfolioNameTextView.setText(portfolioModel.getName() + getString(R.string.portfolio_snippet));
+                portfolioNameTextView.setText(getString(R.string.portfolio_snippet) + portfolioModel.getName());
 
                 portfolioTotalCostTextView.setText(IncomeUtils.getCurrencyString(portfolioModel.getCostBasis()));
                 portfolioTotalDividendTextView.setText(IncomeUtils.getCurrencyString(portfolioModel.getTotalDividend()));
@@ -201,16 +202,17 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
 //        entries.add(new PieEntry(24.0f, "Red"));
 //        entries.add(new PieEntry(40.8f, "Blue"));
 
-        PieDataSet set = new PieDataSet(entries, "");
+        PieDataSet pieChartSet = new PieDataSet(entries, "");
 
         // set the colors
         final int[] MY_COLORS = {
-                Color.rgb(255,0,255),       // purple
-                Color.rgb(255,0,0),         // red
-                Color.rgb(255,153,51),       // orange
-                Color.rgb(204,204,0),     // yellow
-                Color.rgb(0,255,0),        // green
-                Color.rgb(0,0,255)};        // blue
+                Color.rgb(0, 0, 255),        // blue
+                Color.rgb(255, 0, 0),         // red
+                Color.rgb(0, 255, 0),        // green
+                Color.rgb(255, 153, 51),       // orange
+                Color.rgb(255, 0, 255),       // purple
+                Color.rgb(204, 204, 0)     // yellow
+        };
 
         int[] pieColors = new int[] {R.color.colorAccent, R.color.colorPrimary, R.color.doobsPrimary, R.color.doobsAccent};
         int[] pieColors2 = new int[] {R.color.red, R.color.orange, R.color.yellow, R.color.green, R.color.blue, R.color.purple};
@@ -220,18 +222,25 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
             colors.add(color);
         }
 
-        set.setColors(colors);
-        PieData data = new PieData(set);
+        pieChartSet.setColors(colors);
+        PieData data = new PieData(pieChartSet);
         data.setValueTextSize(15);
 
         // set display of pie chart
         this.industryPieChart.setHoleRadius(15);
         this.industryPieChart.setTransparentCircleRadius(10);
         this.industryPieChart.setEntryLabelTextSize(15);
-        this.industryPieChart.setEntryLabelColor(R.color.doobsPrimaryDark);
-        this.industryPieChart.setDrawEntryLabels(true);
+        this.industryPieChart.setEntryLabelColor(R.color.black);
+        this.industryPieChart.setDrawEntryLabels(false);
         this.industryPieChart.setUsePercentValues(true);
+
+        // set legend display
         this.industryPieChart.getLegend().setWordWrapEnabled(true);
+        this.industryPieChart.getLegend().setEnabled(true);
+        this.industryPieChart.getLegend().setTextSize(10);
+        this.industryPieChart.getDescription().setEnabled(false);
+//        this.industryPieChart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_LEFT);
+
 
         // set the data
         this.industryPieChart.setData(data);

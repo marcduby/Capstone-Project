@@ -144,7 +144,7 @@
             android:layout_height="wrap_content"
             android:text="@string/industry_sector_header"
             style="@style/labelView"
-            android:gravity="left"/>
+            android:gravity="center"/>
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/industry_pie_chart"
