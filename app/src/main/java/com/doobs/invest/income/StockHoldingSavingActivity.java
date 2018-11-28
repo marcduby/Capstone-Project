@@ -227,6 +227,10 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
             // set the stock sybol
             newStockHoldingModel.setStockSymbol(this.stockModel.getSymbol());
 
+            // set the industry of the holding
+            String industry = this.stockModel.getIndustry();
+            newStockHoldingModel.setIndustry(industry);
+
             // set the current value
             newStockHoldingModel.setCurrentValue(newStockHoldingModel.getNumberOfShares() * this.stockModel.getPrice());
 

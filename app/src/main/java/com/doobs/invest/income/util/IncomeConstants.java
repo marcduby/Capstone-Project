@@ -28,6 +28,10 @@ public class IncomeConstants {
             public static final String ETF                          = "et";
         }
 
+        public class Industry {
+            public static final String DEFAULT                      = "Multiple";
+        }
+
         public class IssueTypeDescription {
             public static final String COMMON_STOCK                 = "Common stock";
             public static final String ETF                          = "Exchange traded fund";

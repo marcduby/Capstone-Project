@@ -25,13 +25,16 @@ import com.doobs.invest.income.repository.IncomeViewModel;
 import com.doobs.invest.income.repository.StockHoldingViewModel;
 import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeUtils;
+import com.doobs.invest.income.util.NetworkUtils;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +52,7 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
     private StockHoldingViewModel stockHoldingViewModel;
     private LinearLayoutManager stockHoldingListLayoutManager;
     private PortfolioModel portfolioModel;
+    private List<StockHoldingModel> stockHoldingModelList;
 
     // widgets
     @BindView(R.id.portfolio_name_textview)
@@ -131,8 +135,12 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
         // set the observer on the database live data portfolio list used for display
         this.stockHoldingViewModel.getStockHoldingsForPortfolioId(portfolioId).observe(this, new Observer<List<StockHoldingModel>>() {
             @Override
-            public void onChanged(@Nullable List<StockHoldingModel> stockHoldingModelList) {
-                stockHoldingRecyclerAdapter.setStockHoldingModelList(stockHoldingModelList);
+            public void onChanged(@Nullable List<StockHoldingModel> moddelList) {
+                // update the display
+                stockHoldingRecyclerAdapter.setStockHoldingModelList(moddelList);
+
+                // update the instance variable
+                stockHoldingModelList = moddelList;
 
                 // refresh the pie chart
                 refreshPieChart();
@@ -172,13 +180,28 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
 
     private void refreshPieChart() {
         List<PieEntry> entries = new ArrayList<>();
+        Map<String, Double> industryMap = null;
+        String industry = null;
 
-        entries.add(new PieEntry(10.5f, "Green"));
-        entries.add(new PieEntry(26.7f, "Yellow"));
-        entries.add(new PieEntry(24.0f, "Red"));
-        entries.add(new PieEntry(40.8f, "Blue"));
+        // get the industry map
+        industryMap = IncomeUtils.getIndustryMap(this.stockHoldingModelList);
 
-        PieDataSet set = new PieDataSet(entries, "Election Results");
+        // for all the entries, add to the chart
+        Iterator<String> stringIterator = industryMap.keySet().iterator();
+        while (stringIterator.hasNext()) {
+            // get the key
+            industry = stringIterator.next();
+
+            // set the pie chart entry
+            entries.add(new PieEntry(industryMap.get(industry).floatValue(), industry));
+        }
+
+//        entries.add(new PieEntry(10.5f, "Green"));
+//        entries.add(new PieEntry(26.7f, "Yellow"));
+//        entries.add(new PieEntry(24.0f, "Red"));
+//        entries.add(new PieEntry(40.8f, "Blue"));
+
+        PieDataSet set = new PieDataSet(entries, "");
 
         // set the colors
         final int[] MY_COLORS = {
@@ -215,7 +238,5 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
 
         // refresh
         industryPieChart.invalidate(); // refresh
-
     }
-
 }

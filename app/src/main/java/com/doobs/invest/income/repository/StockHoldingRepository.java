@@ -172,6 +172,11 @@ public class StockHoldingRepository {
                 // find with REST
                 stockModel = this.findStockFromRestCall(symbol);
 
+                // set industry as default if none
+                if (stockModel.getIndustry() == null || stockModel.getIndustry().trim().length() < 1) {
+                    stockModel.setIndustry(IncomeConstants.RestCodes.Industry.DEFAULT);
+                }
+
                 // if not null, save to DB and call again
                 if (stockModel != null) {
                     this.stockDao.insert(stockModel);

@@ -62,4 +62,7 @@
     <!-- snippets -->
     <string name="portfolio_snippet"> Portfolio</string>
 
+    <!-- constants for display of industry -->
+    <string name="diversified_industry">Multiple</string>
+
 </resources>
