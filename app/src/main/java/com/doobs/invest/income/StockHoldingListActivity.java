@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -24,8 +25,17 @@ import com.doobs.invest.income.repository.IncomeViewModel;
 import com.doobs.invest.income.repository.StockHoldingViewModel;
 import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeUtils;
+import com.doobs.invest.income.util.NetworkUtils;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,10 +50,10 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
 
     // instance variables
     private StockHoldingRecyclerAdapter stockHoldingRecyclerAdapter;
-    private RecyclerView stockHoldingRecyclerView;
     private StockHoldingViewModel stockHoldingViewModel;
     private LinearLayoutManager stockHoldingListLayoutManager;
     private PortfolioModel portfolioModel;
+    private List<StockHoldingModel> stockHoldingModelList;
 
     // widgets
     @BindView(R.id.portfolio_name_textview)
@@ -52,11 +62,17 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
     @BindView(R.id.stock_holding_add_button)
     protected Button addStockHoldingButton;
 
-    @BindView(R.id.stock_holding_list_total_cost)
-    protected TextView portfolioTotalCostTextView;
+    @BindView(R.id.stock_holding_list_total_value)
+    protected TextView portfolioTotalValueTextView;
 
     @BindView(R.id.stock_holding_list_total_dividend)
     protected TextView portfolioTotalDividendTextView;
+
+    @BindView(R.id.stock_holding_recyclerview)
+    protected RecyclerView stockHoldingRecyclerView;
+
+    @BindView(R.id.industry_pie_chart)
+    protected PieChart industryPieChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +85,13 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
         // get the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // log
         Log.i(this.TAG_NAME, "In onCreate");
 
         // get the views
-        this.addStockHoldingButton = this.findViewById(R.id.stock_holding_add_button);
+//        this.addStockHoldingButton = this.findViewById(R.id.stock_holding_add_button);
         this.addStockHoldingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,9 +122,9 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
             @Override
             public void onChanged(@Nullable PortfolioModel portfolioModelReturn) {
                 portfolioModel = portfolioModelReturn;
-                portfolioNameTextView.setText(portfolioModel.getName() + getString(R.string.portfolio_snippet));
+                portfolioNameTextView.setText(getString(R.string.portfolio_snippet) + portfolioModel.getName());
 
-                portfolioTotalCostTextView.setText(IncomeUtils.getCurrencyString(portfolioModel.getCostBasis()));
+                portfolioTotalValueTextView.setText(IncomeUtils.getCurrencyString(portfolioModel.getCurrentValue()));
                 portfolioTotalDividendTextView.setText(IncomeUtils.getCurrencyString(portfolioModel.getTotalDividend()));
             }
         });
@@ -120,8 +137,15 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
         // set the observer on the database live data portfolio list used for display
         this.stockHoldingViewModel.getStockHoldingsForPortfolioId(portfolioId).observe(this, new Observer<List<StockHoldingModel>>() {
             @Override
-            public void onChanged(@Nullable List<StockHoldingModel> stockHoldingModelList) {
-                stockHoldingRecyclerAdapter.setStockHoldingModelList(stockHoldingModelList);
+            public void onChanged(@Nullable List<StockHoldingModel> moddelList) {
+                // update the display
+                stockHoldingRecyclerAdapter.setStockHoldingModelList(moddelList);
+
+                // update the instance variable
+                stockHoldingModelList = moddelList;
+
+                // refresh the pie chart
+                refreshPieChart();
             }
         });
     }
@@ -156,4 +180,54 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
         this.startActivity(intent);
     }
 
+    private void refreshPieChart() {
+        List<PieEntry> entries = new ArrayList<>();
+        Map<String, Double> industryMap = null;
+        String industry = null;
+
+        // get the industry map
+        industryMap = IncomeUtils.getIndustryMap(this.stockHoldingModelList);
+
+        // for all the entries, add to the chart
+        Iterator<String> stringIterator = industryMap.keySet().iterator();
+        while (stringIterator.hasNext()) {
+            // get the key
+            industry = stringIterator.next();
+
+            // set the pie chart entry
+            entries.add(new PieEntry(industryMap.get(industry).floatValue(), industry));
+        }
+
+        // create the pie chart set
+        PieDataSet pieChartSet = new PieDataSet(entries, "");
+
+        // set the colors
+        pieChartSet.setColors(IncomeUtils.getChartColors());
+        PieData data = new PieData(pieChartSet);
+
+        // set the text size
+        data.setValueTextSize(15);
+
+        // set display of pie chart
+        this.industryPieChart.setHoleRadius(15);
+        this.industryPieChart.setTransparentCircleRadius(10);
+        this.industryPieChart.setEntryLabelTextSize(15);
+        this.industryPieChart.setEntryLabelColor(R.color.black);
+        this.industryPieChart.setDrawEntryLabels(false);
+        this.industryPieChart.setUsePercentValues(true);
+
+        // set legend display
+        this.industryPieChart.getLegend().setWordWrapEnabled(true);
+        this.industryPieChart.getLegend().setEnabled(true);
+        this.industryPieChart.getLegend().setTextSize(10);
+        this.industryPieChart.getDescription().setEnabled(false);
+//        this.industryPieChart.getLegend().setPosition(Legend.LegendPosition.ABOVE_CHART_LEFT);
+
+
+        // set the data
+        this.industryPieChart.setData(data);
+
+        // refresh
+        industryPieChart.invalidate(); // refresh
+    }
 }

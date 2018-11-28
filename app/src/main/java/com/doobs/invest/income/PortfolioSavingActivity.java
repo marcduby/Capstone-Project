@@ -55,6 +55,13 @@ public class PortfolioSavingActivity extends AppCompatActivity {
         // get the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         // get the income view model
         this.incomeViewModel = ViewModelProviders.of(this).get(IncomeViewModel.class);

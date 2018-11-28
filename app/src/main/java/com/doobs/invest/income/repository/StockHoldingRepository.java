@@ -58,7 +58,7 @@ public class StockHoldingRepository {
      * @param stockHoldingModel
      */
     public void insertOrUpdateStockHolding(StockHoldingModel stockHoldingModel) {
-        new InsertOrUpdateStockHoldingAsyncTask(this.stockHoldingDao).execute(stockHoldingModel);
+        new InsertOrUpdateStockHoldingAsyncTask(this.stockHoldingDao, this.portfolioDao).execute(stockHoldingModel);
     }
 
     /**
@@ -81,14 +81,6 @@ public class StockHoldingRepository {
     public LiveData<List<StockHoldingModel>> getStockHoldingsForPortfolioId(Integer portfolioId) {
         // get the list of stock holdings
         LiveData<List<StockHoldingModel>> listLiveData = this.stockHoldingDao.getAllStocks(portfolioId);
-
-        // for each holding, load the stock
-//        if (listLiveData != null && listLiveData.getValue() != null) {
-//            for (StockHoldingModel stockHoldingModel : listLiveData.getValue()) {
-//                StockModel stockModel = this.stockDao.getStockById(stockHoldingModel.getId());
-//                stockHoldingModel.setStockModel(stockModel);
-//            }
-//        }
 
         // return
         return listLiveData;
@@ -171,6 +163,11 @@ public class StockHoldingRepository {
 
                 // find with REST
                 stockModel = this.findStockFromRestCall(symbol);
+
+                // set industry as default if none
+                if (stockModel.getIndustry() == null || stockModel.getIndustry().trim().length() < 1) {
+                    stockModel.setIndustry(IncomeConstants.RestCodes.Industry.DEFAULT);
+                }
 
                 // if not null, save to DB and call again
                 if (stockModel != null) {
@@ -309,14 +306,17 @@ public class StockHoldingRepository {
     public static class InsertOrUpdateStockHoldingAsyncTask extends AsyncTask<StockHoldingModel, Void, Void> {
         // instance variables
         private StockHoldingDao stockHoldingDao;
+        private PortfolioDao portfolioDao;
 
         /**
          * default constructor
          *
-         * @param dao
+         * @param shDao
+         * @param pDao
          */
-        public InsertOrUpdateStockHoldingAsyncTask(StockHoldingDao dao) {
-            this.stockHoldingDao = dao;
+        public InsertOrUpdateStockHoldingAsyncTask(StockHoldingDao shDao, PortfolioDao pDao) {
+            this.stockHoldingDao = shDao;
+            this.portfolioDao = pDao;
         }
 
         @Override
@@ -332,11 +332,46 @@ public class StockHoldingRepository {
                 this.stockHoldingDao.update(stockHoldingModel);
             }
 
+            // update the portfolio totals as well
+            this.updatePortfolioTotals(stockHoldingModel.getPortfolioId());
+
             // log
             Log.i(this.getClass().getName(), "Inserted movie with id: " + stockHoldingModel.getId() + " and stock id: " + stockHoldingModel.getStockId());
 
             // return
             return null;
+        }
+
+        /**
+         * updates the portfolio model
+         *
+         */
+        protected void updatePortfolioTotals(Integer portfolioId) {
+            // local variables
+            PortfolioModel portfolioModel;
+            List<StockHoldingModel> stockHoldingModels;
+            Double cost = new Double(0);
+            Double value = new Double(0);
+            Double dividend = new Double(0);
+
+            // load the portfolio model
+            portfolioModel = this.portfolioDao.loadObjectById(portfolioId);
+
+            // load the list of stock holdings for the portfolio
+            stockHoldingModels = this.stockHoldingDao.getAllStocksObjects(portfolioId);
+
+            // add up the amounts
+            for (StockHoldingModel stockHoldingModel : stockHoldingModels) {
+                cost = cost + stockHoldingModel.getCostBasis();
+                value = value + stockHoldingModel.getCurrentValue();
+                dividend = dividend + stockHoldingModel.getTotalDividend();
+            }
+            portfolioModel.setCostBasis(cost);
+            portfolioModel.setCurrentValue(value);
+            portfolioModel.setTotalDividend(dividend);
+
+            // save the portfolio model
+            this.portfolioDao.update(portfolioModel);
         }
     }
 

@@ -56,7 +56,6 @@ public class StockHoldingViewHolder extends RecyclerView.ViewHolder  implements 
 
         // get the text view
         this.parent = stockHoldingRecyclerAdapter;
-//        this.stockHoldingNameTextView = (TextView) itemView.findViewById(R.id.portfolio_name_textview);
 
         // set the listener
         itemView.setOnClickListener(this);

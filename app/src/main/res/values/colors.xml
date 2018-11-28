@@ -7,4 +7,16 @@
     <color name="doobsPrimary">#00ccff</color>
     <color name="doobsPrimaryDark">#0066ff</color>
     <color name="doobsAccent">#ffcc00</color>
+
+    <!-- pie chart colors -->
+    <color name="red">#ff3300</color>
+    <color name="yellow">#ffff00</color>
+    <color name="blue">#0099ff</color>
+    <color name="green">#00ff99</color>
+    <color name="purple">#cc66ff</color>
+    <color name="orange">#ff9933</color>
+    <color name="black">#000000</color>
+
+
+
 </resources>

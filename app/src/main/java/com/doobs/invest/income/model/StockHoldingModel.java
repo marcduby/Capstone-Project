@@ -43,6 +43,10 @@ public class StockHoldingModel {
     @ColumnInfo(name = "symbol")
     private String stockSymbol;
 
+    @NonNull
+    @ColumnInfo(name = "industry")
+    private String industry;
+
     @ColumnInfo(name = "current_value")
     private Double currentValue;
 
@@ -163,6 +167,15 @@ public class StockHoldingModel {
 
     public void setTotalDividend(Double totalDividend) {
         this.totalDividend = totalDividend;
+    }
+
+    @NonNull
+    public String getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(@NonNull String industry) {
+        this.industry = industry;
     }
 
     /**
