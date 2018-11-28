@@ -175,14 +175,7 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
      */
     private void addStockHolding() {
         // handle the add a portfolio button
-        Toast.makeText(this, "adding stock holding", Toast.LENGTH_LONG).show();
-
-        // call the view model
-//        PortfolioModel portfolioModel = new PortfolioModel();
-//        portfolioModel.setName("portfolio: " + new Date().getTime());
-//        portfolioModel.setGoal("goal test");
-//        portfolioModel.setDescriprion("test decsrition");
-//        this.incomeViewModel.insertPortfolio(portfolioModel);
+//        Toast.makeText(this, "adding stock holding", Toast.LENGTH_LONG).show();
 
         // create intent and send to new activity
         Intent intent = new Intent(this, StockHoldingSavingActivity.class);

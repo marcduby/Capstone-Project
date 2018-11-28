@@ -150,8 +150,8 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
                     Log.i(TAG_NAME, "Saved stock holding for portfolio with id: " + portfolioModel.getId() + " and stock: " + stockModel.getName());
 
                     // snack bar
-                    Snackbar.make(view, "Stock holding " + stockHoldingModel.getId() + " saved", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+//                    Snackbar.make(view, "Stock holding " + stockHoldingModel.getId() + " saved", Snackbar.LENGTH_LONG)
+//                            .setAction("Action", null).show();
 
                     // go back
                     finish();

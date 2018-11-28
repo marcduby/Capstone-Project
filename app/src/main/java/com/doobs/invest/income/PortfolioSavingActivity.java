@@ -79,8 +79,8 @@ public class PortfolioSavingActivity extends AppCompatActivity {
                     Log.i(TAG_NAME, "Saved portfolio with id: " + portfolioModel.getId() + " and name: " + portfolioModel.getName());
 
                     // snack bar
-                    Snackbar.make(view, "Portfolio " + portfolioModel.getName() + " saved", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+//                    Snackbar.make(view, "Portfolio " + portfolioModel.getName() + " saved", Snackbar.LENGTH_LONG)
+//                            .setAction("Action", null).show();
 
                     // go back
                     finish();

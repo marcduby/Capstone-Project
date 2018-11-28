@@ -78,4 +78,9 @@
     <string name="not_found_stock_symbol_error">The stock symbol is not valid; please check the symbol</string>
     <string name="empty_stock_symbol_error">The symbol to search cannot be empty</string>
 
+    <!-- toast messages -->
+    <string name="adding_portfolio_toast">Adding portfolio\u0020</string>
+    <string name="adding_stock_holding_toast">Adding stock holding of\u0020</string>
+
+
 </resources>

@@ -16,14 +16,14 @@
     * error and snack bar
       * test no network
       * add symbol error checking
-    - scrollviews
+    * scrollviews
     - edit
       - portfolio
       - stock holding
     - delete
       - stock holding
       - portfolio
-    - sort lists
+    * sort lists
    ============= AM ==================   
       
     - stock, stock holding, portfolio refresh
@@ -34,7 +34,7 @@
       - analytics
     - RTL check
     - accessibility check
-    - all strings check
+    * all strings check
     - gradle install task
   
   - 20181127 - tuesday

@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
     @Override
     public void onListItemClick(PortfolioModel portfolioModel) {
         // toast
-        Toast.makeText(this, "clicked on item: " + portfolioModel.getName(), Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "clicked on item: " + portfolioModel.getName(), Toast.LENGTH_LONG).show();
 
         // open the stock holding list
         Intent intent = new Intent(this, StockHoldingListActivity.class);
@@ -169,14 +169,7 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
      */
     private void addPortfolio() {
         // handle the add a portfolio button
-        Toast.makeText(this, "adding portfolio", Toast.LENGTH_LONG).show();
-
-        // call the view model
-//        PortfolioModel portfolioModel = new PortfolioModel();
-//        portfolioModel.setName("portfolio: " + new Date().getTime());
-//        portfolioModel.setGoal("goal test");
-//        portfolioModel.setDescriprion("test decsrition");
-//        this.incomeViewModel.insertPortfolio(portfolioModel);
+//        Toast.makeText(this, this.getString(R.string.adding_portfolio_toast), Toast.LENGTH_LONG).show();
 
         // create intent and send to new activity
         Intent intent = new Intent(this, PortfolioSavingActivity.class);
