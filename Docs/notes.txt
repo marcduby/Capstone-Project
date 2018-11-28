@@ -1,10 +1,10 @@
 
 - long term enhacements (post capstone)
-  - analyze company metrics (pe vs eranings growth, rev per emp, profit per emp, trends)
+  - analyze company metrics (pe vs earnings growth, rev per emp, profit per emp, trends)
 
 
 - short term enhancements
-  * store the div/bought/value bvalues in all DB objects
+  * store the div/bought/value values in all DB objects
   - add edits to
     - stock holding
     - portfolio
@@ -13,20 +13,28 @@
 
 - work
   - 20181127 - tuesday
-    - portfolio list gui
-    - capstone proposal
+    * portfolio list gui
+    * portfolio diversification chart
+    * capstone proposal
     - test no network
     - add symbol error checking
-    - edit portfolio/stock holding
+    - back buttons
+    - edit
+      - portfolio
+      - stock holding
+    - delete
+      - stock holding
+      - portfolio
+    - scrollviews
     - widget
     - verify accessibility
-    - portfolio diversification chart
     - google services
       - admob
       - analytics
-    - RTL cheeck
+    - RTL check
     - accessibility check
     - all strings check
+    - gradle install task
     
     
   - 20181126 - monday

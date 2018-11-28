@@ -35,6 +35,7 @@
             android:name=".StockHoldingListActivity"
             android:parentActivityName=".MainActivity"
             android:label="@string/title_activity_stock_holdings"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>

@@ -62,8 +62,8 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
     @BindView(R.id.stock_holding_add_button)
     protected Button addStockHoldingButton;
 
-    @BindView(R.id.stock_holding_list_total_cost)
-    protected TextView portfolioTotalCostTextView;
+    @BindView(R.id.stock_holding_list_total_value)
+    protected TextView portfolioTotalValueTextView;
 
     @BindView(R.id.stock_holding_list_total_dividend)
     protected TextView portfolioTotalDividendTextView;
@@ -85,6 +85,7 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
         // get the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // log
         Log.i(this.TAG_NAME, "In onCreate");
@@ -123,7 +124,7 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
                 portfolioModel = portfolioModelReturn;
                 portfolioNameTextView.setText(getString(R.string.portfolio_snippet) + portfolioModel.getName());
 
-                portfolioTotalCostTextView.setText(IncomeUtils.getCurrencyString(portfolioModel.getCostBasis()));
+                portfolioTotalValueTextView.setText(IncomeUtils.getCurrencyString(portfolioModel.getCurrentValue()));
                 portfolioTotalDividendTextView.setText(IncomeUtils.getCurrencyString(portfolioModel.getTotalDividend()));
             }
         });

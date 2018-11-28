@@ -104,7 +104,9 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
 
         // get the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        this.setSupportActionBar(toolbar);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         // get the income view model
         this.stockHoldingViewModel = ViewModelProviders.of(this).get(StockHoldingViewModel.class);

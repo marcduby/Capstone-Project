@@ -118,7 +118,7 @@
                     android:layout_column="2" />
 
                 <TextView
-                    android:id="@+id/stock_holding_list_total_cost"
+                    android:id="@+id/stock_holding_list_total_value"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right"
