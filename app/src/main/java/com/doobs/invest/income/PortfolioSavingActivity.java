@@ -39,9 +39,13 @@ public class PortfolioSavingActivity extends AppCompatActivity {
     @BindView(R.id.portfolio_goal_editview)
     protected EditText portfolioGoalEditText;
 
-    // FAB
+    // adding portfolio FAB
     @BindView(R.id.portfolio_saving_fab)
     protected FloatingActionButton portfolioSavingFab;
+
+    // deleting portfolio FAB
+    @BindView(R.id.portfolio_deleting_fab)
+    protected FloatingActionButton portfolioDeletingFab;
 
     // title text view
     @BindView(R.id.portfolio_name_label_textview)
@@ -80,7 +84,7 @@ public class PortfolioSavingActivity extends AppCompatActivity {
         // create the portfolio model
         this.portfolioModel = new PortfolioModel();
 
-        // get the FAB
+        // get the saving FAB
         this.portfolioSavingFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,6 +101,19 @@ public class PortfolioSavingActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // get the deleting FAB
+        this.portfolioDeletingFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // log
+                Log.i(TAG_NAME, "Scrap new portflio");
+
+                // go back
+                finish();
+            }
+        });
+
     }
 
     /**
