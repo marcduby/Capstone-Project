@@ -1,11 +1,14 @@
 package com.doobs.invest.income.util;
 
+import android.graphics.Color;
+
 import com.doobs.invest.income.model.StockHoldingModel;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -115,5 +118,30 @@ public class IncomeUtils {
 
         // return
         return industryMap;
+    }
+
+    /**
+     * returns the colors to be used in the charts
+     *
+     * @return
+     */
+    public static ArrayList<Integer> getChartColors() {
+        final int[] chartColors = {
+                Color.rgb(0, 153, 255),        // blue
+                Color.rgb(255, 0, 0),         // red
+                Color.rgb(0, 255, 0),        // green
+                Color.rgb(255, 153, 51),       // orange
+                Color.rgb(255, 0, 255),       // purple
+                Color.rgb(204, 204, 0)     // yellow
+        };
+
+        // create the array
+        ArrayList<Integer> colors = new ArrayList<>();
+        for (int color : chartColors) {
+            colors.add(color);
+        }
+
+        // return
+        return colors;
     }
 }

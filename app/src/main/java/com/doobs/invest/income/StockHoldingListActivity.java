@@ -197,33 +197,14 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
             entries.add(new PieEntry(industryMap.get(industry).floatValue(), industry));
         }
 
-//        entries.add(new PieEntry(10.5f, "Green"));
-//        entries.add(new PieEntry(26.7f, "Yellow"));
-//        entries.add(new PieEntry(24.0f, "Red"));
-//        entries.add(new PieEntry(40.8f, "Blue"));
-
+        // create the pie chart set
         PieDataSet pieChartSet = new PieDataSet(entries, "");
 
         // set the colors
-        final int[] MY_COLORS = {
-                Color.rgb(0, 0, 255),        // blue
-                Color.rgb(255, 0, 0),         // red
-                Color.rgb(0, 255, 0),        // green
-                Color.rgb(255, 153, 51),       // orange
-                Color.rgb(255, 0, 255),       // purple
-                Color.rgb(204, 204, 0)     // yellow
-        };
-
-        int[] pieColors = new int[] {R.color.colorAccent, R.color.colorPrimary, R.color.doobsPrimary, R.color.doobsAccent};
-        int[] pieColors2 = new int[] {R.color.red, R.color.orange, R.color.yellow, R.color.green, R.color.blue, R.color.purple};
-
-        ArrayList<Integer> colors = new ArrayList<>();
-        for (int color : MY_COLORS) {
-            colors.add(color);
-        }
-
-        pieChartSet.setColors(colors);
+        pieChartSet.setColors(IncomeUtils.getChartColors());
         PieData data = new PieData(pieChartSet);
+
+        // set the text size
         data.setValueTextSize(15);
 
         // set display of pie chart

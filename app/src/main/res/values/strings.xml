@@ -56,8 +56,15 @@
     <string name="stock_holding_list_dividend_label">Dividend</string>
     <string name="stock_holding_list_total_label">Totals</string>
 
+    <!-- portfolio list table -->
+    <string name="portfolio_list_name_label">Name</string>
+    <string name="portfolio_list_value_label">Value</string>
+    <string name="portfolio_list_gain_label">Gain/Loss</string>
+    <string name="portfolio_list_dividend_label">Dividend</string>
+
     <!-- headers -->
     <string name="industry_sector_header">% Diversification by Industry</string>
+    <string name="portfolio_list_header">Portfolio List</string>
 
     <!-- snippets -->
     <string name="portfolio_snippet">Portfolio:\u0020</string>

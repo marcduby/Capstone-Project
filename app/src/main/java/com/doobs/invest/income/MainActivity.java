@@ -21,9 +21,13 @@ import com.doobs.invest.income.adapter.PortfolioRecyclerAdapter;
 import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.repository.IncomeViewModel;
 import com.doobs.invest.income.util.IncomeConstants;
+import com.doobs.invest.income.util.IncomeUtils;
 
 import java.util.Date;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements PortfolioRecyclerAdapter.PortfolioItemClickListener {
     // constants
@@ -31,16 +35,39 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
 
     // instance variables
     private PortfolioRecyclerAdapter portfolioRecyclerAdapter;
-    private RecyclerView portfolioRecyclerView;
     private IncomeViewModel incomeViewModel;
     private LinearLayoutManager portfolioListLayoutManager;
-    private Button addPortfolioButton;
+
+    // widgets
+    // recycler view
+    @BindView(R.id.portfolio_recyclerview)
+    protected RecyclerView portfolioRecyclerView;
+
+    // button
+    @BindView(R.id.portfolio_add_button)
+    protected Button addPortfolioButton;
+
+    // portfolio value
+    @BindView(R.id.portfolio_list_value_textview)
+    protected TextView valueTotalTextView;
+
+    // portfolio gain
+    @BindView(R.id.portfolio_list_gain_textview)
+    protected TextView gainTotalTextView;
+
+    // portfolio dividend
+    @BindView(R.id.portfolio_list_dividend_textview)
+    protected TextView dividendTotalTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // bind butterknife
+        ButterKnife.bind(this);
+
+        // get the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -48,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
         Log.i(this.TAG_NAME, "In onCreate");
 
         // get the views
-        this.addPortfolioButton = this.findViewById(R.id.portfolio_add_button);
+//        this.addPortfolioButton = this.findViewById(R.id.portfolio_add_button);
         this.addPortfolioButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
         });
 
         // get the recycler view
-        this.portfolioRecyclerView = (RecyclerView) this.findViewById(R.id.portfolio_recyclerview);
+//        this.portfolioRecyclerView = (RecyclerView) this.findViewById(R.id.portfolio_recyclerview);
         this.portfolioRecyclerView.setHasFixedSize(true);
 
         // set the layout manager for the recycler view
@@ -83,8 +110,42 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
             public void onChanged(@Nullable List<PortfolioModel> portfolioModelList) {
                 // set the data on the adapter
                 portfolioRecyclerAdapter.setPortfolioModelList(portfolioModelList);
+
+                // set the list value totals
+                setValueTotals(portfolioModelList);
             }
         });
+    }
+
+    /**
+     * set the list value totals
+     *
+     * @param portfolioModelList
+     */
+    private void setValueTotals(List<PortfolioModel> portfolioModelList) {
+        // local variables
+        Double value = new Double(0);
+        Double gain = new Double(0);
+        Double dividend = new Double(0);
+
+        // loop through the list and add up the totals
+        if (portfolioModelList != null) {
+            for (PortfolioModel portfolioModel : portfolioModelList) {
+                if (portfolioModel.getCurrentValue() != null
+                        && portfolioModel.getCostBasis() != null
+                        && portfolioModel.getTotalDividend() != null) {
+                    value = value + portfolioModel.getCurrentValue();
+                    gain = gain + portfolioModel.getCurrentValue() - portfolioModel.getCostBasis();
+                    dividend = dividend + portfolioModel.getTotalDividend();
+                }
+
+            }
+        }
+
+        // set the values on the text views
+        this.valueTotalTextView.setText(IncomeUtils.getCurrencyString(value));
+        this.gainTotalTextView.setText(IncomeUtils.getCurrencyString(gain));
+        this.dividendTotalTextView.setText(IncomeUtils.getCurrencyString(dividend));
     }
 
     /**
