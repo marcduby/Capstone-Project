@@ -161,9 +161,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:background="@color/doobsAccent"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginRight="@dimen/fab_margin"
-        android:layout_marginBottom="@dimen/fab_margin_large"
+        android:layout_margin="@dimen/fab_margin"
         android:contentDescription="@string/accessibility_add_stock_holding_button_label"
         android:src="@drawable/ic_add_black_24dp" />
 
