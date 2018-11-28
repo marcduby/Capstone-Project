@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -43,10 +44,6 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
     @BindView(R.id.portfolio_recyclerview)
     protected RecyclerView portfolioRecyclerView;
 
-    // button
-    @BindView(R.id.portfolio_add_button)
-    protected Button addPortfolioButton;
-
     // portfolio value
     @BindView(R.id.portfolio_list_value_textview)
     protected TextView valueTotalTextView;
@@ -58,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
     // portfolio dividend
     @BindView(R.id.portfolio_list_dividend_textview)
     protected TextView dividendTotalTextView;
+
+    // FAB
+    @BindView(R.id.portfolio_adding_fab)
+    protected FloatingActionButton portfolioAddFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
 
         // get the views
 //        this.addPortfolioButton = this.findViewById(R.id.portfolio_add_button);
-        this.addPortfolioButton.setOnClickListener(new View.OnClickListener() {
+        this.portfolioAddFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addPortfolio();

@@ -82,5 +82,11 @@
     <string name="adding_portfolio_toast">Adding portfolio\u0020</string>
     <string name="adding_stock_holding_toast">Adding stock holding of\u0020</string>
 
+    <!-- accessibility labels -->
+    <string name="accessibility_add_portfolio_button_label">Add portfolio</string>
+    <string name="accessibility_add_stock_holding_button_label">Add stock holding</string>
+    <string name="accessibility_save_portfolio_button_label">Save portfolio</string>
+    <string name="accessibility_save_stock_holding_button_label">Save stock holding</string>
+
 
 </resources>

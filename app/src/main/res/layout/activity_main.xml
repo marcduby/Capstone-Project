@@ -25,13 +25,6 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
             <!--app:contentInsetStart="120dp"-->
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/portfolio_add_button"
-                android:id="@+id/portfolio_add_button"
-                android:background="@color/doobsAccent"/>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -146,6 +139,15 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/portfolio_adding_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add_black_24dp"
+        />
 
 
 </android.support.design.widget.CoordinatorLayout>
