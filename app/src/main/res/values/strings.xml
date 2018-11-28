@@ -87,6 +87,7 @@
     <string name="accessibility_add_stock_holding_button_label">Add stock holding</string>
     <string name="accessibility_save_portfolio_button_label">Save portfolio</string>
     <string name="accessibility_save_stock_holding_button_label">Save stock holding</string>
+    <string name="accessibility_search_stock_symbol_button_label">Search stock symbol</string>
 
 
 </resources>

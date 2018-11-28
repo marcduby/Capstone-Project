@@ -51,6 +51,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/symbol_search_button"
                     android:background="@color/doobsAccent"
+                    android:contentDescription="@string/accessibility_search_stock_symbol_button_label"
                     android:text="@string/stock_search_button"/>
 
                 <!-- start - display of search stock results -->
@@ -255,6 +256,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:contentDescription="@string/accessibility_save_stock_holding_button_label"
         android:src="@drawable/ic_done_black_24dp"
          />
 

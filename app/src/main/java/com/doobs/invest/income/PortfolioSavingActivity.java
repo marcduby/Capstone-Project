@@ -39,6 +39,10 @@ public class PortfolioSavingActivity extends AppCompatActivity {
     @BindView(R.id.portfolio_goal_editview)
     protected EditText portfolioGoalEditText;
 
+    // FAB
+    @BindView(R.id.portfolio_saving_fab)
+    protected FloatingActionButton portfolioSavingFab;
+
     /**
      * onCreate method
      *
@@ -70,8 +74,7 @@ public class PortfolioSavingActivity extends AppCompatActivity {
         this.portfolioModel = new PortfolioModel();
 
         // get the FAB
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        this.portfolioSavingFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (savePortfolio(portfolioModel)) {
