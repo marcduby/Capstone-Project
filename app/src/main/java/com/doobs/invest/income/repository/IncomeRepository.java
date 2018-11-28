@@ -60,6 +60,16 @@ public class IncomeRepository {
     }
 
     /**
+     * returns the portfolio loaded from the database
+     *
+     * @param portfolioId
+     * @return
+     */
+    public LiveData<PortfolioModel> getPortfolioModelLiveData(Integer portfolioId) {
+        return this.portfolioDao.loadById(portfolioId);
+    }
+
+    /**
      * deletes a portfolio object
      *
      * @param portfolioModel

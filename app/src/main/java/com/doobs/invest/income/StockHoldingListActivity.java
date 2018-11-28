@@ -80,7 +80,11 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
 
     // add stock holding FAB
     @BindView(R.id.add_stock_holding_fab)
-    protected FloatingActionButton portfolioAddFab;
+    protected FloatingActionButton stockHoldingAddFab;
+
+    // edit portfolio FAB
+    @BindView(R.id.edit_portfolio_fab)
+    protected FloatingActionButton portfolioEditFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,12 +102,19 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
         // log
         Log.i(this.TAG_NAME, "In onCreate");
 
-        // get the views
-//        this.addStockHoldingButton = this.findViewById(R.id.stock_holding_add_button);
-        this.portfolioAddFab.setOnClickListener(new View.OnClickListener() {
+        // add stock holding FAB
+        this.stockHoldingAddFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addStockHolding();
+            }
+        });
+
+        // edit portfolio FAB
+        this.portfolioEditFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editPortfolio();
             }
         });
 
@@ -173,6 +184,19 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
     @Override
     public void onListItemClick(StockHoldingModel stockHoldingModel) {
         Toast.makeText(this, "clicked on item: " + stockHoldingModel.getDescription(), Toast.LENGTH_LONG).show();
+    }
+
+    /**
+     * edit the portfolio
+     *
+     */
+    private void editPortfolio() {
+        // create intent
+        Intent intent = new Intent(this, PortfolioUpdatingActivity.class);
+        intent.putExtra(IncomeConstants.ExtraKeys.PORTFOLIO_ID, this.portfolioModel.getId());
+
+        // start activity
+        this.startActivity(intent);
     }
 
     /**

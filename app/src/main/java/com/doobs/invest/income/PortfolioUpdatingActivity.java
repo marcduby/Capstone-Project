@@ -1,10 +1,11 @@
 package com.doobs.invest.income;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.database.sqlite.SQLiteConstraintException;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,13 +16,13 @@ import android.widget.Toast;
 
 import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.repository.IncomeViewModel;
+import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
-public class PortfolioSavingActivity extends AppCompatActivity {
+public class PortfolioUpdatingActivity extends AppCompatActivity {
     // constants
     private final String TAG_NAME = this.getClass().getName();
 
@@ -60,6 +61,9 @@ public class PortfolioSavingActivity extends AppCompatActivity {
         // bind butterknife
         ButterKnife.bind(this);
 
+        // set the activity title
+        this.titleTextView.setText(this.getString(R.string.title_activity_portfolio_saving));
+
         // get the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -71,14 +75,22 @@ public class PortfolioSavingActivity extends AppCompatActivity {
             }
         });
 
-        // set the activity title
-        this.titleTextView.setText(this.getString(R.string.title_activity_portfolio_new));
-
         // get the income view model
         this.incomeViewModel = ViewModelProviders.of(this).get(IncomeViewModel.class);
 
-        // create the portfolio model
-        this.portfolioModel = new PortfolioModel();
+        // load the portfolio model
+        Intent intent = this.getIntent();
+        final Integer portfolioId = intent.getIntExtra(IncomeConstants.ExtraKeys.PORTFOLIO_ID, 0);
+        Log.i(TAG_NAME, "Loaded portfolio: " + portfolioId + " for modification");
+
+        // get the portfolio model from the view model
+        this.incomeViewModel.loadPortfolioById(portfolioId).observe(this, new Observer<PortfolioModel>() {
+            @Override
+            public void onChanged(@Nullable PortfolioModel loadedModel) {
+                portfolioModel = loadedModel;
+                setPortfolioData();
+            }
+        });
 
         // get the FAB
         this.portfolioSavingFab.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +109,21 @@ public class PortfolioSavingActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    /**
+     * sets the loaded portfolio data in the edit text fields
+     *
+     */
+    private void setPortfolioData() {
+        // set the name
+        this.portfolioNameEditText.setText(this.portfolioModel.getName());
+
+        // set the description
+        this.portfolioDescriptionEditText.setText(portfolioModel.getDescriprion());
+
+        // set the goal
+        this.portfolioGoalEditText.setText(portfolioModel.getGoal());
     }
 
     /**
@@ -123,7 +150,7 @@ public class PortfolioSavingActivity extends AppCompatActivity {
             portfolioModel.validityCheck();
 
             // save the portfolio
-            this.incomeViewModel.insertPortfolio(portfolioModel);
+            this.incomeViewModel.updatePortfolio(portfolioModel);
             saveSuccess = true;
 
         } catch (IncomeException exception) {

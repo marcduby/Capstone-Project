@@ -82,4 +82,13 @@ public class IncomeViewModel extends AndroidViewModel {
         return portfolioList;
     }
 
+    /**
+     * load the portfolio from the database
+     *
+     * @param portfolioId
+     * @return
+     */
+    public LiveData<PortfolioModel> loadPortfolioById(Integer portfolioId) {
+        return this.incomeRepository.getPortfolioModelLiveData(portfolioId);
+    }
 }
