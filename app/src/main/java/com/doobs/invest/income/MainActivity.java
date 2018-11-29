@@ -23,6 +23,7 @@ import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.repository.IncomeViewModel;
 import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeUtils;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Date;
 import java.util.List;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
     private IncomeViewModel incomeViewModel;
     private LinearLayoutManager portfolioListLayoutManager;
     private List<PortfolioModel> portfolioModelList;
+    private FirebaseAnalytics firebaseAnalytics;
 
     // widgets
     // recycler view
@@ -72,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
 
         // bind butterknife
         ButterKnife.bind(this);
+
+        // get the firebase instance
+        this.firebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // get the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -172,6 +177,9 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
         // toast
 //        Toast.makeText(this, "clicked on item: " + portfolioModel.getName(), Toast.LENGTH_LONG).show();
 
+        // log in firebase
+        IncomeUtils.logFirebaseEvent(this.firebaseAnalytics, IncomeConstants.Firebase.Event.PORTFOLIO_VIEW);
+
         // open the stock holding list
         Intent intent = new Intent(this, StockHoldingListActivity.class);
         intent.putExtra(IncomeConstants.ExtraKeys.PORTFOLIO_ID, portfolioModel.getId());
@@ -188,6 +196,9 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
                 this.incomeViewModel.refreshPortfolio(portfolioModel.getId());
             }
         }
+
+        // log in firebase
+        IncomeUtils.logFirebaseEvent(this.firebaseAnalytics, IncomeConstants.Firebase.Event.PORTFOLIOS_REFRESH);
     }
     /**
      * handles the add portfolio option
@@ -197,9 +208,11 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
         // handle the add a portfolio button
 //        Toast.makeText(this, this.getString(R.string.adding_portfolio_toast), Toast.LENGTH_LONG).show();
 
+        // log in firebase
+        IncomeUtils.logFirebaseEvent(this.firebaseAnalytics, IncomeConstants.Firebase.Event.PORTFOLIO_ADD);
+
         // create intent and send to new activity
         Intent intent = new Intent(this, PortfolioSavingActivity.class);
         this.startActivity(intent);
     }
-
 }

@@ -32,6 +32,7 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,6 +58,7 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
     private LinearLayoutManager stockHoldingListLayoutManager;
     private PortfolioModel portfolioModel;
     private List<StockHoldingModel> stockHoldingModelList;
+    private FirebaseAnalytics firebaseAnalytics;
 
     // widgets
     @BindView(R.id.portfolio_name_textview)
@@ -97,6 +99,9 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
 
         // bind butterknife
         ButterKnife.bind(this);
+
+        // get the firebase instance
+        this.firebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // get the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -184,6 +189,10 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
         this.portfolioRefreshFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // log firebase event
+                IncomeUtils.logFirebaseEvent(firebaseAnalytics, IncomeConstants.Firebase.Event.PORTFOLIO_SINGLE_REFRESH);
+
+                // refresh the underlying financial data
                 stockHoldingViewModel.refreshPortfolio(portfolioId);
             }
         });
@@ -197,6 +206,9 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
      */
     @Override
     public void onListItemClick(StockHoldingModel stockHoldingModel) {
+        // log firebase event
+        IncomeUtils.logFirebaseEvent(this.firebaseAnalytics, IncomeConstants.Firebase.Event.STOCK_HOLDING_VIEW);
+
         // create the intent
         Intent intent = new Intent(this, StockHoldingUpdatingActivity.class);
         intent.putExtra(IncomeConstants.ExtraKeys.STOCK_HOLDING_ID, stockHoldingModel.getId());
@@ -211,6 +223,9 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
      *
      */
     private void editPortfolio() {
+        // log firebase event
+        IncomeUtils.logFirebaseEvent(this.firebaseAnalytics, IncomeConstants.Firebase.Event. PORTFOLIO_EDIT);
+
         // create intent
         Intent intent = new Intent(this, PortfolioUpdatingActivity.class);
         intent.putExtra(IncomeConstants.ExtraKeys.PORTFOLIO_ID, this.portfolioModel.getId());
@@ -227,12 +242,19 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
         // handle the add a portfolio button
 //        Toast.makeText(this, "adding stock holding", Toast.LENGTH_LONG).show();
 
+        // log firebase event
+        IncomeUtils.logFirebaseEvent(this.firebaseAnalytics, IncomeConstants.Firebase.Event.STOCK_HOLDING_ADD);
+
         // create intent and send to new activity
         Intent intent = new Intent(this, StockHoldingSavingActivity.class);
         intent.putExtra(IncomeConstants.ExtraKeys.PORTFOLIO_ID, this.portfolioModel.getId());
         this.startActivity(intent);
     }
 
+    /**
+     * refresh the pie chart
+     *
+     */
     private void refreshPieChart() {
         List<PieEntry> entries = new ArrayList<>();
         Map<String, Double> industryMap = null;

@@ -1,10 +1,12 @@
 package com.doobs.invest.income.util;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.model.StockHoldingModel;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.awt.font.TextAttribute;
 import java.text.DateFormat;
@@ -177,5 +179,21 @@ public class IncomeUtils {
         portfolioModel.setCostBasis(cost);
         portfolioModel.setCurrentValue(value);
         portfolioModel.setTotalDividend(dividend);
+    }
+
+    /**
+     * log a firebase event
+     *
+     * @param eventType
+     */
+    public static void logFirebaseEvent(FirebaseAnalytics firebaseAnalytics, String eventType) {
+        // create the bundle
+        Bundle bundle = new Bundle();
+
+        // log the event
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, eventType);
+
+        // send
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 }

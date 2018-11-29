@@ -15,7 +15,10 @@ import android.widget.Toast;
 
 import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.repository.IncomeViewModel;
+import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeException;
+import com.doobs.invest.income.util.IncomeUtils;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,6 +31,7 @@ public class PortfolioSavingActivity extends AppCompatActivity {
     // instance variables
     PortfolioModel portfolioModel;
     private IncomeViewModel incomeViewModel;
+    private FirebaseAnalytics firebaseAnalytics;
 
     // widgets
     @BindView(R.id.portfolio_name_editview)
@@ -64,6 +68,9 @@ public class PortfolioSavingActivity extends AppCompatActivity {
         // bind butterknife
         ButterKnife.bind(this);
 
+        // get the firebase analytics
+        this.firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         // get the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -92,6 +99,9 @@ public class PortfolioSavingActivity extends AppCompatActivity {
                     // log
                     Log.i(TAG_NAME, "Saved portfolio with id: " + portfolioModel.getId() + " and name: " + portfolioModel.getName());
 
+                    // log the firebase event
+                    IncomeUtils.logFirebaseEvent(firebaseAnalytics, IncomeConstants.Firebase.Event.PORTFOLIO_DELETE);
+
                     // snack bar
 //                    Snackbar.make(view, "Portfolio " + portfolioModel.getName() + " saved", Snackbar.LENGTH_LONG)
 //                            .setAction("Action", null).show();
@@ -108,6 +118,9 @@ public class PortfolioSavingActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // log
                 Log.i(TAG_NAME, "Scrap new portflio");
+
+                // log the firebase event
+                IncomeUtils.logFirebaseEvent(firebaseAnalytics, IncomeConstants.Firebase.Event.PORTFOLIO_ADD_CANCEL);
 
                 // go back
                 finish();
