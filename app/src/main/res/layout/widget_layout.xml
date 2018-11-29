@@ -5,17 +5,18 @@
     android:layout_height="match_parent"
     android:layout_margin="8dip"
     android:orientation="vertical"
-    android:background="@color/doobsPrimary" >
+    >
 
     <TextView
         android:id="@+id/update"
-        style="@android:style/TextAppearance.Medium"
+        style="@style/labelViewSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center_horizontal|center_vertical"
         android:layout_margin="4dip"
-        android:text="" >
+        android:background="@color/doobsPrimary"
+        android:text="@string/widget_title" >
     </TextView>
 
     <LinearLayout
@@ -56,18 +57,21 @@
                 android:id="@+id/widget_total_value_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="end|right"
                 style="@style/textViewSmall"/>
 
             <TextView
                 android:id="@+id/widget_total_gains_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="end|right"
                 style="@style/textViewSmall"/>
 
             <TextView
                 android:id="@+id/widget_total_dividends_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="end|right"
                 style="@style/textViewSmall"/>
         </LinearLayout>
 
@@ -75,10 +79,13 @@
 
     <Button
         android:id="@+id/stock_holding_refresh_widget_button"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:padding="@dimen/small_margin"
+        android:layout_margin="@dimen/tiny_margin"
         android:text="@string/widget_update_button"
+        android:textAllCaps="false"
         android:background="@color/doobsAccent"/>
+
 </LinearLayout>

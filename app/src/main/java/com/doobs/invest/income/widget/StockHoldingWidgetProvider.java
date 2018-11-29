@@ -130,17 +130,14 @@ public class StockHoldingWidgetProvider extends AppWidgetProvider {
 
             // for all widgets, update
             for (int widgetId : appIds) {
-                // create some random data
-                int number = (new Random().nextInt(100));
-
                 // update
                 RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
                 Log.i(this.getClass().getName(), "Updating widget with id: " + widgetId);
 
                 // Set the text
-                remoteViews.setTextViewText(R.id.widget_total_value_textview, String.valueOf(number) + ": " + IncomeUtils.getCurrencyString(value));
-                remoteViews.setTextViewText(R.id.widget_total_dividends_textview, String.valueOf(number) + ": " + IncomeUtils.getCurrencyString(dividends));
-                remoteViews.setTextViewText(R.id.widget_total_gains_textview, String.valueOf(number) + ": " + IncomeUtils.getCurrencyString(gains));
+                remoteViews.setTextViewText(R.id.widget_total_value_textview, IncomeUtils.getCurrencyString(value));
+                remoteViews.setTextViewText(R.id.widget_total_dividends_textview, IncomeUtils.getCurrencyString(dividends));
+                remoteViews.setTextViewText(R.id.widget_total_gains_textview, IncomeUtils.getCurrencyString(gains));
 
                 // Register an onClickListener
                 Intent intent = new Intent(context, StockHoldingWidgetProvider.class);
