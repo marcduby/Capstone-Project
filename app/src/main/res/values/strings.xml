@@ -83,6 +83,13 @@
     <string name="adding_portfolio_toast">Adding portfolio\u0020</string>
     <string name="adding_stock_holding_toast">Adding stock holding of\u0020</string>
 
+    <!-- widget string -->
+    <string name="widget_title">Income Portfolio Totals</string>
+    <string name="widget_value_label">Current value</string>
+    <string name="widget_dividend_label">Yearly dividends</string>
+    <string name="widget_gain_label">Total gains</string>
+    <string name="widget_update_button">Update</string>
+
     <!-- accessibility labels -->
     <string name="accessibility_delete_portfolio_button_label">Delete portfolio</string>
     <string name="accessibility_edit_portfolio_button_label">Edit portfolio</string>
