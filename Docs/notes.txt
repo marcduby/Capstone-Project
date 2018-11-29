@@ -27,10 +27,10 @@
    ============= AM ==================   
       
     * stock, stock holding, portfolio refresh
-    - widget
+    * widget
     - google services
       - admob
-      - analytics
+      * analytics
     - RTL check
     * accessibility check
     * all strings check

@@ -16,6 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
@@ -43,6 +44,11 @@ dependencies {
 
     // add Firebase SDK
     implementation 'com.google.firebase:firebase-core:16.0.4'
+
+    // add in AdMob
+//    implementation 'com.google.android.gms:play-services-ads:11.8.0'
+    implementation 'com.google.android.gms:play-services-ads:16.0.0'
+//    implementation 'com.google.firebase:firebase-ads:17.1.1'
 
     // Room components
     implementation "android.arch.persistence.room:runtime:$rootProject.roomVersion"

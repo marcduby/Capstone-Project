@@ -40,7 +40,7 @@
     </style>
 
     <style name="labelView" parent="labelViewNoMargin">
-        <item name="android:layout_marginTop">15sp</item>
+        <item name="android:layout_marginTop">10sp</item>
     </style>
 
 

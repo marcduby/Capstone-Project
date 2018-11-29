@@ -23,6 +23,9 @@ import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.repository.IncomeViewModel;
 import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeUtils;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.Date;
@@ -67,6 +70,10 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
     @BindView(R.id.portfolio_refresh_all_fab)
     protected FloatingActionButton portfolioRefreshAllFab;
 
+    // ad view
+    @BindView(R.id.adView)
+    protected AdView adView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +81,14 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
 
         // bind butterknife
         ButterKnife.bind(this);
+
+        // initialize the AdMob service
+        MobileAds.initialize(this, "ca-app-pub-4175572237555472~5024376641");
+
+        // load the ad
+        AdRequest adRequest = new AdRequest.Builder().build();
+        this.adView.loadAd(adRequest);
+
 
         // get the firebase instance
         this.firebaseAnalytics = FirebaseAnalytics.getInstance(this);
