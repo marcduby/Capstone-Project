@@ -87,6 +87,7 @@
     <string name="accessibility_delete_portfolio_button_label">Delete portfolio</string>
     <string name="accessibility_edit_portfolio_button_label">Edit portfolio</string>
     <string name="accessibility_refresh_portfolio_button_label">Refresh portfolio</string>
+    <string name="accessibility_refresh_all_portfolio_button_label">Refresh all portfolios</string>
     <string name="accessibility_add_portfolio_button_label">Add portfolio</string>
     <string name="accessibility_add_stock_holding_button_label">Add stock holding</string>
     <string name="accessibility_save_portfolio_button_label">Save portfolio</string>

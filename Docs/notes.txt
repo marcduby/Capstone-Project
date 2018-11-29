@@ -17,16 +17,16 @@
       * test no network
       * add symbol error checking
     * scrollviews
-    - edit
+    * edit
       * portfolio
-      - stock holding
-    - delete
-      - stock holding
-      - portfolio
+      * stock holding
+    * delete
+      * stock holding
+      * portfolio
     * sort lists
    ============= AM ==================   
       
-    - stock, stock holding, portfolio refresh
+    * stock, stock holding, portfolio refresh
     - widget
     - google services
       - admob

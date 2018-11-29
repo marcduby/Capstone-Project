@@ -19,6 +19,7 @@ import java.util.List;
 public class IncomeViewModel extends AndroidViewModel {
     // instance variables
     private IncomeRepository incomeRepository;
+    private RefreshRepository refreshRepository;
     private LiveData<List<PortfolioModel>> portfolioList;
 
     /**
@@ -31,6 +32,7 @@ public class IncomeViewModel extends AndroidViewModel {
 
         // build the repository
         this.incomeRepository = new IncomeRepository(application);
+        this.refreshRepository = new RefreshRepository(application);
 
         // get the portfolio list
         this.portfolioList = this.incomeRepository.getPortfolioList();
@@ -90,5 +92,14 @@ public class IncomeViewModel extends AndroidViewModel {
      */
     public LiveData<PortfolioModel> loadPortfolioById(Integer portfolioId) {
         return this.incomeRepository.getPortfolioModelLiveData(portfolioId);
+    }
+
+    /**
+     * refresh the portfolio prices
+     *
+     * @param portfolioId
+     */
+    public void refreshPortfolio(Integer portfolioId) {
+        this.refreshRepository.refreshPortfolio(portfolioId);
     }
 }

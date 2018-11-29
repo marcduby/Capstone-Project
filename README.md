@@ -44,6 +44,17 @@
     * https://stackoverflow.com/questions/4253328/getstring-outside-of-a-context-or-activity
   * RTL support
     * https://android.jlelse.eu/rtl-support-on-android-here-is-all-you-need-know-e13f2df512e2
+  * Used this color tool to help pick chart colors
+    * https://www.w3schools.com/colors/colors_picker.asp
+  * For Android list sorting
+    * https://stackoverflow.com/questions/45790363/how-to-sort-recyclerview-item-in-android
+  * To clear the activity stack
+    * https://stackoverflow.com/questions/38538890/how-to-clear-current-activity-stack-when-start-another-activity-which-belong-to
+  * To layout two FABs in one screen
+    * https://stackoverflow.com/questions/31205720/two-floating-action-buttons-next-to-each-other
+    
+    
+    
     
     
     

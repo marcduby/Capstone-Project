@@ -145,10 +145,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        android:background="@color/doobsAccent"
         android:layout_margin="@dimen/fab_margin"
         android:contentDescription="@string/accessibility_add_portfolio_button_label"
-        android:src="@drawable/ic_add_black_24dp"
-        />
+        android:src="@drawable/ic_add_black_24dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_invisible"
+        android:layout_width="@dimen/fab_margin"
+        android:layout_height="@dimen/fab_margin"
+        android:layout_gravity="top|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:visibility="invisible"
+        app:layout_anchor="@id/portfolio_adding_fab"
+        app:layout_anchorGravity="top" />
+
+    <!-- top FAB -->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/portfolio_refresh_all_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_cached_black_24dp"
+        android:background="@color/doobsAccent"
+        app:layout_anchor="@id/fab_invisible"
+        android:contentDescription="@string/accessibility_refresh_all_portfolio_button_label"
+        app:layout_anchorGravity="top" />
 
 
 </android.support.design.widget.CoordinatorLayout>

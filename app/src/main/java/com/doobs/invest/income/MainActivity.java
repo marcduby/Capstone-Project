@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
     private PortfolioRecyclerAdapter portfolioRecyclerAdapter;
     private IncomeViewModel incomeViewModel;
     private LinearLayoutManager portfolioListLayoutManager;
+    private List<PortfolioModel> portfolioModelList;
 
     // widgets
     // recycler view
@@ -56,9 +57,13 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
     @BindView(R.id.portfolio_list_dividend_textview)
     protected TextView dividendTotalTextView;
 
-    // FAB
+    // add portfolio FAB
     @BindView(R.id.portfolio_adding_fab)
     protected FloatingActionButton portfolioAddFab;
+
+    // refresh all portfolios FAB
+    @BindView(R.id.portfolio_refresh_all_fab)
+    protected FloatingActionButton portfolioRefreshAllFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +80,7 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
         // log
         Log.i(this.TAG_NAME, "In onCreate");
 
-        // get the views
-//        this.addPortfolioButton = this.findViewById(R.id.portfolio_add_button);
+        // get the add portfolio FAB
         this.portfolioAddFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
         });
 
         // get the recycler view
-//        this.portfolioRecyclerView = (RecyclerView) this.findViewById(R.id.portfolio_recyclerview);
         this.portfolioRecyclerView.setHasFixedSize(true);
 
         // set the layout manager for the recycler view
@@ -108,12 +111,23 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
         // set the observer on the database live data portfolio list used for display
         this.incomeViewModel.getPortfolioList().observe(this, new Observer<List<PortfolioModel>>() {
             @Override
-            public void onChanged(@Nullable List<PortfolioModel> portfolioModelList) {
+            public void onChanged(@Nullable List<PortfolioModel> modelList) {
                 // set the data on the adapter
-                portfolioRecyclerAdapter.setPortfolioModelList(portfolioModelList);
+                portfolioRecyclerAdapter.setPortfolioModelList(modelList);
 
                 // set the list value totals
-                setValueTotals(portfolioModelList);
+                setValueTotals(modelList);
+
+                // set the portfolio list
+                portfolioModelList = modelList;
+            }
+        });
+
+        // get the add portfolio FAB
+        this.portfolioRefreshAllFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refreshAllPortfolios();
             }
         });
     }
@@ -164,6 +178,17 @@ public class MainActivity extends AppCompatActivity implements PortfolioRecycler
         this.startActivity(intent);
     }
 
+    /**
+     * refresh the portfolio data
+     *
+     */
+    private void refreshAllPortfolios() {
+        if (this.portfolioModelList != null) {
+            for (PortfolioModel portfolioModel : portfolioModelList) {
+                this.incomeViewModel.refreshPortfolio(portfolioModel.getId());
+            }
+        }
+    }
     /**
      * handles the add portfolio option
      *
