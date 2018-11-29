@@ -38,6 +38,9 @@ public interface StockDao {
     @Query("select * from " + IncomeConstants.Database.TABLE_NAME_STOCK_INFORMATION + " where id = :stockId")
     public StockModel getStockById(Integer stockId);
 
+    @Query("select * from " + IncomeConstants.Database.TABLE_NAME_STOCK_INFORMATION + " where id = :stockId")
+    public LiveData<StockModel> getStockLiveDataById(Integer stockId);
+
     @Query("select * from " + IncomeConstants.Database.TABLE_NAME_STOCK_INFORMATION + " where symbol = :symbol")
     public StockModel getStockBySymbol(String symbol);
 

@@ -61,6 +61,9 @@ public class StockHoldingRepository {
      * @param stockHoldingModel
      */
     public void insertOrUpdateStockHolding(StockHoldingModel stockHoldingModel) {
+        Log.i(TAG_NAME, "Saving stock hilding with id: " + stockHoldingModel.getId());
+
+        // insert/update the stock holding
         new InsertOrUpdateStockHoldingAsyncTask(this.stockHoldingDao, this.portfolioDao).execute(stockHoldingModel);
     }
 
@@ -139,6 +142,52 @@ public class StockHoldingRepository {
      */
     public void updateStockModelLiveData(StockModel stockModel) {
         this.stockModelLiveData.postValue(stockModel);
+    }
+
+    /**
+     * return the stock object from the database
+     *
+     * @param stockId
+     * @return
+     */
+    public LiveData<StockModel> loadStockModelLiveDataById(Integer stockId) {
+        return this.stockDao.getStockLiveDataById(stockId);
+    }
+
+    /**
+     * delete the stock holding object
+     *
+     * @param stockHoldingModel
+     */
+    public void deleteStockHolding(StockHoldingModel stockHoldingModel) {
+        // get the portfolio id
+        Integer portfolioId = stockHoldingModel.getPortfolioId();
+
+        // delete
+        new DeleteStockHoldingAsyncTask(this.stockHoldingDao).execute(stockHoldingModel);
+
+        // update the portfolio totals
+        this.updatePortfolioTotals(portfolioId);
+    }
+
+    /**
+     * update the portfolio totals
+     *
+     * @param portfolioId
+     */
+    public void updatePortfolioTotals(Integer portfolioId) {
+        // update the portfolio totals
+        new UpdatePortfolioTotalsAsyncTask(this.stockHoldingDao, this.portfolioDao).execute(portfolioId);
+    }
+
+    /**
+     * load the stock holding object
+     *
+     * @param stockHoldingId
+     * @return
+     */
+    public LiveData<StockHoldingModel> loadStockHoldingById(Integer stockHoldingId) {
+        return this.stockHoldingDao.loadById(stockHoldingId);
     }
 
     /**
@@ -338,6 +387,39 @@ public class StockHoldingRepository {
     }
 
     /**
+     * Asyc task class to delete a stock holding
+     *
+     */
+    public static class DeleteStockHoldingAsyncTask extends AsyncTask<StockHoldingModel, Void, Void> {
+        // instance variables
+        private StockHoldingDao stockHoldingDao;
+
+        /**
+         * default constructor
+         *
+         * @param shDao
+         */
+        public DeleteStockHoldingAsyncTask(StockHoldingDao shDao) {
+            this.stockHoldingDao = shDao;
+        }
+
+        @Override
+        protected Void doInBackground(StockHoldingModel... stockHoldingModels) {
+            // get the portfolio to delete
+            StockHoldingModel stockHoldingModel = stockHoldingModels[0];
+
+            // log
+            Log.i(this.getClass().getName(), "Deleting stock holding with id: " + stockHoldingModel.getId() + " and stock: " + stockHoldingModel.getStockSymbol());
+
+            // delete the stock holding
+            this.stockHoldingDao.delete(stockHoldingModel);
+
+            // return
+            return null;
+        }
+    }
+
+    /**
      * async task class to insert or update a stock holding
      *
      */
@@ -410,6 +492,65 @@ public class StockHoldingRepository {
 
             // save the portfolio model
             this.portfolioDao.update(portfolioModel);
+        }
+    }
+
+    /**
+     * Async task class to update the portfolio totals
+     *
+     */
+    public static class UpdatePortfolioTotalsAsyncTask extends AsyncTask<Integer, Void, Void> {
+        // instance variables
+        private StockHoldingDao stockHoldingDao;
+        private PortfolioDao portfolioDao;
+
+        /**
+         * default constructor
+         *
+         * @param shDao
+         * @param pDao
+         */
+        public UpdatePortfolioTotalsAsyncTask(StockHoldingDao shDao, PortfolioDao pDao) {
+            this.stockHoldingDao = shDao;
+            this.portfolioDao = pDao;
+        }
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            // local variables
+            PortfolioModel portfolioModel;
+            List<StockHoldingModel> stockHoldingModels;
+            Double cost = new Double(0);
+            Double value = new Double(0);
+            Double dividend = new Double(0);
+
+            // get the stock holding to insert
+            Integer portfolioId = integers[0];
+
+            // load the portfolio model
+            portfolioModel = this.portfolioDao.loadObjectById(portfolioId);
+
+            // load the list of stock holdings for the portfolio
+            stockHoldingModels = this.stockHoldingDao.getAllStocksObjects(portfolioId);
+
+            // add up the amounts
+            for (StockHoldingModel stockHoldingModel : stockHoldingModels) {
+                cost = cost + stockHoldingModel.getCostBasis();
+                value = value + stockHoldingModel.getCurrentValue();
+                dividend = dividend + stockHoldingModel.getTotalDividend();
+            }
+            portfolioModel.setCostBasis(cost);
+            portfolioModel.setCurrentValue(value);
+            portfolioModel.setTotalDividend(dividend);
+
+            // save the portfolio model
+            this.portfolioDao.update(portfolioModel);
+
+            // log
+            Log.i(this.getClass().getName(), "Updated the totals for portfolio with id: " + portfolioModel.getId() + " and name: " + portfolioModel.getName());
+
+            // return
+            return null;
         }
     }
 

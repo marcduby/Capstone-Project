@@ -90,6 +90,35 @@ public class StockHoldingViewModel extends AndroidViewModel {
     }
 
     /**
+     * return the stock object from the database
+     *
+     * @param stockId
+     * @return
+     */
+    public LiveData<StockModel> loadStockModelLiveDataById(Integer stockId) {
+        return this.stockHoldingRepository.loadStockModelLiveDataById(stockId);
+    }
+
+    /**
+     * delete the stock holding object
+     *
+     * @param stockHoldingModel
+     */
+    public void deleteStockHolding(StockHoldingModel stockHoldingModel) {
+        this.stockHoldingRepository.deleteStockHolding(stockHoldingModel);
+    }
+
+    /**
+     * load the stock holding object
+     *
+     * @param stockHoldingId
+     * @return
+     */
+    public LiveData<StockHoldingModel> loadById(Integer stockHoldingId) {
+        return this.stockHoldingRepository.loadStockHoldingById(stockHoldingId);
+    }
+
+    /**
      * returns the error string live data model
      *
      * @return

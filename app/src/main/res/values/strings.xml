@@ -46,7 +46,8 @@
     <string name="title_activity_portfolio_new">New Portfolio</string>
     <string name="title_activity_main">Portfolios</string>
     <string name="title_activity_stock_holdings">Portfolio Holdings</string>
-    <string name="title_activity_stock_holdings_new">Update Stock Holding</string>
+    <string name="title_activity_stock_holding_new">New Stock Holding</string>
+    <string name="title_activity_stock_holding_update">Update Stock Holding</string>
 
     <!-- stock holding list table -->
     <string name="stock_holding_list_shares_label"># Shares</string>
@@ -89,6 +90,7 @@
     <string name="accessibility_add_stock_holding_button_label">Add stock holding</string>
     <string name="accessibility_save_portfolio_button_label">Save portfolio</string>
     <string name="accessibility_save_stock_holding_button_label">Save stock holding</string>
+    <string name="accessibility_delete_stock_holding_button_label">Delete stock holding</string>
     <string name="accessibility_search_stock_symbol_button_label">Search stock symbol</string>
 
 

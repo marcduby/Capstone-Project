@@ -54,6 +54,8 @@ public class IncomeConstants {
 
     public class ExtraKeys {
         public static final String PORTFOLIO_ID                     = "portfolioId";
+        public static final String STOCK_HOLDING_ID                 = "stockHoldingId";
+        public static final String STOCK_ID                         = "stockId";
     }
 
     public static class JsonKeys {

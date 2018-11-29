@@ -183,7 +183,13 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
      */
     @Override
     public void onListItemClick(StockHoldingModel stockHoldingModel) {
-        Toast.makeText(this, "clicked on item: " + stockHoldingModel.getDescription(), Toast.LENGTH_LONG).show();
+        // create the intent
+        Intent intent = new Intent(this, StockHoldingUpdatingActivity.class);
+        intent.putExtra(IncomeConstants.ExtraKeys.STOCK_HOLDING_ID, stockHoldingModel.getId());
+        intent.putExtra(IncomeConstants.ExtraKeys.STOCK_ID, stockHoldingModel.getStockId());
+
+        // start activity
+        this.startActivity(intent);
     }
 
     /**
