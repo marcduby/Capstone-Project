@@ -41,6 +41,9 @@ public interface PortfolioDao {
     @Query("select * from " + IncomeConstants.Database.TABLE_NAME_PORTFOLIO + " order by name")
     public LiveData<List<PortfolioModel>> getAllPortfolios();
 
+    @Query("select * from " + IncomeConstants.Database.TABLE_NAME_PORTFOLIO + " order by name")
+    public List<PortfolioModel> getAllPortfolioObjects();
+
     @Query("select count(id) from " + IncomeConstants.Database.TABLE_NAME_PORTFOLIO + " where name = :name")
     public Integer getCountPortfoliosByName(String name);
 }
