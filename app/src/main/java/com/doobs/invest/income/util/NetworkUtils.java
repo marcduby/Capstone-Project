@@ -3,6 +3,12 @@ package com.doobs.invest.income.util;
 import android.net.Uri;
 import android.util.Log;
 
+import com.doobs.invest.income.json.StockJsonParser;
+import com.doobs.invest.income.json.bean.StockInformationBean;
+import com.doobs.invest.income.json.bean.StockQuoteBean;
+import com.doobs.invest.income.json.bean.StockStatsBean;
+import com.doobs.invest.income.model.StockModel;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -127,4 +133,77 @@ public class NetworkUtils {
         return stockQueryUrl;
     }
 
+    /**
+     * find a stock through the REST service
+     *
+     * @param stockModel
+     * @return
+     */
+    public static void updateStockFromRestCall(StockModel stockModel) {
+        // TODO - implement
+        URL stockQueryUrl = null;
+        String restCallString = null;
+        StockInformationBean stockInformationBean = null;
+        StockQuoteBean stockQuoteBean = null;
+        StockStatsBean stockStatsBean = null;
+
+        // log
+        Log.i(TAG_NAME, "Calling REST service for symbol: " + stockModel.getSymbol() + " and stock id: " + stockModel.getId());
+
+        try {
+            // get the stock information
+            // build the URL
+            stockQueryUrl = NetworkUtils.getRestServiceUrl(stockModel.getSymbol(), IncomeConstants.RestServer.DATA_COMPANY);
+
+            // call the REST service
+            restCallString = NetworkUtils.getResponseFromHttpUrl(stockQueryUrl);
+
+            // parse the string to json
+            stockInformationBean = StockJsonParser.getStockInformationFromJsonString(restCallString);
+
+            // get the data for the stock model
+            stockModel.setName(stockInformationBean.getName());
+            stockModel.setIndustry(stockInformationBean.getIndustry());
+            stockModel.setIssueType(stockInformationBean.getIssueType());
+
+            // get the stock price
+            // build the URL
+            stockQueryUrl = NetworkUtils.getRestServiceUrl(stockModel.getSymbol(), IncomeConstants.RestServer.DATA_QUOTE);
+
+            // call the REST service
+            restCallString = NetworkUtils.getResponseFromHttpUrl(stockQueryUrl);
+
+            // parse the string to json
+            stockQuoteBean = StockJsonParser.getStockQuoteFromJsonString(restCallString);
+
+            // get the data for the stock model
+            stockModel.setPrice(stockQuoteBean.getPrice());
+            stockModel.setPeRatio(stockQuoteBean.getPeRatio());
+            stockModel.setPriceChange(stockQuoteBean.getPriceChange());
+            stockModel.setDateString(IncomeUtils.getCurrentDateString());
+
+            // get the stock stats
+            // build the URL
+            stockQueryUrl = NetworkUtils.getRestServiceUrl(stockModel.getSymbol(), IncomeConstants.RestServer.DATA_STATS);
+
+            // call the REST service
+            restCallString = NetworkUtils.getResponseFromHttpUrl(stockQueryUrl);
+
+            // parse the string to json
+            stockStatsBean = StockJsonParser.getStockStatsFromJsonString(restCallString);
+
+            // get the data for the stock model
+            stockModel.setDividend(stockStatsBean.getDividend());
+            stockModel.setYield(stockStatsBean.getYield());
+            stockModel.setBeta(stockStatsBean.getBeta());
+
+        } catch (IncomeException exception) {
+            // log
+            Log.e(TAG_NAME, "Got error parsing the REST call: " + exception.getMessage());
+
+        } catch (IOException exception) {
+            // log
+            Log.e(TAG_NAME, "Got IO error parsing the REST call: " + exception.getMessage());
+        }
+    }
 }

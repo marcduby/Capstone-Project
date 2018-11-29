@@ -45,6 +45,11 @@ public class StockHoldingRepository {
     private MutableLiveData<StockModel> stockModelLiveData = new MutableLiveData<StockModel>();
     private MutableLiveData<String> errorStringMutableLiveData = new MutableLiveData<String>();
 
+    /**
+     * default constructor
+     *
+     * @param application
+     */
     public StockHoldingRepository(Application application) {
         // create the database
         IncomeDatabase incomeDatabase = IncomeDatabase.getInstance(application);
@@ -534,14 +539,15 @@ public class StockHoldingRepository {
             stockHoldingModels = this.stockHoldingDao.getAllStocksObjects(portfolioId);
 
             // add up the amounts
-            for (StockHoldingModel stockHoldingModel : stockHoldingModels) {
-                cost = cost + stockHoldingModel.getCostBasis();
-                value = value + stockHoldingModel.getCurrentValue();
-                dividend = dividend + stockHoldingModel.getTotalDividend();
-            }
-            portfolioModel.setCostBasis(cost);
-            portfolioModel.setCurrentValue(value);
-            portfolioModel.setTotalDividend(dividend);
+            IncomeUtils.updatePortfolioTotals(stockHoldingModels, portfolioModel);
+//            for (StockHoldingModel stockHoldingModel : stockHoldingModels) {
+//                cost = cost + stockHoldingModel.getCostBasis();
+//                value = value + stockHoldingModel.getCurrentValue();
+//                dividend = dividend + stockHoldingModel.getTotalDividend();
+//            }
+//            portfolioModel.setCostBasis(cost);
+//            portfolioModel.setCurrentValue(value);
+//            portfolioModel.setTotalDividend(dividend);
 
             // save the portfolio model
             this.portfolioDao.update(portfolioModel);

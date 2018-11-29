@@ -1,9 +1,12 @@
 package com.doobs.invest.income.util;
 
 import android.graphics.Color;
+import android.util.Log;
 
+import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.model.StockHoldingModel;
 
+import java.awt.font.TextAttribute;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -21,6 +24,8 @@ import java.util.Map;
  */
 
 public class IncomeUtils {
+    // constants
+    public static String TAG_NAME = IncomeUtils.class.getName();
 
     /**
      * returns a currency format for the double
@@ -146,5 +151,31 @@ public class IncomeUtils {
 
         // return
         return colors;
+    }
+
+    /**
+     * update the portfolio totals based on the stock holdings given
+     *
+     * @param stockHoldingModelList
+     * @param portfolioModel
+     */
+    public static void updatePortfolioTotals(List<StockHoldingModel> stockHoldingModelList, PortfolioModel portfolioModel) {
+        // locall variables
+        Double cost = new Double(0);
+        Double value = new Double(0);
+        Double dividend = new Double(0);
+
+        // log
+        Log.i(TAG_NAME, "Updating totals for portfolio id: " + portfolioModel.getId() + " and name: " + portfolioModel.getName());
+
+        // add up the amounts
+        for (StockHoldingModel stockHoldingModel : stockHoldingModelList) {
+            cost = cost + stockHoldingModel.getCostBasis();
+            value = value + stockHoldingModel.getCurrentValue();
+            dividend = dividend + stockHoldingModel.getTotalDividend();
+        }
+        portfolioModel.setCostBasis(cost);
+        portfolioModel.setCurrentValue(value);
+        portfolioModel.setTotalDividend(dividend);
     }
 }

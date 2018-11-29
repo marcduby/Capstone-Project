@@ -46,4 +46,9 @@ public interface StockDao {
 
     @Query("select * from " + IncomeConstants.Database.TABLE_NAME_STOCK_INFORMATION + " where id = :stockId")
     public LiveData<StockModel> getStock(Integer stockId);
+
+    @Query("select stock.* from " + IncomeConstants.Database.TABLE_NAME_STOCK_INFORMATION + " stock, " +
+            IncomeConstants.Database.TABLE_NAME_HOLDING + " holding " +
+            " where holding.portfolio_id = :portfolioId and holding.stock_id = stock.id")
+    public List<StockModel> getStockByPortfolioId(Integer portfolioId);
 }

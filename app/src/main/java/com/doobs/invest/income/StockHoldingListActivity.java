@@ -86,6 +86,10 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
     @BindView(R.id.edit_portfolio_fab)
     protected FloatingActionButton portfolioEditFab;
 
+    // refresh portfolio FAB
+    @BindView(R.id.refresh_portfolio_fab)
+    protected FloatingActionButton portfolioRefreshFab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,7 +140,7 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
         this.stockHoldingViewModel = ViewModelProviders.of(this).get(StockHoldingViewModel.class);
 
         // load the portfolio from the intent
-        Integer portfolioId = this.getIntent().getIntExtra(IncomeConstants.ExtraKeys.PORTFOLIO_ID, 0);
+        final Integer portfolioId = this.getIntent().getIntExtra(IncomeConstants.ExtraKeys.PORTFOLIO_ID, 0);
         this.stockHoldingViewModel.getPortfolioModelLiveData(portfolioId).observe(this, new Observer<PortfolioModel>() {
             @Override
             public void onChanged(@Nullable PortfolioModel portfolioModelReturn) {
@@ -175,6 +179,16 @@ public class StockHoldingListActivity extends AppCompatActivity implements Stock
                 refreshPieChart();
             }
         });
+
+        // refresh portfolio FAB
+        this.portfolioRefreshFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stockHoldingViewModel.refreshPortfolio(portfolioId);
+            }
+        });
+
+
     }
 
     /**

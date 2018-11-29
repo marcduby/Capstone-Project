@@ -25,6 +25,7 @@ public class StockHoldingViewModel extends AndroidViewModel {
 
     // instamnce variables
     private StockHoldingRepository stockHoldingRepository;
+    private RefreshRepository refreshRepository;
     private LiveData<PortfolioModel> portfolioModelLiveData;
     private MutableLiveData<String> errorStringMutableLiveData;
 
@@ -38,6 +39,7 @@ public class StockHoldingViewModel extends AndroidViewModel {
 
         // get the repository
         this.stockHoldingRepository = new StockHoldingRepository(application);
+        this.refreshRepository = new RefreshRepository(application);
 
         // get the error string live data object
         this.errorStringMutableLiveData = this.stockHoldingRepository.getErrorStringMutableLiveData();
@@ -144,5 +146,14 @@ public class StockHoldingViewModel extends AndroidViewModel {
      */
     public LiveData<List<StockHoldingModel>> getStockHoldingsForPortfolioId(Integer portfolioId) {
         return this.stockHoldingRepository.getStockHoldingsForPortfolioId(portfolioId);
+    }
+
+    /**
+     * refresh the prtfolio data
+     *
+     * @param portfolioId
+     */
+    public void refreshPortfolio(Integer portfolioId) {
+        this.refreshRepository.refreshPortfolio(portfolioId);
     }
 }
