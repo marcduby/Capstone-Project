@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.RemoteViews;
 
 import com.doobs.invest.income.R;
@@ -81,42 +82,6 @@ public class StockHoldingWidgetProvider extends AppWidgetProvider {
     }
 
     /**
-     * update the widgets based on the data pulled from the database
-     *
-     * @param context
-     * @param appWidgetManager
-     * @param appWidgetIds
-     * @param portfolioModelList
-     */
-    private void updateWidgets(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds, List<PortfolioModel> portfolioModelList) {
-        // get the widget IDs
-        ComponentName thisWidget = new ComponentName(context, StockHoldingWidgetProvider.class);
-        int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
-
-        // for all widgets, update
-        for (int widgetId : allWidgetIds) {
-            // create some random data
-            int number = (new Random().nextInt(100));
-
-            // update
-            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-            Log.i(TAG_NAME, String.valueOf(number));
-
-            // Set the text
-            remoteViews.setTextViewText(R.id.update, String.valueOf(number) + portfolioModelList.get(0).getName() + " with value: " + IncomeUtils.getCurrencyString(portfolioModelList.get(0).getCurrentValue()));
-
-            // Register an onClickListener
-            Intent intent = new Intent(context, StockHoldingWidgetProvider.class);
-            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-            intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
-
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            remoteViews.setOnClickPendingIntent(R.id.stock_holding_refresh_widget_button, pendingIntent);
-            appWidgetManager.updateAppWidget(widgetId, remoteViews);
-        }
-    }
-
-    /**
      * task class to update a portfolio in the DB layer
      *
      */
@@ -153,6 +118,16 @@ public class StockHoldingWidgetProvider extends AppWidgetProvider {
 
         @Override
         protected void onPostExecute(List<PortfolioModel> portfolioModelList) {
+            // calculate the totals
+            Double value = 0.0;
+            Double dividends = 0.0;
+            Double gains = 0.0;
+            for (PortfolioModel portfolioModel : portfolioModelList) {
+                value = value + portfolioModel.getCurrentValue();
+                dividends = dividends + portfolioModel.getTotalDividend();
+                gains = gains + portfolioModel.getCurrentValue() - portfolioModel.getCostBasis();
+            }
+
             // for all widgets, update
             for (int widgetId : appIds) {
                 // create some random data
@@ -163,8 +138,9 @@ public class StockHoldingWidgetProvider extends AppWidgetProvider {
                 Log.i(this.getClass().getName(), "Updating widget with id: " + widgetId);
 
                 // Set the text
-                remoteViews.setTextViewText(R.id.update, String.valueOf(number) + ": " + portfolioModelList.get(0).getName()
-                        + " with value: " + IncomeUtils.getCurrencyString(portfolioModelList.get(0).getCurrentValue()));
+                remoteViews.setTextViewText(R.id.widget_total_value_textview, String.valueOf(number) + ": " + IncomeUtils.getCurrencyString(value));
+                remoteViews.setTextViewText(R.id.widget_total_dividends_textview, String.valueOf(number) + ": " + IncomeUtils.getCurrencyString(dividends));
+                remoteViews.setTextViewText(R.id.widget_total_gains_textview, String.valueOf(number) + ": " + IncomeUtils.getCurrencyString(gains));
 
                 // Register an onClickListener
                 Intent intent = new Intent(context, StockHoldingWidgetProvider.class);

@@ -15,15 +15,70 @@
         android:layout_gravity="center"
         android:gravity="center_horizontal|center_vertical"
         android:layout_margin="4dip"
-        android:text="Income Tracker Portfolios" >
+        android:text="" >
     </TextView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/widget_value_label"
+                style="@style/labelViewSmall"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/widget_gain_label"
+                style="@style/labelViewSmall"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/widget_dividend_label"
+                style="@style/labelViewSmall"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/widget_total_value_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/textViewSmall"/>
+
+            <TextView
+                android:id="@+id/widget_total_gains_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/textViewSmall"/>
+
+            <TextView
+                android:id="@+id/widget_total_dividends_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/textViewSmall"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/stock_holding_refresh_widget_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Update Holdings"
+        android:padding="@dimen/small_margin"
+        android:text="@string/widget_update_button"
         android:background="@color/doobsAccent"/>
-
 </LinearLayout>
