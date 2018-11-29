@@ -113,7 +113,6 @@ public class PortfolioSavingActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     /**

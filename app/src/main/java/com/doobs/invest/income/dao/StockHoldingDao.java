@@ -29,8 +29,8 @@ public interface StockHoldingDao {
     @Update
     public void update(StockHoldingModel stockHoldingModel);
 
-    @Query("delete from " + IncomeConstants.Database.TABLE_NAME_HOLDING)
-    public void deleteAll();
+    @Query("delete from " + IncomeConstants.Database.TABLE_NAME_HOLDING + " where portfolio_id = :portfolioId")
+    public void deleteAll(Integer portfolioId);
 
     @Query("select * from " + IncomeConstants.Database.TABLE_NAME_HOLDING + " where portfolio_id = :portfolioId")
     public LiveData<List<StockHoldingModel>> getAllStocks(Integer portfolioId);

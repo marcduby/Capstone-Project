@@ -40,9 +40,13 @@ public class PortfolioUpdatingActivity extends AppCompatActivity {
     @BindView(R.id.portfolio_goal_editview)
     protected EditText portfolioGoalEditText;
 
-    // FAB
+    // adding portfolio FAB
     @BindView(R.id.portfolio_saving_fab)
     protected FloatingActionButton portfolioSavingFab;
+
+    // deleting portfolio FAB
+    @BindView(R.id.portfolio_deleting_fab)
+    protected FloatingActionButton portfolioDeletingFab;
 
     // title text view
     @BindView(R.id.portfolio_name_label_textview)
@@ -109,6 +113,32 @@ public class PortfolioUpdatingActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // get the deleting FAB
+        this.portfolioDeletingFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // log
+                Log.i(TAG_NAME, "Delete portfolio: " + portfolioModel.getId());
+
+                // call the delete method
+                deletePortfolio();
+            }
+        });
+    }
+
+    /**
+     * delete the portfolio
+     *
+     */
+    private void deletePortfolio() {
+        // delete the portfolio
+        this.incomeViewModel.deletePortfolio(this.portfolioModel);
+
+        // create an intent and go back to the main activity
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        this.startActivity(intent);
     }
 
     /**
@@ -116,14 +146,16 @@ public class PortfolioUpdatingActivity extends AppCompatActivity {
      *
      */
     private void setPortfolioData() {
-        // set the name
-        this.portfolioNameEditText.setText(this.portfolioModel.getName());
+        if (this.portfolioModel != null) {
+            // set the name
+            this.portfolioNameEditText.setText(this.portfolioModel.getName());
 
-        // set the description
-        this.portfolioDescriptionEditText.setText(portfolioModel.getDescriprion());
+            // set the description
+            this.portfolioDescriptionEditText.setText(portfolioModel.getDescriprion());
 
-        // set the goal
-        this.portfolioGoalEditText.setText(portfolioModel.getGoal());
+            // set the goal
+            this.portfolioGoalEditText.setText(portfolioModel.getGoal());
+        }
     }
 
     /**

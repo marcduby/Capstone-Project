@@ -38,6 +38,7 @@ public class IncomeRepository {
     public IncomeRepository(Application application) {
         IncomeDatabase incomeDatabase = IncomeDatabase.getInstance(application);
         this.portfolioDao = incomeDatabase.getPortfolioDao();
+        this.stockHoldingDao = incomeDatabase.getStockHoldingDao();
         this.portfolioList = this.portfolioDao.getAllPortfolios();
     }
 
@@ -75,7 +76,7 @@ public class IncomeRepository {
      * @param portfolioModel
      */
     public void delete(PortfolioModel portfolioModel) {
-        new DeletePortfolioAsyncTask(this.portfolioDao).execute(portfolioModel);
+        new DeletePortfolioAsyncTask(this.portfolioDao, this.stockHoldingDao).execute(portfolioModel);
     }
 
     /**
@@ -137,14 +138,16 @@ public class IncomeRepository {
     public static class DeletePortfolioAsyncTask extends AsyncTask<PortfolioModel, Void, Void> {
         // instance variables
         private PortfolioDao portfolioDao;
+        private StockHoldingDao stockHoldingDao;
 
         /**
          * default constructor
          *
          * @param dao
          */
-        public DeletePortfolioAsyncTask(PortfolioDao dao) {
+        public DeletePortfolioAsyncTask(PortfolioDao dao, StockHoldingDao shDao) {
             this.portfolioDao = dao;
+            this.stockHoldingDao = shDao;
         }
 
         @Override
@@ -152,11 +155,14 @@ public class IncomeRepository {
             // get the portfolio to insert
             PortfolioModel portfolioModel = portfolioModels[0];
 
+            // log
+            Log.i(this.getClass().getName(), "Deleting portfolio with id: " + portfolioModel.getId() + " and name: " + portfolioModel.getName());
+
+            // delete all the stock holdings for the portfolio
+            this.stockHoldingDao.deleteAll(portfolioModel.getId());
+
             // delete the portfolio
             this.portfolioDao.delete(portfolioModel);
-
-            // log
-            Log.i(this.getClass().getName(), "Deleted movie with id: " + portfolioModel.getId() + " and name: " + portfolioModel.getName());
 
             // return
             return null;
