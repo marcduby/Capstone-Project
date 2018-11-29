@@ -36,7 +36,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:paddingLeft="@dimen/table_layout_padding">
+                android:paddingLeft="@dimen/table_layout_padding"
+                android:paddingStart="@dimen/table_layout_padding">
 
                 <TableRow
                     android:layout_width="fill_parent"
@@ -62,7 +63,7 @@
                         android:text="@string/stock_holding_list_current_value_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="right|end"
                         android:width="@dimen/table_layout_stock_holding_list_cost_basis_width"
                         style="@style/labelViewSmall"
                         android:layout_column="3" />
@@ -71,7 +72,7 @@
                         android:text="@string/stock_holding_list_dividend_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="right|end"
                         android:width="@dimen/table_layout_stock_holding_list_dividend_width"
                         style="@style/labelViewSmall"
                         android:layout_column="4" />
@@ -93,7 +94,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small_margin"
                 android:background="@color/doobsPrimary"
-                android:paddingLeft="@dimen/table_layout_padding">
+                android:paddingLeft="@dimen/table_layout_padding"
+                android:paddingStart="@dimen/table_layout_padding">
 
                 <TableRow
                     android:layout_width="fill_parent"
@@ -118,7 +120,7 @@
                         android:id="@+id/stock_holding_list_total_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="right|end"
                         android:width="@dimen/table_layout_stock_holding_list_cost_basis_width"
                         style="@style/labelViewSmall"
                         android:layout_column="3" />
@@ -127,7 +129,7 @@
                         android:id="@+id/stock_holding_list_total_dividend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="right|end"
                         android:width="@dimen/table_layout_stock_holding_list_dividend_width"
                         style="@style/labelViewSmall"
                         android:layout_column="4" />
@@ -148,6 +150,8 @@
                 android:layout_width="match_parent"
                 android:layout_marginLeft="@dimen/small_margin"
                 android:layout_marginRight="@dimen/small_margin"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/small_margin"
                 android:layout_height="@dimen/stock_holding_pie_chart_width" />
 
         </LinearLayout>
