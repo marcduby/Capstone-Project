@@ -63,6 +63,20 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
+
+        <receiver
+            android:icon="@drawable/ic_golf_course_black_24dp"
+            android:label="Example Widget"
+            android:name=".widget.StockHoldingWidgetProvider" >
+            <intent-filter >
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/income_tracker_widget" />
+        </receiver>
+
     </application>
 
 </manifest>
