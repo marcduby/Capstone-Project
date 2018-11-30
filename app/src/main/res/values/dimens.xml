@@ -6,7 +6,6 @@
     <dimen name="tiny_margin">4dp</dimen>
 
     <dimen name="toolbar_height">56dp</dimen>
-    <dimen name="toolbar_elevation">4dp</dimen>
 
     <dimen name="table_layout_stock_label_width">90dp</dimen>
 
@@ -30,4 +29,9 @@
     <!-- charts -->
     <dimen name="stock_holding_pie_chart_width">280dp</dimen>
 
+    <!-- elevations -->
+    <dimen name="FAB_elevation">6dp</dimen>
+    <dimen name="FAB_pressed_elevation">12dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="button_elevation">4dp</dimen>
 </resources>

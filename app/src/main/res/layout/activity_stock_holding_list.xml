@@ -166,6 +166,8 @@
         android:layout_gravity="bottom|end"
         android:background="@color/doobsAccent"
         android:layout_margin="@dimen/fab_margin"
+        app:elevation="@dimen/FAB_elevation"
+        app:pressedTranslationZ="@dimen/FAB_pressed_elevation"
         android:contentDescription="@string/accessibility_add_stock_holding_button_label"
         android:src="@drawable/ic_add_black_24dp" />
 
@@ -189,6 +191,8 @@
         android:src="@drawable/ic_create_black_24dp"
         android:background="@color/doobsAccent"
         app:layout_anchor="@id/fab_invisible"
+        app:elevation="@dimen/FAB_elevation"
+        app:pressedTranslationZ="@dimen/FAB_pressed_elevation"
         android:contentDescription="@string/accessibility_edit_portfolio_button_label"
         app:layout_anchorGravity="top" />
 
@@ -212,6 +216,8 @@
         android:src="@drawable/ic_cached_black_24dp"
         android:background="@color/doobsAccent"
         app:layout_anchor="@id/fab_invisible2"
+        app:elevation="@dimen/FAB_elevation"
+        app:pressedTranslationZ="@dimen/FAB_pressed_elevation"
         android:contentDescription="@string/accessibility_edit_portfolio_button_label"
         app:layout_anchorGravity="top" />
 </android.support.design.widget.CoordinatorLayout>
