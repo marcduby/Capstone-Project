@@ -89,4 +89,26 @@ public class IncomeConstants {
             public final static String REVENUE_PER_HARE_KEY = "revenuePerShare";
         }
     }
+
+    public class Firebase {
+        public class Event {
+            public final static String PORTFOLIOS_REFRESH                       = "refreshAllPortfolios";
+            public final static String PORTFOLIOS_WIDGET_REFRESH                = "refreshAllWidgetPortfolios";
+
+            public final static String PORTFOLIO_SINGLE_REFRESH                 = "refreshSinglePortflio";
+            public final static String PORTFOLIO_ADD                            = "addSinglePortflio";
+            public final static String PORTFOLIO_ADD_CANCEL                     = "cancelAddSinglePortflio";
+            public final static String PORTFOLIO_EDIT                           = "addSinglePortflio";
+            public final static String PORTFOLIO_UPDATE                         = "addSinglePortflio";
+            public final static String PORTFOLIO_DELETE                         = "addSinglePortflio";
+            public final static String PORTFOLIO_VIEW                           = "viewSinglePortflio";
+
+            public final static String STOCK_HOLDING_ADD                        = "addStockHolding";
+            public final static String STOCK_HOLDING_DELETE                     = "deleteStockHolding";
+            public final static String STOCK_HOLDING_VIEW                       = "viewStockHolding";
+            public final static String STOCK_HOLDING_UPDATE                     = "updateStockHolding";
+
+            public final static String STOCK_SEARCH                             = "searchStock";
+        }
+    }
 }

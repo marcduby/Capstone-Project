@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:width="@dimen/table_layout_stock_holding_list_symbol_width"
-                android:gravity="end"
+                android:gravity="end|right"
                 style="@style/textViewSmall"
                 android:layout_column="2" />
 
@@ -35,7 +35,7 @@
                 android:id="@+id/portfolio_list_gain_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="end"
+                android:gravity="end|right"
                 android:width="@dimen/table_layout_stock_holding_list_cost_basis_width"
                 style="@style/textViewSmall"
                 android:layout_column="3" />

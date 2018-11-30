@@ -50,8 +50,21 @@
     * https://stackoverflow.com/questions/45790363/how-to-sort-recyclerview-item-in-android
   * To clear the activity stack
     * https://stackoverflow.com/questions/38538890/how-to-clear-current-activity-stack-when-start-another-activity-which-belong-to
+    * https://stackoverflow.com/questions/6722109/going-two-activities-back
   * To layout two FABs in one screen
     * https://stackoverflow.com/questions/31205720/two-floating-action-buttons-next-to-each-other
+  * Using dialogs
+    * https://developer.android.com/guide/topics/ui/dialogs
+  * Gradle help
+    * https://stackoverflow.com/questions/33897802/gradle-build-task-installrelease-missing-in-android-project
+    * https://developer.android.com/studio/publish/app-signing
+  * Help with the widget through a tutorial
+    * https://developer.android.com/guide/topics/appwidgets/
+    * http://www.vogella.com/tutorials/AndroidWidgets/article.html
+  * Room access from widgets (didn't use in end)
+    * https://stackoverflow.com/questions/47291669/appwidgetprovider-with-android-architecture-component
+    
+    
     
     
     

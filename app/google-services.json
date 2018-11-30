@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "715054349416",
+    "firebase_url": "https://incometrackerandroid.firebaseio.com",
+    "project_id": "incometrackerandroid",
+    "storage_bucket": "incometrackerandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715054349416:android:8886b1a72118ab22",
+        "android_client_info": {
+          "package_name": "com.doobs.invest.income"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715054349416-g2jar4rhn3310h3lucugi08dkgkrrc24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6-evsPd3EXls0VXihXVfBNMBiiT0amyU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

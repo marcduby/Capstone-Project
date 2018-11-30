@@ -23,6 +23,7 @@ import com.doobs.invest.income.repository.StockHoldingViewModel;
 import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeException;
 import com.doobs.invest.income.util.IncomeUtils;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.text.ParseException;
 import java.util.List;
@@ -39,6 +40,7 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
     private StockHoldingViewModel stockHoldingViewModel;
     private StockModel stockModel;
     private PortfolioModel portfolioModel;
+    private FirebaseAnalytics firebaseAnalytics;
 
     // widgets
     // stock name text view
@@ -101,6 +103,9 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
 
         // bind butterknife
         ButterKnife.bind(this);
+
+        // get the firebase analytics
+        this.firebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // get the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -190,6 +195,9 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
         } else {
             this.stockHoldingViewModel.loadStockHolding(symbol);
         }
+
+        // log the firebase event
+        IncomeUtils.logFirebaseEvent(this.firebaseAnalytics, IncomeConstants.Firebase.Event.STOCK_SEARCH);
     }
 
     /**
@@ -279,6 +287,9 @@ public class StockHoldingSavingActivity extends AppCompatActivity {
             // assign the stock holding model
             this.stockHoldingModel = newStockHoldingModel;
         }
+
+        // log the firebase event
+        IncomeUtils.logFirebaseEvent(this.firebaseAnalytics, IncomeConstants.Firebase.Event.PORTFOLIO_DELETE);
 
         // return
         return saveSuccess;

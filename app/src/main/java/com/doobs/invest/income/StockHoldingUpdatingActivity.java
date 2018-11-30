@@ -23,6 +23,7 @@ import com.doobs.invest.income.repository.StockHoldingViewModel;
 import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeException;
 import com.doobs.invest.income.util.IncomeUtils;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +35,7 @@ public class StockHoldingUpdatingActivity extends AppCompatActivity {
     // instance variables
     private StockHoldingModel stockHoldingModel;
     private StockModel stockModel;
+    private FirebaseAnalytics firebaseAnalytics;
     private StockHoldingViewModel stockHoldingViewModel;
 
     // widgets
@@ -93,6 +95,9 @@ public class StockHoldingUpdatingActivity extends AppCompatActivity {
 
         // bind butterknife
         ButterKnife.bind(this);
+
+        // get the firebase analytics
+        this.firebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // get the toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -178,6 +183,10 @@ public class StockHoldingUpdatingActivity extends AppCompatActivity {
      * @param stockHoldingModel
      */
     private void deleteStockHolding(StockHoldingModel stockHoldingModel) {
+        // log the firebase event
+        IncomeUtils.logFirebaseEvent(this.firebaseAnalytics, IncomeConstants.Firebase.Event.STOCK_HOLDING_DELETE);
+
+        // delete the stock holding
         this.stockHoldingViewModel.deleteStockHolding(stockHoldingModel);
     }
 
@@ -227,6 +236,9 @@ public class StockHoldingUpdatingActivity extends AppCompatActivity {
             // set the dividend
             this.stockDividendTextView.setText(IncomeUtils.getCurrencyString(this.stockModel.getDividend()));
         }
+
+        // log the firebase event
+        IncomeUtils.logFirebaseEvent(this.firebaseAnalytics, IncomeConstants.Firebase.Event.STOCK_HOLDING_UPDATE);
     }
 
     /**

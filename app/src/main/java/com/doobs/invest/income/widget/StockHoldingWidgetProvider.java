@@ -9,6 +9,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.ListView;
@@ -20,7 +21,9 @@ import com.doobs.invest.income.database.IncomeDatabase;
 import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.repository.IncomeRepository;
 import com.doobs.invest.income.repository.IncomeViewModel;
+import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeUtils;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.List;
 import java.util.Random;
@@ -53,6 +56,12 @@ public class StockHoldingWidgetProvider extends AppWidgetProvider {
         // get the widget IDs
         ComponentName thisWidget = new ComponentName(context, StockHoldingWidgetProvider.class);
         int[] allWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+
+        // log firebase event
+        // create the bundle
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, IncomeConstants.Firebase.Event.PORTFOLIOS_WIDGET_REFRESH);
+        FirebaseAnalytics.getInstance(context).logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
         // call the async task to load the portfolios and update the widget
         new LoadPortfoliosAsyncTask(portfolioDao, context, appWidgetManager, appWidgetIds).execute(1);

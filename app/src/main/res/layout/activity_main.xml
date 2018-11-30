@@ -25,6 +25,20 @@
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
             <!--app:contentInsetStart="120dp"-->
 
+            <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_margin="@dimen/small_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                ads:adSize="BANNER"
+                ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+            </com.google.android.gms.ads.AdView>
+            <!-- NOTE: leaving test ad banner unit id for now -->
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,7 +50,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_margin"
-                android:paddingLeft="@dimen/table_layout_padding">
+                android:paddingLeft="@dimen/table_layout_padding"
+                android:paddingStart="@dimen/table_layout_padding">
 
                 <TableRow
                     android:layout_width="fill_parent"
@@ -55,7 +70,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:width="@dimen/table_layout_stock_holding_list_symbol_width"
-                        android:gravity="right"
+                        android:gravity="right|end"
                         style="@style/labelViewSmall"
                         android:layout_column="2" />
 
@@ -63,7 +78,7 @@
                         android:text="@string/portfolio_list_gain_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="right|end"
                         android:width="@dimen/table_layout_stock_holding_list_cost_basis_width"
                         style="@style/labelViewSmall"
                         android:layout_column="3" />
@@ -72,7 +87,7 @@
                         android:text="@string/portfolio_list_dividend_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="right|end"
                         android:width="@dimen/table_layout_stock_holding_list_dividend_width"
                         style="@style/labelViewSmall"
                         android:layout_column="4" />
@@ -92,7 +107,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/small_margin"
                 android:background="@color/doobsPrimary"
-                android:paddingLeft="@dimen/table_layout_padding">
+                android:paddingLeft="@dimen/table_layout_padding"
+                android:paddingStart="@dimen/table_layout_padding">
 
                 <TableRow
                     android:layout_width="fill_parent"
@@ -112,14 +128,14 @@
                         android:layout_height="wrap_content"
                         android:width="@dimen/table_layout_stock_holding_list_symbol_width"
                         style="@style/labelViewSmall"
-                        android:gravity="right"
+                        android:gravity="right|end"
                         android:layout_column="2" />
 
                     <TextView
                         android:id="@+id/portfolio_list_gain_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="right|end"
                         android:width="@dimen/table_layout_stock_holding_list_cost_basis_width"
                         style="@style/labelViewSmall"
                         android:layout_column="3" />
@@ -128,7 +144,7 @@
                         android:id="@+id/portfolio_list_dividend_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
+                        android:gravity="right|end"
                         android:width="@dimen/table_layout_stock_holding_list_dividend_width"
                         style="@style/labelViewSmall"
                         android:layout_column="4" />

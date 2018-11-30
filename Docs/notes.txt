@@ -27,11 +27,11 @@
    ============= AM ==================   
       
     * stock, stock holding, portfolio refresh
-    - widget
-    - google services
-      - admob
-      - analytics
-    - RTL check
+    * widget
+    * google services
+      * admob
+      * analytics
+    * RTL check
     * accessibility check
     * all strings check
     - gradle install task

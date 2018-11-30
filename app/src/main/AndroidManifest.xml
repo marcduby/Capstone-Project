@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- admob service -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-4175572237555472~5024376641"/>
+
+        <!-- start activities -->
         <activity android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
@@ -64,6 +70,7 @@
 
         </activity>
 
+        <!-- start receivers -->
         <receiver
             android:icon="@drawable/ic_golf_course_black_24dp"
             android:label="Example Widget"

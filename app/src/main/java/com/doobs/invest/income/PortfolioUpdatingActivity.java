@@ -18,6 +18,8 @@ import com.doobs.invest.income.model.PortfolioModel;
 import com.doobs.invest.income.repository.IncomeViewModel;
 import com.doobs.invest.income.util.IncomeConstants;
 import com.doobs.invest.income.util.IncomeException;
+import com.doobs.invest.income.util.IncomeUtils;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,6 +31,7 @@ public class PortfolioUpdatingActivity extends AppCompatActivity {
     // instance variables
     PortfolioModel portfolioModel;
     private IncomeViewModel incomeViewModel;
+    private FirebaseAnalytics firebaseAnalytics;
 
     // widgets
     @BindView(R.id.portfolio_name_editview)
@@ -64,6 +67,9 @@ public class PortfolioUpdatingActivity extends AppCompatActivity {
 
         // bind butterknife
         ButterKnife.bind(this);
+
+        // get the firebase analytics
+        this.firebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // set the activity title
         this.titleTextView.setText(this.getString(R.string.title_activity_portfolio_saving));
@@ -108,6 +114,9 @@ public class PortfolioUpdatingActivity extends AppCompatActivity {
 //                    Snackbar.make(view, "Portfolio " + portfolioModel.getName() + " saved", Snackbar.LENGTH_LONG)
 //                            .setAction("Action", null).show();
 
+                    // log the firebase event
+                    IncomeUtils.logFirebaseEvent(firebaseAnalytics, IncomeConstants.Firebase.Event.PORTFOLIO_UPDATE);
+
                     // go back
                     finish();
                 }
@@ -134,6 +143,9 @@ public class PortfolioUpdatingActivity extends AppCompatActivity {
     private void deletePortfolio() {
         // delete the portfolio
         this.incomeViewModel.deletePortfolio(this.portfolioModel);
+
+        // log the firebase event
+        IncomeUtils.logFirebaseEvent(this.firebaseAnalytics, IncomeConstants.Firebase.Event.PORTFOLIO_DELETE);
 
         // create an intent and go back to the main activity
         Intent intent = new Intent(this, MainActivity.class);
