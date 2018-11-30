@@ -63,6 +63,13 @@
     * http://www.vogella.com/tutorials/AndroidWidgets/article.html
   * Room access from widgets (didn't use in end)
     * https://stackoverflow.com/questions/47291669/appwidgetprovider-with-android-architecture-component
+  * Using Google analytics
+    * https://developers.google.com/analytics/devguides/collection/android/v4/
+    * https://firebase.google.com/docs/analytics/android/start/
+  * Keystore help
+    * https://stackoverflow.com/questions/3997748/how-can-i-create-a-keystore/30254012
+    
+    
     
     
     

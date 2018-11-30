@@ -34,7 +34,7 @@
     * RTL check
     * accessibility check
     * all strings check
-    - gradle install task
+    * gradle install task
     - add espresso test
   
   - 20181127 - tuesday
@@ -72,9 +72,13 @@
     
     
     
-- Dr1zztD0Urd3n_
 - income_tracker
 - dividends_rule
 - ../Keystore/my-release-key.keystore
+
+
+- GoogleNanoAndroid
+-  keytool -genkey -v -keystore Keystore/income.keystore -alias income_tracker -keyalg RSA -keysize 2048 -validity 10000
+
 
     
