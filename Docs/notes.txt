@@ -28,10 +28,10 @@
       
     * stock, stock holding, portfolio refresh
     * widget
-    - google services
-      - admob
+    * google services
+      * admob
       * analytics
-    - RTL check
+    * RTL check
     * accessibility check
     * all strings check
     - gradle install task
