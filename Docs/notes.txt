@@ -72,3 +72,9 @@
     
     
     
+- Dr1zztD0Urd3n_
+- income_tracker
+- dividends_rule
+- ../Keystore/my-release-key.keystore
+
+    

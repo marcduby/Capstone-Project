@@ -73,7 +73,7 @@
         <!-- start receivers -->
         <receiver
             android:icon="@drawable/ic_golf_course_black_24dp"
-            android:label="Example Widget"
+            android:label="@string/widget_name"
             android:name=".widget.StockHoldingWidgetProvider" >
             <intent-filter >
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

@@ -1,6 +1,17 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    // add in keystore
+    signingConfigs {
+        debug {
+            keyAlias 'income_tracker'
+            keyPassword 'dividends_rule'
+            storeFile file('../Keystore/income.keystore')
+            storePassword 'GoogleNanoAndroid'
+        }
+    }
+
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.doobs.invest.income"
@@ -11,9 +22,13 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
 
